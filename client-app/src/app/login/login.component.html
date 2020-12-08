@@ -1,0 +1,27 @@
+<p>login works!</p>
+<div class="form-group">
+    <form>
+    <div class="stock-name">
+        <td>
+            <tr> 
+                <label>username  </label>
+                <input type="text"
+                    placeholder="Username"
+                    [value]="login.Username"
+                    (input)="login.Username=$event.target.value">
+            </tr>
+    
+            <tr> 
+                <label>password  </label>
+                 <input type="text"
+                    placeholder="Password"
+                    [value]="login.Password"
+                    (input)="login.Password=$event.target.value">
+            </tr>
+        </td>
+    </div>
+    </form>
+
+    <button (click)="logIn()">Loggin</button> 
+
+    </div>
