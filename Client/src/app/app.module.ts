@@ -14,15 +14,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { RouterModule } from '@angular/Router';
-import { FlightsComponent } from './flights/flights.component';
+import { AirlinesComponent } from './airlines/airlines.component';
 import { HotelsComponent } from './hotels/hotels.component'; // CLI imports AppRoutingModule
+import { AirlineService } from './services/airline.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     LoginComponent,
-    FlightsComponent,
+    AirlinesComponent,
     HotelsComponent
   ],
   imports: [
@@ -31,11 +32,11 @@ import { HotelsComponent } from './hotels/hotels.component'; // CLI imports AppR
     BrowserAnimationsModule,
     MatTabsModule,
     RouterModule.forRoot([
-      {path: '', redirectTo: '/flights', pathMatch: 'full'},
+      {path: '', redirectTo: '/airlines', pathMatch: 'full'},
       {path: 'home', component: HomePageComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'flights', component: FlightsComponent},
-      {path: 'flights/login', component: LoginComponent},
+      {path: 'airlines', component: AirlinesComponent},
+      {path: 'airlines/login', component: LoginComponent},
       {path: 'hotels', component: HotelsComponent},
       
     ])
@@ -44,6 +45,7 @@ import { HotelsComponent } from './hotels/hotels.component'; // CLI imports AppR
     UserService,
     CookieService,
     CommunicationService,
+    AirlineService,
     
   ],
   bootstrap: [AppComponent]

@@ -15,6 +15,7 @@ namespace WebServer.Controllers
     {
         // GET api/values
         readonly UserDatabaseLogic Udbl = new UserDatabaseLogic();
+        readonly AirlineDatabaseLogic Adbl = new AirlineDatabaseLogic();
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
@@ -59,19 +60,16 @@ namespace WebServer.Controllers
             user3.ListOfFriends = "";
             Udbl.AddUser(user3);
 
+            Airline airline1 = new Airline();
+
+            airline1.About = "Nesto o kompaniji";
+            airline1.Name = "Kompanija 1";
+            airline1.Rating = 4.5;
+            Adbl.AddAirline(airline1);
 
             return new string[] { "value1", "value2" };
 
-
-
-
-
-
           
-
-
-
-
         }
 
         // GET api/values/5

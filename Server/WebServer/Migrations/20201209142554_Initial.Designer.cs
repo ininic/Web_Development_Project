@@ -9,7 +9,7 @@ using WebServer.DatabaseConfig;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(DatabaseAccess))]
-    [Migration("20200908072359_Initial")]
+    [Migration("20201209142554_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,6 +19,23 @@ namespace WebServer.Migrations
                 .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("WebServer.Models.Airline", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("About");
+
+                    b.Property<string>("Name");
+
+                    b.Property<double>("Rating");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Airlines");
+                });
 
             modelBuilder.Entity("WebServer.Models.User", b =>
                 {

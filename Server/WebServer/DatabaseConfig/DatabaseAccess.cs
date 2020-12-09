@@ -10,6 +10,7 @@ namespace WebServer.DatabaseConfig
     public class DatabaseAccess : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Airline> Airlines { get; set; } 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
