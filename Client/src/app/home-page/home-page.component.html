@@ -1,6 +1,7 @@
 <p>home-page works!</p>
 
 
+<h1>{{logged}}</h1>
 
 <h1>cookie {{ this.cookieValue}}</h1>
 <div *ngIf="this.cookieValue == 'our cookie value'">
@@ -9,12 +10,11 @@
 <div *ngIf="this.cookieValue != 'our cookie value'">
     IZLOGOVAN 
 </div>
-<mat-tab-group animationDuration="0ms">
-  <mat-tab label="First">Content 1</mat-tab>
-  <mat-tab label="Second">Content 2</mat-tab>
-  <mat-tab *ngIf="this.cookieValue != 'our cookie value'"  label="Third">
-    <app-login></app-login>
-  </mat-tab>
-</mat-tab-group>
 
+
+<nav mat-tab-nav-bar  animationDuration="0ms">
+  <a mat-tab-link label="First" routerLink = "flights" >Flights</a>
+  <a mat-tab-link label="Second"  routerLink = "hotels" >Hotels</a>
+  <a mat-tab-link *ngIf="this.cookieValue != 'our cookie value'"  label="Third" routerLink="login">Login</a>
+</nav>
 

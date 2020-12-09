@@ -12539,11 +12539,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ivan\\Desktop\\Web_Development_Project\\WebServer\\WebServer.csproj",
+      "projectUniqueName": "C:\\Users\\Ivan\\Desktop\\PSUGS\\Web_Development_Project\\Server\\WebServer\\WebServer.csproj",
       "projectName": "WebServer",
-      "projectPath": "C:\\Users\\Ivan\\Desktop\\Web_Development_Project\\WebServer\\WebServer.csproj",
+      "projectPath": "C:\\Users\\Ivan\\Desktop\\PSUGS\\Web_Development_Project\\Server\\WebServer\\WebServer.csproj",
       "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ivan\\Desktop\\Web_Development_Project\\WebServer\\obj\\",
+      "outputPath": "C:\\Users\\Ivan\\Desktop\\PSUGS\\Web_Development_Project\\Server\\WebServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
