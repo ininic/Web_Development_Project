@@ -17,6 +17,10 @@ import { RouterModule } from '@angular/Router';
 import { AirlinesComponent } from './airlines/airlines.component';
 import { HotelsComponent } from './hotels/hotels.component'; // CLI imports AppRoutingModule
 import { AirlineService } from './services/airline.service';
+import { AirlineProfileComponent } from './airline-profile/airline-profile.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -24,7 +28,8 @@ import { AirlineService } from './services/airline.service';
     HomePageComponent,
     LoginComponent,
     AirlinesComponent,
-    HotelsComponent
+    HotelsComponent,
+    AirlineProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,7 @@ import { AirlineService } from './services/airline.service';
       {path: 'home', component: HomePageComponent},
       {path: 'login', component: LoginComponent},
       {path: 'airlines', component: AirlinesComponent},
-      {path: 'airlines/login', component: LoginComponent},
+      {path: 'airlines/:id', component: AirlineProfileComponent},
       {path: 'hotels', component: HotelsComponent},
       
     ])

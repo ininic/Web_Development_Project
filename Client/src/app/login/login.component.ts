@@ -11,6 +11,11 @@ import {HomePageComponent} from 'src/app/home-page/home-page.component';
 import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { CommunicationService } from '../services/comunication.service';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
+
+
+
 @Component({
   providers:[HomePageComponent],
   selector: 'app-login',
@@ -21,8 +26,14 @@ export class LoginComponent implements OnInit {
 
   @Output() private toggleFavorite: EventEmitter<number>;
   public login: LoginParameters;
-  constructor( private authService: AuthService, private cookieService: CookieService, private route: Router,private _communicationService: CommunicationService) { }
-
+  constructor(private authService: AuthService, private cookieService: CookieService, private route: Router,private _communicationService: CommunicationService)
+   {
+   
+    //const decodedToken = helper.decodeToken(myRawToken);
+    //const expirationDate = helper.getTokenExpirationDate(myRawToken);
+    //const isExpired = helper.isTokenExpired(myRawToken); 
+    }
+  invalidLogin : boolean;
   ngOnInit(): void {
     this.login = {
       Username : 'Ivan',
@@ -31,17 +42,30 @@ export class LoginComponent implements OnInit {
   }
   logIn() {
     this.authService.logIn(this.login)
-    .subscribe((res) => { console.log(res), this.setCookie(); this.onSomething(); },
-              (err : HttpErrorResponse) => { console.log(err); },
+    .subscribe((response: any) => { 
+               const token: any = response.token;
+               console.log(response);
+               this.invalidLogin = false;
+               localStorage.setItem("jwt", token);
+               const helper = new JwtHelperService();
+               console.log("Jwt istice:", helper.getTokenExpirationDate(token));
+               const exp = helper.getTokenExpirationDate(token);
+               this.setCookie(exp); this.onSomething();
+     
+            },
+              (err : HttpErrorResponse) => { 
+                this.invalidLogin = true;
+                console.log(err); },
              () => { console.log('hendling denflig');  } 
           );
 
     }
 
-    setCookie(){
+    setCookie(exp: any){
       var date = new Date();
-      date.setTime(date.getTime()+(5*1000)); 
-      
+      //date.setTime(date.getTime()+(5*1000)); 
+      console.log("datum",exp);
+      date = exp;
        this.cookieService.set('cookie-name','our cookie value', date);
    
     }

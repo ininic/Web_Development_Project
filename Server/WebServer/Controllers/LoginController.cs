@@ -5,6 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+
 namespace WebServer.Controllers
 {
     [Route("api/[controller]")]
@@ -31,9 +38,19 @@ namespace WebServer.Controllers
         {
             if(login.Password == "123" && login.Username == "Ivan")
             {
-                return Ok("ok");
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+                var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                var tokenOptions = new JwtSecurityToken(
+                    issuer: "https://localhost:44325",
+                    audience: "https://localhost:44325",
+                    claims: new List<Claim>(),
+                    expires: DateTime.Now.AddSeconds(27),
+                    signingCredentials: signingCredentials
+                    );
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+                return Ok(new { Token = tokenString });
             }
-            return NotFound();
+            return Unauthorized();
         }
 
         // PUT: api/Login/5

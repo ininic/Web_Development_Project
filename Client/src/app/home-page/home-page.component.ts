@@ -23,34 +23,21 @@ export class HomePageComponent implements OnInit {
   public  username: number;
   public  password: string;
   public cookieValue: string;
+  public jwt:string;
   public user: User;
   title = 'angular-material-tab-router';  
   navLinks: any[];
   activeLinkIndex = -1; 
   constructor(private userService: UserService, private cookieService: CookieService, private router: Router,private _communicationService: CommunicationService) {
     
-
+      //kada se desi promena na login-u aktivirace se _communicationService
+      //i ponovo ce se inicijalizovati home-page, sa novim vrednostima
     _communicationService.changeEmitted$.subscribe(data => {
       console.log('aaaa', data);
       this.logged = 10;
       this.cookieValue = this.cookieService.get('cookie-name');
+      this.jwt = localStorage.getItem('jwt');
       })
-
-    this.navLinks = [
-      {
-          label: 'First',
-          link: './flights',
-          index: 0
-      }, {
-          label: 'Second',
-          link: './hotels',
-          index: 1
-      }, {
-          label: 'Third',
-          link: './login',
-          index: 2
-      }, 
-  ];
 
    }
 
@@ -74,10 +61,9 @@ export class HomePageComponent implements OnInit {
      
 
       this.cookieValue = this.cookieService.get('cookie-name');
- 
-      this.router.events.subscribe((res) => {
-        this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
-    });
+      this.jwt = localStorage.getItem('jwt');
+
+     
   }
 
   

@@ -1,6 +1,6 @@
 export interface Airline {
-    Id : number;
-    Name: string;
-    About: string;
-    Rating: number;
+    id : number;
+    name: string;
+    about: string;
+    rating: number;
  } 

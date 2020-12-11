@@ -1,6 +1,6 @@
 <a routerLink = "login">aaaa</a>
 
 <span *ngFor="let clickd of airlines; index as i;">
-        <h2>{{airlines[i].name}} {{airlines[i].about}} {{airlines[i].rating}} </h2>
+        <h2 [routerLink] = "['/airlines', airlines[i].id]">{{airlines[i].name}} {{airlines[i].about}} {{airlines[i].rating}} </h2>
 </span>
 

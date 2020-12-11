@@ -47,13 +47,45 @@ namespace WebServer.DatabaseLogic
 
             using (var acces = new DatabaseAccess())
             {
-                var query = from us in acces.Airlines
-                            where us.Name == "kompanija 1"
-                            select us;
+                var query = acces.Airlines;
+                          
                 listOfAirlines = query.ToList();
             }
 
             return listOfAirlines;
         }
+
+        public Airline FindUserById(int id)
+        {
+            Airline a = new Airline();
+            bool boolvalue = false;
+            lock (Obj)
+            {
+                using (var access = new DatabaseAccess())
+                {
+                    var airlines = access.Airlines;
+
+                    foreach (var airline in airlines)
+                    {
+                        if (airline.Id == id)
+                        {
+                            boolvalue = true;
+                            a = airline;
+                        }
+                    }
+                }
+                if (boolvalue)
+                {
+                    return a;
+                }
+                else
+                {
+
+                }
+
+                return null;
+            }
+        }
+
     }
 }

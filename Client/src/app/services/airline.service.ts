@@ -14,5 +14,11 @@ export class AirlineService {
     return this.http.get<Airline[]>('https://localhost:44325/api/airline');
    
     }
+
+    getAirline(id: string) : Observable<Airline> {
+      console.log('aaaa222');
+      return this.http.get<Airline>('https://localhost:44325/api/airline/'+ id);
+     
+      }
 }
 

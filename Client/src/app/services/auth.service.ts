@@ -16,6 +16,6 @@ export class AuthService {
     const headers: HttpHeaders = new  HttpHeaders();
     headers.set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.http.post('https://localhost:44325/api/login/', logparam, {responseType: 'text', headers: headers});
+    return this.http.post('https://localhost:44325/api/login/', logparam, { headers: headers});
   }
 }

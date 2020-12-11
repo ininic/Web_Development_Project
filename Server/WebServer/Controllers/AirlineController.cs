@@ -23,9 +23,9 @@ namespace WebServer.Controllers
 
         // GET: api/Airline/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Airline Get(int id)
         {
-            return "value";
+            return Adbl.FindUserById(id);
         }
 
         // POST: api/Airline

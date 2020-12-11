@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.DatabaseLogic;
 using WebServer.Models;
@@ -17,6 +18,7 @@ namespace WebServer.Controllers
         readonly UserDatabaseLogic Udbl = new UserDatabaseLogic();
         readonly AirlineDatabaseLogic Adbl = new AirlineDatabaseLogic();
         [HttpGet]
+        [Authorize]
         public ActionResult<IEnumerable<string>> Get()
         {
 
