@@ -67,10 +67,6 @@ export class HomePageComponent implements OnInit {
   }
 
   
-  onToggleFavorite(stock: number) {
-    console.log('Favorite for stock ', stock, ' was triggered');
-    this.logged = stock;
-    }
-
+ 
     
 }

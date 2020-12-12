@@ -29,7 +29,15 @@ namespace WebServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCORS", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
 
             services.AddAuthentication(opt =>
                 {
@@ -47,8 +55,8 @@ namespace WebServer
 
                         ValidIssuer = "https://localhost:44325",
                         ValidAudience = "https://localhost:44325",
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("syperSecretKey@345"))
-
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345")),
+                        ClockSkew = TimeSpan.Zero
                     };
                 });
 
@@ -66,7 +74,7 @@ namespace WebServer
                 app.UseHsts();
             }
             app.UseAuthentication();
-            app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
+            app.UseCors("EnableCORS");
             app.UseHttpsRedirection();
             app.UseMvc();
         }

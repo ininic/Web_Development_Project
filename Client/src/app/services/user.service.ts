@@ -4,6 +4,7 @@ import { User } from '../../app/model/user';
 
 import { Observable } from 'rxjs';
 import { LoginParameters } from '../model/login-parameters';
+import { tokengGetter } from '../app.module';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,13 @@ export class UserService {
       
   }
 
-  logInaaa(query: number) : Observable<string>{
-    return this.http.get(`https://localhost:44325/api/users/${query}` , {responseType: 'text'});    
+  logInaaa() : Observable<any>{
+    console.log('poziv');
+    const t = localStorage.getItem("jwt");
+    
+    var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+    const header = { Authorization: `Bearer ${t}` }
+    return this.http.get("https://localhost:44325/api/values", {headers: header});    
   }
 
   
