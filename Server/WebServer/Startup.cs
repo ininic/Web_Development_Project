@@ -33,9 +33,10 @@ namespace WebServer
             {
                 options.AddPolicy("EnableCORS", builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder
                     .AllowAnyHeader()
-                    .AllowAnyMethod();
+                    .AllowAnyMethod()
+                    .WithOrigins("http://localhost:4200", "other domains"); ;
                 });
             });
 

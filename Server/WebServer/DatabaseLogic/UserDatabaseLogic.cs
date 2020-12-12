@@ -184,5 +184,42 @@ namespace WebServer.DatabaseLogic
             return listOfUsers;
         }
 
+        public User LogInUser(string username, string password)
+        {
+            User u = new User();
+            bool boolvalue = false;
+            lock (Obj)
+            {
+                using (var access = new DatabaseAccess())
+                {
+                    var users = access.Users;
+
+                    foreach (var user in users)
+                    {
+                        if (user.Username == username)
+                        {
+                            if (user.Password == password)
+                            {
+                                return u;
+                            }
+                        }
+                    }
+
+                
+                }
+
+                if (boolvalue)
+                {
+                    Console.WriteLine("Korisnik " + username + " je pronadjen!");
+                    return u;
+                }
+                else
+                {
+                    Console.WriteLine("Korisnik " + username + " nije pronadjen!");
+                }
+
+                return null;
+            }
+        }
     }
 }

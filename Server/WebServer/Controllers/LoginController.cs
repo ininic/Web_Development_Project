@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using WebServer.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using WebServer.DatabaseLogic;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebServer.Controllers
 {
@@ -19,6 +20,7 @@ namespace WebServer.Controllers
     public class LoginController : ControllerBase
     {
         // GET: api/Login
+        readonly UserDatabaseLogic Udbl = new UserDatabaseLogic();
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -36,7 +38,9 @@ namespace WebServer.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]  LoginParameters login)
         {
-            if(login.Password == "123" && login.Username == "Ivan")
+            
+            
+            if( Udbl.LogInUser(login.Username, login.Password) != null)
             {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);

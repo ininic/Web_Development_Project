@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.DatabaseLogic;
+using WebServer.DatabasePopulation;
 using WebServer.Models;
 
 namespace WebServer.Controllers
@@ -21,63 +22,15 @@ namespace WebServer.Controllers
         [Authorize]
         public ActionResult<IEnumerable<string>> Get()
         {
-
-
-            User user = new User();
-            user.FirstName = "Mira";
-            user.Lastname = "Miric";
-            user.LoggedIn = false;
-            user.IsDeleted = false;
-            user.Password = "12345678";
-            user.Username = "mmiric";
-            user.Gender = "male";
-            user.Role = "sysadmin";
-            user.Email = "ininic95@gmail.com";
-            user.ListOfFriends = "";
-            Udbl.AddUser(user);
-
-            User user2 = new User();
-            user2.FirstName = "Mira";
-            user2.Lastname = "Miric";
-            user2.LoggedIn = false;
-            user2.IsDeleted = false;
-            user2.Password = "12345678";
-            user2.Username = "hmiric";
-            user2.Gender = "male";
-            user2.Role = "sysadmin";
-            user2.Email = "ininic95@gmail.com";
-            user2.ListOfFriends = "";
-            Udbl.AddUser(user2);
-
-            User user3 = new User();
-            user3.FirstName = "Mira";
-            user3.Lastname = "Miric";
-            user3.LoggedIn = false;
-            user3.IsDeleted = false;
-            user3.Password = "12345678";
-            user3.Username = "umiric";
-            user3.Gender = "male";
-            user3.Role = "sysadmin";
-            user3.Email = "ininic95@gmail.com";
-            user3.ListOfFriends = "";
-            Udbl.AddUser(user3);
-
-            Airline airline1 = new Airline();
-
-            airline1.About = "Nesto o kompaniji";
-            airline1.Name = "Kompanija 1";
-            airline1.Rating = 4.5;
-            Adbl.AddAirline(airline1);
-
-            return new string[] { "value1", "value2" };
-
-          
+            return new string[] { "value1", "value2" };         
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
+            DatabasePopulate dp = new DatabasePopulate();
+            dp.Populate();
             return "value";
         }
 
@@ -111,6 +64,7 @@ namespace WebServer.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+           
         }
 
         // DELETE api/values/5
