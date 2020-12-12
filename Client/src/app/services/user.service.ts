@@ -14,15 +14,11 @@ export class UserService {
   constructor(private http: HttpClient) { 
 
       
-  }
+  } 
 
   logInaaa() : Observable<any>{
     console.log('poziv');
-    const t = localStorage.getItem("jwt");
-    
-    var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
-    const header = { Authorization: `Bearer ${t}` }
-    return this.http.get("https://localhost:44325/api/values", {headers: header});    
+    return this.http.get("https://localhost:44325/api/values");    
   }
 
   

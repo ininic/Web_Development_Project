@@ -19,9 +19,12 @@ import { HotelsComponent } from './hotels/hotels.component'; // CLI imports AppR
 import { AirlineService } from './services/airline.service';
 import { AirlineProfileComponent } from './airline-profile/airline-profile.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { CarRenatalCompaniesComponent } from './car-renatal-companies/car-renatal-companies.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AuthInterceptor } from './services/jwt-interceptor.service';
 
 export function tokengGetter(){
-  return localStorage.getItem("jwt"  );
+  return localStorage.getItem("jwt");
 }
 
 
@@ -33,7 +36,9 @@ export function tokengGetter(){
     LoginComponent,
     AirlinesComponent,
     HotelsComponent,
-    AirlineProfileComponent
+    AirlineProfileComponent,
+    CarRenatalCompaniesComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -42,11 +47,13 @@ export function tokengGetter(){
     MatTabsModule,
     RouterModule.forRoot([
       {path: '', redirectTo: '/airlines', pathMatch: 'full'},
-      {path: 'home', component: HomePageComponent},
+      {path: 'home', component: AirlinesComponent},
       {path: 'login', component: LoginComponent},
       {path: 'airlines', component: AirlinesComponent},
       {path: 'airlines/:id', component: AirlineProfileComponent},
+      {path: 'carrentals', component: CarRenatalCompaniesComponent},
       {path: 'hotels', component: HotelsComponent, canActivate: [AuthGuardService]},
+      {path: 'profile', component: UserProfileComponent},
       
     ]),
     JwtModule.forRoot({
@@ -62,6 +69,7 @@ export function tokengGetter(){
     CookieService,
     CommunicationService,
     AirlineService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
     
   ],
   bootstrap: [AppComponent]

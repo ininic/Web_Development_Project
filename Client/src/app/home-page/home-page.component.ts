@@ -43,6 +43,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     
+    
     this.user = {
       Username: 'ininic',
       Password: '123',

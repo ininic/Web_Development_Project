@@ -14,8 +14,10 @@
  
 
 <nav mat-tab-nav-bar  animationDuration="0ms">
-  <a mat-tab-link label="First" routerLink = "airlines" >Airlines</a>
+  <a mat-tab-link label="First" routerLink = "airlines" >Airlines</a> 
+  <a mat-tab-link label="Second"  routerLink = "carrentals" >Car Rentals</a>
   <a mat-tab-link label="Second"  routerLink = "hotels" >Hotels</a>
   <a mat-tab-link *ngIf="this.cookieValue != 'our cookie value'"  label="Third" routerLink="login">Login</a>
+  <a mat-tab-link *ngIf="this.cookieValue == 'our cookie value'"  label="Forth" routerLink="profile">Profile</a>
 </nav>
 
