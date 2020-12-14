@@ -200,7 +200,7 @@ namespace WebServer.DatabaseLogic
                         {
                             if (user.Password == password)
                             {
-                                return u;
+                                return user;
                             }
                         }
                     }

@@ -10,6 +10,7 @@ import { CookieService} from 'ngx-cookie-service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { CommunicationService } from '../services/comunication.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Component({
@@ -25,9 +26,7 @@ export class HomePageComponent implements OnInit {
   public cookieValue: string;
   public jwt:string;
   public user: User;
-  title = 'angular-material-tab-router';  
-  navLinks: any[];
-  activeLinkIndex = -1; 
+  public role: Object;
   constructor(private userService: UserService, private cookieService: CookieService, private router: Router,private _communicationService: CommunicationService) {
     
       //kada se desi promena na login-u aktivirace se _communicationService
@@ -37,6 +36,9 @@ export class HomePageComponent implements OnInit {
       this.logged = 10;
       this.cookieValue = this.cookieService.get('cookie-name');
       this.jwt = localStorage.getItem('jwt');
+      const helper = new JwtHelperService();
+      this.role = helper.decodeToken(this.jwt)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
       })
 
    }
@@ -66,7 +68,10 @@ export class HomePageComponent implements OnInit {
 
      
   }
-
+  
+  onSomething() {
+    this._communicationService.emitChange({proprty: 'value'});
+}
   
  
     

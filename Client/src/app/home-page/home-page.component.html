@@ -1,8 +1,5 @@
 <p>home-page works!</p>
-
-
-<h1>{{logged}}</h1>
-
+<h1>role: {{this.role}}</h1>
 <h1>cookie {{ this.cookieValue}}</h1>
 <h2>jwt: {{this.jwt}}</h2>
 <div *ngIf="this.cookieValue == 'our cookie value'">
@@ -18,6 +15,6 @@
   <a mat-tab-link label="Second"  routerLink = "carrentals" >Car Rentals</a>
   <a mat-tab-link label="Second"  routerLink = "hotels" >Hotels</a>
   <a mat-tab-link *ngIf="this.cookieValue != 'our cookie value'"  label="Third" routerLink="login">Login</a>
-  <a mat-tab-link *ngIf="this.cookieValue == 'our cookie value'"  label="Forth" routerLink="profile">Profile</a>
+  <a mat-tab-link *ngIf="this.cookieValue == 'our cookie value'"  (click) = "onSomething()" label="Forth" routerLink="profile">Profile</a>
 </nav>
 

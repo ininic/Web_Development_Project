@@ -38,16 +38,23 @@ namespace WebServer.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]  LoginParameters login)
         {
-            
-            
-            if( Udbl.LogInUser(login.Username, login.Password) != null)
+
+            User user = new User();
+            if ((user = Udbl.LogInUser(login.Username, login.Password)) != null)
             {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, login.Username),
+                    new Claim(ClaimTypes.Role, user.Role)
+                };
+
                 var tokenOptions = new JwtSecurityToken(
                     issuer: "https://localhost:44325",
                     audience: "https://localhost:44325",
-                    claims: new List<Claim>(),
+                    claims: claims,
                     expires: DateTime.Now.AddSeconds(27),
                     signingCredentials: signingCredentials
                     );

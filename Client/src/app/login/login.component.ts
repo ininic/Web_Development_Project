@@ -25,7 +25,7 @@ import {Location} from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  @Output() private toggleFavorite: EventEmitter<number>;
+  //@Output() private toggleFavorite: EventEmitter<number>;
   public login: LoginParameters;
   constructor( private _location: Location, private authService: AuthService, private cookieService: CookieService, private route: Router,private _communicationService: CommunicationService)
    {

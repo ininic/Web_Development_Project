@@ -53,7 +53,7 @@ export function tokengGetter(){
       {path: 'airlines/:id', component: AirlineProfileComponent},
       {path: 'carrentals', component: CarRenatalCompaniesComponent},
       {path: 'hotels', component: HotelsComponent, canActivate: [AuthGuardService]},
-      {path: 'profile', component: UserProfileComponent},
+      {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardService]},
       
     ]),
     JwtModule.forRoot({

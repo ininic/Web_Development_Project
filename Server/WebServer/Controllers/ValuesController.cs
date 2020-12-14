@@ -19,7 +19,7 @@ namespace WebServer.Controllers
         readonly UserDatabaseLogic Udbl = new UserDatabaseLogic();
         readonly AirlineDatabaseLogic Adbl = new AirlineDatabaseLogic();
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "sysadmin")]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };         

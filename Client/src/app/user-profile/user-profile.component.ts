@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommunicationService } from '../services/comunication.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _communicationService: CommunicationService) { }
 
   ngOnInit(): void {
   }
 
+  
+  onSomething() {
+    this._communicationService.emitChange({proprty: 'value'});
+}
 }
