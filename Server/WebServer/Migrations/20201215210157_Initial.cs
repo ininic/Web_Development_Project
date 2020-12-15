@@ -23,6 +23,41 @@ namespace WebServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CarRentalCompaies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Adress = table.Column<string>(nullable: true),
+                    About = table.Column<string>(nullable: true),
+                    PriceList = table.Column<string>(nullable: true),
+                    Branches = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarRentalCompaies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cars",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Model = table.Column<string>(nullable: true),
+                    Year = table.Column<int>(nullable: false),
+                    NumberOfSeats = table.Column<int>(nullable: false),
+                    Tip = table.Column<string>(nullable: true),
+                    CarRenalId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cars", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -49,6 +84,12 @@ namespace WebServer.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Airlines");
+
+            migrationBuilder.DropTable(
+                name: "CarRentalCompaies");
+
+            migrationBuilder.DropTable(
+                name: "Cars");
 
             migrationBuilder.DropTable(
                 name: "Users");

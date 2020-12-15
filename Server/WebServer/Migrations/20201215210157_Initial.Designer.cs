@@ -9,7 +9,7 @@ using WebServer.DatabaseConfig;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(DatabaseAccess))]
-    [Migration("20201209142554_Initial")]
+    [Migration("20201215210157_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,50 @@ namespace WebServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Airlines");
+                });
+
+            modelBuilder.Entity("WebServer.Models.Car", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CarRenalId");
+
+                    b.Property<string>("Model");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("NumberOfSeats");
+
+                    b.Property<string>("Tip");
+
+                    b.Property<int>("Year");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("WebServer.Models.CarRentalCompany", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("About");
+
+                    b.Property<string>("Adress");
+
+                    b.Property<string>("Branches");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PriceList");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CarRentalCompaies");
                 });
 
             modelBuilder.Entity("WebServer.Models.User", b =>
