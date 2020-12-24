@@ -9,6 +9,7 @@ namespace WebServer.DatabaseConfig
 {
     public class DatabaseAccess : DbContext
     {
+        
         public DbSet<User> Users { get; set; }
         public DbSet<Airline> Airlines { get; set; }
         public DbSet<CarRentalCompany> CarRentalCompaies { get; set; }
@@ -18,6 +19,7 @@ namespace WebServer.DatabaseConfig
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\ProjectsV13;Initial Catalog=StoreDB;");
+            
         }
     }
 }

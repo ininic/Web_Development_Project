@@ -7,27 +7,27 @@ using WebServer.Models;
 
 namespace WebServer.DatabaseLogic
 {
-    public class AirlineDatabaseLogic
+    public class CarRentalCompanyDatabaseLogic
     {
         private static readonly object Obj = new object();
-        public bool AddAirline(Airline newAirline)
+        public bool AddCarRentalCompany(CarRentalCompany newCompany) 
         {
             lock (Obj)
             {
                 using (var acess = new DatabaseAccess())
                 {
-                    var airlines = acess.Airlines;
-                    foreach (var user in airlines)
+                    var companies = acess.CarRentalCompaies;
+                    foreach (var company in companies)
                     {
-                        if (user.Name == newAirline.Name)
+                        if (company.Name == newCompany.Name)
                         {
 
                             return false;
-                            
+
                         }
                     }
 
-                    acess.Airlines.Add(newAirline);
+                    acess.CarRentalCompaies.Add(newCompany);
                     int valid = acess.SaveChanges();
                     if (valid > 0)
                     {
@@ -40,43 +40,43 @@ namespace WebServer.DatabaseLogic
                 }
             }
         }
-
-        public List<Airline> GetAllAirlines() 
+        public List<CarRentalCompany> GetAllCarRentalCompanies()
         {
-            List<Airline> listOfAirlines = new List<Airline>();
+            List<CarRentalCompany> listOfcompanies = new List<CarRentalCompany>();
 
             using (var acces = new DatabaseAccess())
             {
-                var query = acces.Airlines;
-                          
-                listOfAirlines = query.ToList();
+                var query = acces.CarRentalCompaies;
+
+                listOfcompanies = query.ToList();
             }
 
-            return listOfAirlines;
+            return listOfcompanies;
         }
 
-        public Airline FindUserById(int id)
+
+        public CarRentalCompany FindCompanyById(int id)
         {
-            Airline a = new Airline();
+            CarRentalCompany c = new CarRentalCompany();
             bool boolvalue = false;
             lock (Obj)
             {
                 using (var access = new DatabaseAccess())
                 {
-                    var airlines = access.Airlines;
+                    var companies = access.CarRentalCompaies;
 
-                    foreach (var airline in airlines)
+                    foreach (var company in companies)
                     {
-                        if (airline.Id == id)
+                        if (company.Id == id)
                         {
                             boolvalue = true;
-                            a = airline;
+                            c = company;
                         }
                     }
                 }
                 if (boolvalue)
                 {
-                    return a;
+                    return c;
                 }
                 else
                 {
@@ -86,6 +86,5 @@ namespace WebServer.DatabaseLogic
                 return null;
             }
         }
-
     }
 }

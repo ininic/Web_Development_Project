@@ -11,8 +11,10 @@ namespace WebServer.DatabasePopulation
     {
         readonly UserDatabaseLogic Udbl = new UserDatabaseLogic();
         readonly AirlineDatabaseLogic Adbl = new AirlineDatabaseLogic();
+        readonly CarRentalCompanyDatabaseLogic Cdbl = new CarRentalCompanyDatabaseLogic();
         public void Populate()
         {
+
             PopulateUsers("Marko", "Markovic", "sysadmin", "mmarkovic", "mmarkovic@gmail.com", "male", false, "m123");
             PopulateUsers("Stefan", "Stefanovic", "airlineadmin", "sstefanovic", "sstefanovic@gmail.com", "male", false, "s123");
             PopulateUsers("Petar", "Petrovic", "carrentaladmin", "ppetrovic", "ppetrovic@gmail.com", "male", false, "p123");
@@ -26,6 +28,13 @@ namespace WebServer.DatabasePopulation
             PopulateAirlines("Britanska kompanija koja se bavi avio prevozom", "British Airways", 4.15);
             PopulateAirlines("Francuska kompanija koja se bavi avio prevozom", "Air France", 4.35);
             PopulateAirlines("Svajcarska kompanija koja se bavi avio prevozom", "Helvetic Airways", 4.35);
+
+            PopulateCarRentalCompanies("Novosadska komanija", "Svetozara Miletica 12", "Rentacar021", "u izradi", "trenutno nedostupno");
+            PopulateCarRentalCompanies("Valjevska komanija", "Ilije Bircanina 71", "Rentacar014", "u izradi", "trenutno nedostupno");
+            PopulateCarRentalCompanies("Beogradska komanija", "Krunska 42", "Rentacar021", "u izradi", "trenutno nedostupno");
+            PopulateCarRentalCompanies("Zrenjaninska komanija", "Žarka Zrenjanina 16", "Rentacar023", "u izradi", "trenutno nedostupno");
+            PopulateCarRentalCompanies("Niška komanija", "Sinđelićeva 22", "Rentacar018", "u izradi", "trenutno nedostupno");
+            PopulateCarRentalCompanies("Pančevačka komanija", "Miloša Crnjanskog 33", "Rentacar013", "u izradi", "trenutno nedostupno");
 
 
         }
@@ -41,9 +50,7 @@ namespace WebServer.DatabasePopulation
             user.Gender = gender;
             user.LoggedIn = logedIn;
             user.Password = password;
-            Udbl.AddUser(user);
-
-
+            Udbl.AddUser(user);    
         }
         public void PopulateAirlines(string about, string name, double rating)
         {
@@ -52,6 +59,17 @@ namespace WebServer.DatabasePopulation
             airline.Name = name;
             airline.Rating = rating;
             Adbl.AddAirline(airline);
+        }
+
+        public void PopulateCarRentalCompanies(string about, string adress, string name, string priceList, string branches)
+        {
+            CarRentalCompany carRentalCompany = new CarRentalCompany();
+            carRentalCompany.About = about;
+            carRentalCompany.Adress = adress;
+            carRentalCompany.Branches = branches;
+            carRentalCompany.Name = name;
+            carRentalCompany.PriceList = priceList;
+            Cdbl.AddCarRentalCompany(carRentalCompany);
         }
     }
 }

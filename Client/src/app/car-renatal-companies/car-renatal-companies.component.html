@@ -1,1 +1,6 @@
 <p>car-renatal-companies works!</p>
+<a routerLink = "login">aaaa</a>
+
+<span *ngFor="let clickd of companies; index as i;">
+        <h2 [routerLink] = "['/carrentals', companies[i].id]">{{companies[i].name}} {{companies[i].about}} {{companies[i].pricelist}} </h2>
+</span>

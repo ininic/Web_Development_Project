@@ -92,14 +92,7 @@ namespace WebServer.DatabaseLogic
                     {
                         if (us.Id == u.Id)
                         {
-                            us.Username = u.Username;
-                            us.Password = u.Password;
-                            us.FirstName = u.FirstName;
-                            us.Lastname = u.Lastname;
-                            us.Gender = u.Gender;
-                            us.Role = u.Role;
-                            us.IsDeleted = u.IsDeleted;
-                            us.LoggedIn = u.LoggedIn;
+                            us.Email = "aaa";
                             goto label;
                         }
                     }
@@ -200,12 +193,13 @@ namespace WebServer.DatabaseLogic
                         {
                             if (user.Password == password)
                             {
-                                return user;
+                                boolvalue = true;
+                                u = user;
+
                             }
                         }
                     }
 
-                
                 }
 
                 if (boolvalue)
