@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Car } from '../model/car';
 import { CarRentalCompany } from '../model/car-rental-company';
 import { CarRentalCompanyService } from '../services/car-rental-company.service';
 
@@ -10,6 +11,8 @@ import { CarRentalCompanyService } from '../services/car-rental-company.service'
 })
 export class CarRenatlCompanyProfileComponent implements OnInit {
   public company: CarRentalCompany; 
+  public cars: Car[];
+  public car: Car; 
   public id: string;
   public name: string;
   public adress: string;
@@ -19,6 +22,7 @@ export class CarRenatlCompanyProfileComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {this.id = params.get('id'); console.log(params.get('id')) });
     this.carservice.getCompany(this.id).subscribe((response) => { this.company = response; console.log('OBSERVE "response" RESPONSE is ', this.company);
+    this.carservice.getCompanyCars(this.id).subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);})
     this.name = this.company.name;
     this.about = this.company.about;
     this.adress = this.company.adress;

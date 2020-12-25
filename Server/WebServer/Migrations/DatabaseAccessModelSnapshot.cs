@@ -43,13 +43,15 @@ namespace WebServer.Migrations
 
                     b.Property<int>("CarRenalId");
 
-                    b.Property<string>("Model");
+                    b.Property<string>("Mark");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Model");
 
                     b.Property<int>("NumberOfSeats");
 
-                    b.Property<string>("Tip");
+                    b.Property<string>("Type");
+
+                    b.Property<string>("UniqueIdentifier");
 
                     b.Property<int>("Year");
 

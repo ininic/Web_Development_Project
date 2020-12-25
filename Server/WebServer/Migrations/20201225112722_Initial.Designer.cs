@@ -9,7 +9,7 @@ using WebServer.DatabaseConfig;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(DatabaseAccess))]
-    [Migration("20201215210157_Initial")]
+    [Migration("20201225112722_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,13 +45,15 @@ namespace WebServer.Migrations
 
                     b.Property<int>("CarRenalId");
 
-                    b.Property<string>("Model");
+                    b.Property<string>("Mark");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Model");
 
                     b.Property<int>("NumberOfSeats");
 
-                    b.Property<string>("Tip");
+                    b.Property<string>("Type");
+
+                    b.Property<string>("UniqueIdentifier");
 
                     b.Property<int>("Year");
 

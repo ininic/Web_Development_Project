@@ -11,7 +11,8 @@ namespace WebServer.DatabasePopulation
     {
         readonly UserDatabaseLogic Udbl = new UserDatabaseLogic();
         readonly AirlineDatabaseLogic Adbl = new AirlineDatabaseLogic();
-        readonly CarRentalCompanyDatabaseLogic Cdbl = new CarRentalCompanyDatabaseLogic();
+        readonly CarRentalCompanyDatabaseLogic Crdbl = new CarRentalCompanyDatabaseLogic();
+        readonly CarDatabaseLogic Cdbl = new CarDatabaseLogic();
         public void Populate()
         {
 
@@ -69,7 +70,29 @@ namespace WebServer.DatabasePopulation
             carRentalCompany.Branches = branches;
             carRentalCompany.Name = name;
             carRentalCompany.PriceList = priceList;
-            Cdbl.AddCarRentalCompany(carRentalCompany);
+            Crdbl.AddCarRentalCompany(carRentalCompany);
+            PopulateCars("mercedes", "m2000", "caravan", 2010, 5, carRentalCompany.Id, carRentalCompany.Id.ToString() + 'A');
+            PopulateCars("toyota", "t2000", "caravan", 2007, 5, carRentalCompany.Id, carRentalCompany.Id.ToString() + 'B');
+            PopulateCars("ford", "f2000", "caravan", 1990, 5, carRentalCompany.Id, carRentalCompany.Id.ToString() + 'C');
+            PopulateCars("audi", "a2000", "caravan", 2000, 4, carRentalCompany.Id, carRentalCompany.Id.ToString() + 'D');
+            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Id.ToString() + 'E');
+
+        }
+
+
+        public void PopulateCars(string mark, string model, string type, int year, int numberOfSeats, int carRentalId, string uniqueIdentifier)
+        {
+            Car car = new Car();
+            car.Mark = mark;
+            car.Model = model;
+            car.Type = type;
+            car.Year = year;
+            car.NumberOfSeats = numberOfSeats;
+            car.CarRenalId = carRentalId;
+            car.UniqueIdentifier = uniqueIdentifier;
+            Cdbl.AddCar(car);
+
+
         }
     }
 }

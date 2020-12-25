@@ -11,30 +11,30 @@ namespace WebServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarRentalCompanyController : ControllerBase
+    public class CarController : ControllerBase
     {
-        readonly CarRentalCompanyDatabaseLogic Crdbl = new CarRentalCompanyDatabaseLogic();
-        // GET: api/CarRentalCompany
+        readonly CarDatabaseLogic Cdbl = new CarDatabaseLogic();
+        // GET: api/Car
         [HttpGet]
-        public IEnumerable<CarRentalCompany> Get()
+        public IEnumerable<string> Get()
         {
-            return Crdbl.GetAllCarRentalCompanies();
+            return new string[] { "value1", "value2" };
         }
 
-        // GET: api/CarRentalCompany/5
+        // GET: api/Car/5
         [HttpGet("{id}")]
-        public CarRentalCompany Get(int id)
+        public List<Car> Get(int id)
         {
-            return Crdbl.FindCompanyById(id);
+            return Cdbl.GetCarsByRentalId(id);
         }
 
-        // POST: api/CarRentalCompany
+        // POST: api/Car
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/CarRentalCompany/5
+        // PUT: api/Car/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

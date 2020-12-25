@@ -45,11 +45,12 @@ namespace WebServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    UniqueIdentifier = table.Column<string>(nullable: true),
+                    Mark = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
                     Year = table.Column<int>(nullable: false),
                     NumberOfSeats = table.Column<int>(nullable: false),
-                    Tip = table.Column<string>(nullable: true),
+                    Type = table.Column<string>(nullable: true),
                     CarRenalId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
