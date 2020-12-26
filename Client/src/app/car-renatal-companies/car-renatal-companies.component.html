@@ -1,6 +1,20 @@
-<p>car-renatal-companies works!</p>
-<a routerLink = "login">aaaa</a>
+<table class="table">
+        <thead>
+                <tr>
+                  <th (click)="sort()" scope="col">Name</th>
+                  <th scope="col">About</th>
+                  <th scope="col">Address</th>
+                </tr>
+        </thead>
+           
+        <tbody>
+                <tr *ngFor="let clickd of companies; index as i;">
+      
+                        <td [routerLink] = "['/carrentals', companies[i].id]"> <a href="#">{{companies[i].name}}</a> </td>
+                        <td>{{companies[i].about}} </td>
+                        <td>{{companies[i].adress}} </td>
+                </tr>
 
-<span *ngFor="let clickd of companies; index as i;">
-        <h2 [routerLink] = "['/carrentals', companies[i].id]">{{companies[i].name}} {{companies[i].about}} {{companies[i].pricelist}} </h2>
-</span>
+        </tbody>
+        
+</table>

@@ -4,8 +4,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatFormField } from '@angular/material/form-field'
 import { RouterModule } from '@angular/Router';
 import { JwtModule } from '@auth0/angular-jwt';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 import { AppComponent } from './app.component';
@@ -23,6 +26,7 @@ import { CarRenatalCompaniesComponent } from './car-renatal-companies/car-renata
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthInterceptor } from './services/jwt-interceptor.service';
 import { CarRenatlCompanyProfileComponent } from './car-renatl-company-profile/car-renatl-company-profile.component';
+
 
 export function tokengGetter(){
   return localStorage.getItem("jwt");
@@ -47,6 +51,7 @@ export function tokengGetter(){
     HttpClientModule,
     BrowserAnimationsModule,
     MatTabsModule,
+    MatFormFieldModule,
     RouterModule.forRoot([
       {path: '', redirectTo: '/airlines', pathMatch: 'full'},
       {path: 'home', component: AirlinesComponent},

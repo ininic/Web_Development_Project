@@ -17,5 +17,10 @@ export class CarRenatalCompaniesComponent implements OnInit {
     this.carservice.getCompanies().subscribe((response) => { this.companies = response; console.log('OBSERVE "response" RESPONSE is ', this.companies);
  });
   }
+  sort(): void{
+    this.companies.sort((a, b) => a.name.localeCompare(b.name))
+  
+  }
+
 
 }

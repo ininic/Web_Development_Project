@@ -1,6 +1,20 @@
-<a routerLink = "login">aaaa</a>
+<table class="table">
+        <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">About</th>
+                  <th scope="col">Rating</th>
+                </tr>
+        </thead>
+           
+        <tbody>
+                <tr *ngFor="let clickd of airlines; index as i;">
+      
+                        <td [routerLink] = "['/airlines', airlines[i].id]"> <a href="#">{{airlines[i].name}}</a> </td>
+                        <td>{{airlines[i].about}} </td>
+                        <td>{{airlines[i].rating}} </td>
+                </tr>
 
-<span *ngFor="let clickd of airlines; index as i;">
-        <h2 [routerLink] = "['/airlines', airlines[i].id]">{{airlines[i].name}} {{airlines[i].about}} {{airlines[i].rating}} </h2>
-</span>
-
+        </tbody>
+        
+</table>
