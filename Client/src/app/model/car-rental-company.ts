@@ -2,7 +2,7 @@ export class CarRentalCompany {
 
     id: number;
     name: string;
-    adress: string;
+    address: string;
     about: string;
     priceList: string;
     branches: string;

@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
   public login: LoginParameters;
   constructor( private _location: Location, private authService: AuthService, private cookieService: CookieService, private route: Router,private _communicationService: CommunicationService)
    {
-   
+     
+    this.onSomething()
     //const decodedToken = helper.decodeToken(myRawToken);
     //const expirationDate = helper.getTokenExpirationDate(myRawToken);
     //const isExpired = helper.isTokenExpired(myRawToken); 
@@ -51,7 +52,8 @@ export class LoginComponent implements OnInit {
                const helper = new JwtHelperService();
                console.log("Jwt istice:", helper.getTokenExpirationDate(token));
                const exp = helper.getTokenExpirationDate(token);
-               this.setCookie(exp); this.onSomething();
+               this.setCookie(exp); 
+               this.onSomething();
                this._location.back();
             },
               (err : HttpErrorResponse) => { 

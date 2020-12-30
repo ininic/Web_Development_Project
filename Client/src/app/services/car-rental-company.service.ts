@@ -22,6 +22,11 @@ export class CarRentalCompanyService {
     }
 
   getCompanyCars(id: string) :  Observable<Car[]> {
-    return this.http.get<Car[]>('https://localhost:44325/api/car/'+ id);
+    return this.http.get<Car[]>('https://localhost:44325/api/car/'+ id); 
+  }
+
+  getCars(): Observable<Car[]>
+  {
+    return this.http.get<Car[]>('https://localhost:44325/api/car'); 
   }
 }

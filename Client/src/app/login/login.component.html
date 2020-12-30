@@ -1,27 +1,39 @@
-<p>login works!</p>
-<div class="form-group">
-    <form>
-    <div class="stock-name">
-        <td>
-            <tr> 
-                <label>username  </label>
-                <input type="text"
-                    placeholder="Username"
-                    [value]="login.Username"
-                    (input)="login.Username=$event.target.value">
-            </tr>
-    
-            <tr> 
-                <label>password  </label>
-                 <input type="text"
-                    placeholder="Password"
-                    [value]="login.Password"
-                    (input)="login.Password=$event.target.value">
-            </tr>
-        </td>
-    </div>
+<div   style="text-align: center;" >
+        <form>
+            <p></p>
+            <div   id="cc">
+                    <label  style="text-align: center;" for="inputAddress" >username  </label>
+                    <input class="form-control"  type="text"
+                        placeholder="Username"
+                        id="inputAddress"
+                        [value]="login.Username"
+                        (input)="login.Username=$event.target.value"  >
+                      
+            </div>
+                
+        
+            <div id="cc"  > 
+                    <label for="inputPassword4"  >password  </label>
+                    <input type="text"
+                        type="password" 
+                        class="form-control" 
+                        placeholder="Password"
+                        [value]="login.Password"
+                        (input)="login.Password=$event.target.value" 
+                       >
+            </div>
+         
+             
+             
+     
+
+          
     </form>
 
-    <button (click)="logIn()">Loggin</button> 
 
+  
+    <div id="cc">
+        <p></p>
+        <button  class="btn btn-primary" (click)="logIn()">Loggin</button>  
     </div>
+</div>

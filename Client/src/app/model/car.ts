@@ -1,6 +1,6 @@
 export class Car {
     id: number;
-    uniqueIdentifier: string;
+    nameOfCompany: string;
     mark: string;
     model: string 
     year: number;

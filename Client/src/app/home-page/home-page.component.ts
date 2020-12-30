@@ -31,13 +31,30 @@ export class HomePageComponent implements OnInit {
     
       //kada se desi promena na login-u aktivirace se _communicationService
       //i ponovo ce se inicijalizovati home-page, sa novim vrednostima
+      const helper = new JwtHelperService();
+      this.cookieValue = this.cookieService.get('cookie-name');
+      if(this.cookieValue ==  'our cookie value')
+      {
+      this.jwt = localStorage.getItem('jwt');
+      this.role = helper.decodeToken(this.jwt)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+      }
+      else{
+        this.role="";
+      }
+    
     _communicationService.changeEmitted$.subscribe(data => {
       console.log('aaaa', data);
       this.logged = 10;
       this.cookieValue = this.cookieService.get('cookie-name');
+      if(this.cookieValue ==  'our cookie value')
+      {
       this.jwt = localStorage.getItem('jwt');
       const helper = new JwtHelperService();
       this.role = helper.decodeToken(this.jwt)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+      }
+      else{
+        this.role="";
+      }
 
       })
 

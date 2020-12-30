@@ -62,25 +62,25 @@ namespace WebServer.DatabasePopulation
             Adbl.AddAirline(airline);
         }
 
-        public void PopulateCarRentalCompanies(string about, string adress, string name, string priceList, string branches)
+        public void PopulateCarRentalCompanies(string about, string address, string name, string priceList, string branches)
         {
             CarRentalCompany carRentalCompany = new CarRentalCompany();
             carRentalCompany.About = about;
-            carRentalCompany.Adress = adress;
+            carRentalCompany.Address = address;
             carRentalCompany.Branches = branches;
             carRentalCompany.Name = name;
             carRentalCompany.PriceList = priceList;
             Crdbl.AddCarRentalCompany(carRentalCompany);
-            PopulateCars("mercedes", "m2000", "caravan", 2010, 5, carRentalCompany.Id, carRentalCompany.Id.ToString() + 'A');
-            PopulateCars("toyota", "t2000", "caravan", 2007, 5, carRentalCompany.Id, carRentalCompany.Id.ToString() + 'B');
-            PopulateCars("ford", "f2000", "caravan", 1990, 5, carRentalCompany.Id, carRentalCompany.Id.ToString() + 'C');
-            PopulateCars("audi", "a2000", "caravan", 2000, 4, carRentalCompany.Id, carRentalCompany.Id.ToString() + 'D');
-            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Id.ToString() + 'E');
+            PopulateCars("mercedes", "m2000", "caravan", 2010, 5, carRentalCompany.Id, carRentalCompany.Name);
+            PopulateCars("toyota", "t2000", "caravan", 2007, 5, carRentalCompany.Id, carRentalCompany.Name);
+            PopulateCars("ford", "f2000", "caravan", 1990, 5, carRentalCompany.Id, carRentalCompany.Name);
+            PopulateCars("audi", "a2000", "caravan", 2000, 4, carRentalCompany.Id, carRentalCompany.Name);
+            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name);
 
         }
 
 
-        public void PopulateCars(string mark, string model, string type, int year, int numberOfSeats, int carRentalId, string uniqueIdentifier)
+        public void PopulateCars(string mark, string model, string type, int year, int numberOfSeats, int carRentalId, string nameOfCompany)
         {
             Car car = new Car();
             car.Mark = mark;
@@ -89,7 +89,7 @@ namespace WebServer.DatabasePopulation
             car.Year = year;
             car.NumberOfSeats = numberOfSeats;
             car.CarRenalId = carRentalId;
-            car.UniqueIdentifier = uniqueIdentifier;
+            car.NameOfCompany = nameOfCompany;
             Cdbl.AddCar(car);
 
 

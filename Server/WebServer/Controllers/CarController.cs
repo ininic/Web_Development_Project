@@ -16,9 +16,9 @@ namespace WebServer.Controllers
         readonly CarDatabaseLogic Cdbl = new CarDatabaseLogic();
         // GET: api/Car
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<Car> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Cdbl.GetCars();
         }
 
         // GET: api/Car/5

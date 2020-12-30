@@ -2,11 +2,12 @@
 <div>
     <li>ID: {{this.id}}</li>
     <li>Name: {{this.name}}</li>
-    <li>Adress: {{this.adress}}</li>
+    <li>Adress: {{this.address}}</li>
     <li>About: {{this.about}}</li>
     <li>List of cars: </li>
     <span *ngFor="let clickd of cars; index as i;">
-        <li>{{cars[i].uniqueIdentifier}}  {{cars[i].mark}}  {{cars[i].model}}  {{cars[i].year}} </li>
+        <li>{{cars[i].nameOfCompany}}  {{cars[i].mark}}  {{cars[i].model}}  {{cars[i].year}} </li>
 </span>
 
 </div>
+

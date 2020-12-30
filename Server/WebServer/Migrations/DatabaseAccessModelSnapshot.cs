@@ -47,11 +47,11 @@ namespace WebServer.Migrations
 
                     b.Property<string>("Model");
 
+                    b.Property<string>("NameOfCompany");
+
                     b.Property<int>("NumberOfSeats");
 
                     b.Property<string>("Type");
-
-                    b.Property<string>("UniqueIdentifier");
 
                     b.Property<int>("Year");
 
@@ -68,7 +68,7 @@ namespace WebServer.Migrations
 
                     b.Property<string>("About");
 
-                    b.Property<string>("Adress");
+                    b.Property<string>("Address");
 
                     b.Property<string>("Branches");
 

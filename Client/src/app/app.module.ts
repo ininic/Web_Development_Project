@@ -40,7 +40,7 @@ export function tokengGetter(){
     HomePageComponent,
     LoginComponent,
     AirlinesComponent,
-    HotelsComponent,
+    HotelsComponent, 
     AirlineProfileComponent,
     CarRenatalCompaniesComponent,
     UserProfileComponent,

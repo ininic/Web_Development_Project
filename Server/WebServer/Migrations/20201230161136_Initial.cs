@@ -29,7 +29,7 @@ namespace WebServer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    Adress = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
                     About = table.Column<string>(nullable: true),
                     PriceList = table.Column<string>(nullable: true),
                     Branches = table.Column<string>(nullable: true)
@@ -45,7 +45,7 @@ namespace WebServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UniqueIdentifier = table.Column<string>(nullable: true),
+                    NameOfCompany = table.Column<string>(nullable: true),
                     Mark = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
                     Year = table.Column<int>(nullable: false),

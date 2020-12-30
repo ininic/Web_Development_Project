@@ -8,7 +8,7 @@ namespace WebServer.Models
     public class Car
     {
         public int Id { get; set; }
-        public string UniqueIdentifier { get; set; }
+        public string NameOfCompany { get; set; }
         public string Mark { get; set; } 
         public string Model { get; set; }
         public int Year { get; set; }

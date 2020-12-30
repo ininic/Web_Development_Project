@@ -19,7 +19,7 @@ namespace WebServer.DatabaseLogic
                     var cars = acess.Cars;
                     foreach (var car in cars)
                     {
-                        if (car.UniqueIdentifier == newCar.UniqueIdentifier)
+                        if (car.Id == newCar.Id)
                         {
 
                             return false;
@@ -55,6 +55,19 @@ namespace WebServer.DatabaseLogic
                         listOfCars.Add(car);
                     }
                 }
+            }
+
+            return listOfCars;
+        }
+
+        public List<Car> GetCars()
+        {
+            List<Car> listOfCars = new List<Car>();
+
+            using (var access = new DatabaseAccess())
+            {
+                var cars = access.Cars;
+                listOfCars = cars.ToList();
             }
 
             return listOfCars;

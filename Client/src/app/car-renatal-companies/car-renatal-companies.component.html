@@ -1,9 +1,9 @@
 <table class="table">
         <thead>
                 <tr>
-                  <th (click)="sort()" scope="col">Name</th>
-                  <th scope="col">About</th>
-                  <th scope="col">Address</th>
+                  <th >Name <i (click)="sortByName()" scope="col"  class="fas fa-sort"></i> </th>
+                  <th scope="col">About  <i (click)="sortByAbout()" scope="col"  class="fas fa-sort"></i></th>
+                  <th scope="col">Address  <i (click)="sortByAddress()" scope="col"  class="fas fa-sort"></i></th>
                 </tr>
         </thead>
            
@@ -12,9 +12,71 @@
       
                         <td [routerLink] = "['/carrentals', companies[i].id]"> <a href="#">{{companies[i].name}}</a> </td>
                         <td>{{companies[i].about}} </td>
-                        <td>{{companies[i].adress}} </td>
-                </tr>
+                        <td>{{companies[i].address}} </td>
+                </tr> 
 
         </tbody>
         
 </table>
+
+
+        
+<form>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputAddress">Car rental company</label>
+            <input type="text" class="form-control"
+             (input)="this.nameOfCompany=$event.target.value"
+             placeholder="company">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputAddress">Mark</label>
+            <input type="text" class="form-control" 
+            (input) = "this.mark = $event.target.value"
+            placeholder="mark">
+          </div>       
+        <div  class="form-group col-md-4">
+          <label for="inputAddress">Number of seats</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="Number of seats">
+        </div>  
+        <div  class="form-group col-md-4">
+          <label for="inputAddress">City</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="City">
+        </div>  
+      </div>
+</form>
+
+<div style="text-align:center" >
+<button style="width: 20%; height: 20%;" class="btn btn-primary" (click)="Search()">Search</button>  
+</div>
+
+
+
+<div  *ngIf = "this.issearched == 1">
+  
+<h1>Rezultati pretrage: </h1>
+
+
+<table class="table" >
+<thead>
+  <tr>
+    <th >Mark <i  scope="col"  class="fas fa-sort"></i> </th>
+    <th scope="col">Number of seats  <i  scope="col"  class="fas fa-sort"></i></th>
+    <th scope="col">Company  <i  scope="col"  class="fas fa-sort"></i></th>
+  </tr>
+</thead>
+
+<tbody>
+  <tr *ngFor="let clickd of searchedcars; index as i; let last = last">
+
+          <td [routerLink] = "['/carrentals', searchedcars[i].id]"> <a href="#">{{searchedcars[i].mark}}</a> </td>
+          <td>{{searchedcars[i].model}} </td>
+          <td>{{searchedcars[i].nameOfCompany}} </td>
+          <span *ngIf="i == 4">{{scrollOn()}}</span>
+  </tr> 
+
+</tbody>
+        
+
+</table>
+</div>

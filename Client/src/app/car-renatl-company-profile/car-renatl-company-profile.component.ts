@@ -15,7 +15,7 @@ export class CarRenatlCompanyProfileComponent implements OnInit {
   public car: Car; 
   public id: string;
   public name: string;
-  public adress: string;
+  public address: string;
   public about: string;
   constructor(private carservice: CarRentalCompanyService, private route: ActivatedRoute) { }
 
@@ -25,7 +25,7 @@ export class CarRenatlCompanyProfileComponent implements OnInit {
     this.carservice.getCompanyCars(this.id).subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);})
     this.name = this.company.name;
     this.about = this.company.about;
-    this.adress = this.company.adress;
+    this.address = this.company.address;
   });
 } 
 
