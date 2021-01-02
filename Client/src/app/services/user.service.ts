@@ -21,5 +21,12 @@ export class UserService {
     return this.http.get("https://localhost:44325/api/values");    
   }
 
-  
+  Register(user: User) : Observable<any>{
+    const headers: HttpHeaders = new  HttpHeaders();
+    console.log('poziv');
+    headers.set('Content-Type', 'application/x-www-form-urlencoded');
+    
+
+    return this.http.post('https://localhost:44325/api/registration/', user, { headers: headers , });
+  }
 }

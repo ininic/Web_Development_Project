@@ -1,16 +1,12 @@
-<p>home-page works!</p>
-<h1>role: {{this.role}}</h1>
-<h1>cookie {{ this.cookieValue}}</h1>
-<h2>jwt: {{this.jwt}}</h2>
 <div *ngIf="this.cookieValue == 'our cookie value'">
-    ULOGOVAN
+  You are logged in as {{this.role}} cookie: {{this.cookieValue}}
 </div>
 <div *ngIf="this.cookieValue != 'our cookie value'">
-    IZLOGOVAN 
+  Not logged in, please <a style= "font-weight: bold;" routerLink = "/login" >Sign in </a> or <a style= "font-weight: bold;" routerLink = "/registration" >Register </a>
 </div>
  
 
-<nav mat-tab-nav-bar  animationDuration="0ms" >
+<nav mat-tab-nav-bar  animationDuration="2ms" >
   <a mat-tab-link label="First" routerLink = "airlines" >Airlines</a> 
   <a mat-tab-link label="Second"  routerLink = "carrentals" >Car Rentals</a>
   <a mat-tab-link label="Second"  routerLink = "hotels" >Hotels</a>

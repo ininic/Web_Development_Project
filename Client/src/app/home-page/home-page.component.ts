@@ -21,7 +21,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class HomePageComponent implements OnInit {
 
   logged : number = 0;
-  public  username: number;
+  public  username: number; 
   public  password: string;
   public cookieValue: string;
   public jwt:string;
@@ -64,17 +64,17 @@ export class HomePageComponent implements OnInit {
     
     
     this.user = {
-      Username: 'ininic',
-      Password: '123',
-      FirstName: 'ininic',
-      Lastname: 'ininic',
-      Role: 'ininic',
-      Gender:'ininic',
-      Email: 'ininic',
-      ListOfFriends: '',
-      Id: 1,
-      LoggedIn: false,
-      IsDeleted: false
+      username: 'ininic',
+      password: '123',
+      firstName: 'ininic',
+      lastName: 'ininic',
+      role: 'ininic',
+      gender:'ininic',
+      email: 'ininic',
+      listOfFriends: '',
+      id: 1,
+      loggedIn: false,
+      isDeleted: false
 
        
       };

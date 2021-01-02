@@ -1,0 +1,79 @@
+<div   style="text-align: center;" >
+    <form>
+        <p></p>
+        <div   id="cc">
+                <label  style="text-align: center;" for="inputAddress" >First Name  </label>
+                <input class="form-control"  type="text"
+                    placeholder="First Name"
+                    id="inputAddress"
+                    [value]="user.firstName"
+                    (input)="user.firstName=$event.target.value"
+                     >
+                  
+        </div>
+            
+        <div   id="cc">
+            <label  style="text-align: center;" for="inputAddress" >Last Name  </label>
+            <input class="form-control"  type="text"
+                placeholder="Last Name"
+                id="inputAddress"
+                [value]="user.lastName"
+                (input)="user.lastName=$event.target.value"
+                 >
+              
+        </div>
+
+        <div   id="cc">
+            <label  style="text-align: center;" for="inputAddress" >Username  </label>
+            <input class="form-control"  type="text"
+                placeholder="Username"
+                id="inputAddress"
+                [value]="user.username"
+                (input)="user.username=$event.target.value"
+                 >
+              
+        </div>
+        <div id="cc">
+            <label for="inputState">Gender</label>
+            <select id="inputState" class="form-control"  (input)="user.gender=$event.target.value"
+            [value]="user.gender">
+              <option  value="male">Male</option>
+              <option value = "female">Female</option>
+            </select>
+          </div>
+
+        <div   id="cc">
+            <label  style="text-align: center;" for="inputAddress" >Email  </label>
+            <input class="form-control"  type="email"
+                placeholder="Email"
+                id="inputAddress"
+                [value] = "user.email"
+                (input)="user.email=$event.target.value"
+                 >
+              
+        </div>
+
+        <div id="cc"  > 
+                <label for="inputPassword4"  >Password  </label>
+                <input type="text"
+                    type="password" 
+                    class="form-control" 
+                    placeholder="Password"     
+                    [value] = "user.password"           
+                    (input)="user.password=$event.target.value"   
+                   >
+        </div>
+     
+         
+         
+ 
+
+      
+</form>
+
+<div id="cc">
+    <p></p>
+    <button  class="btn btn-primary"  (click)="register()">Register</button>  
+    <p><label>Have an account?<a style= "font-weight: bold;" routerLink = "/login" > Log in</a></label></p>
+</div>
+</div>

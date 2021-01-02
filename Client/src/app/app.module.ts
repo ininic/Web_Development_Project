@@ -26,6 +26,7 @@ import { CarRenatalCompaniesComponent } from './car-renatal-companies/car-renata
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthInterceptor } from './services/jwt-interceptor.service';
 import { CarRenatlCompanyProfileComponent } from './car-renatl-company-profile/car-renatl-company-profile.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 export function tokengGetter(){
@@ -44,7 +45,8 @@ export function tokengGetter(){
     AirlineProfileComponent,
     CarRenatalCompaniesComponent,
     UserProfileComponent,
-    CarRenatlCompanyProfileComponent
+    CarRenatlCompanyProfileComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ export function tokengGetter(){
       {path: 'carrentals/:id', component: CarRenatlCompanyProfileComponent},
       {path: 'hotels', component: HotelsComponent, canActivate: [AuthGuardService]},
       {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardService]},
+      {path: 'registration', component: RegistrationComponent},
       
     ]),
     JwtModule.forRoot({

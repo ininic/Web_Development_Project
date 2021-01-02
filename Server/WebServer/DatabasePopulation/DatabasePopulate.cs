@@ -15,7 +15,9 @@ namespace WebServer.DatabasePopulation
         readonly CarDatabaseLogic Cdbl = new CarDatabaseLogic();
         public void Populate()
         {
-
+            User user = new User();
+            user.Username = "1111";
+            Udbl.Register(user);
             PopulateUsers("Marko", "Markovic", "sysadmin", "mmarkovic", "mmarkovic@gmail.com", "male", false, "m123");
             PopulateUsers("Stefan", "Stefanovic", "airlineadmin", "sstefanovic", "sstefanovic@gmail.com", "male", false, "s123");
             PopulateUsers("Petar", "Petrovic", "carrentaladmin", "ppetrovic", "ppetrovic@gmail.com", "male", false, "p123");

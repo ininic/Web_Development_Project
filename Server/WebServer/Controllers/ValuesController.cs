@@ -16,7 +16,7 @@ namespace WebServer.Controllers
     public class ValuesController : ControllerBase
     {
         // GET api/values
-       // readonly UserDatabaseLogic Udbl = new UserDatabaseLogic();
+       readonly UserDatabaseLogic Udbl = new UserDatabaseLogic();
        // readonly AirlineDatabaseLogic Adbl = new AirlineDatabaseLogic();
         [HttpGet]
         [Authorize(Roles = "sysadmin")]
@@ -56,7 +56,7 @@ namespace WebServer.Controllers
             user4.Role = "sysadmin";
             user4.Email = "ininic95@gmail.com";
             user4.ListOfFriends = "";
-             //   Udbl.AddUser(user4);
+               Udbl.AddUser(user4);
             return  Ok("Inserted");
         }
 

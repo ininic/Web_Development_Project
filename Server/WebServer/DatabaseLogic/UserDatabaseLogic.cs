@@ -215,5 +215,36 @@ namespace WebServer.DatabaseLogic
                 return null;
             }
         }
+
+        public bool Register(User newUser)
+        {
+            lock (Obj)
+            {
+                using (var acess = new DatabaseAccess())
+                {
+                    var users = acess.Users;
+                    foreach (var user in users)
+                    {
+                        if (user.Username == newUser.Username)
+                        {
+                            return false;
+                        }
+
+
+                    }
+                    acess.Users.Add(newUser);
+      
+                    int valid = acess.SaveChanges();
+                    if (valid > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,13 +1,13 @@
 export interface User {
-    Id : number;
-    Username: string;
-    Password: string;
-    FirstName: string;
-    Lastname: string;
-    Email: string;
-    Gender: string;
-    Role: string;
-    ListOfFriends: string;
-    LoggedIn: boolean;
-    IsDeleted: boolean;
+    id : number;
+    username: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    gender: string;
+    role: string;
+    listOfFriends: string;
+    loggedIn: boolean;
+    isDeleted: boolean;
  } 
