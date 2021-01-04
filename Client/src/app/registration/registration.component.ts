@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { componentFactoryName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user';
 import { UserService } from '../services/user.service';
@@ -28,7 +29,8 @@ export class RegistrationComponent implements OnInit {
       listOfFriends: '',
       id: 1,
       loggedIn: false,
-      isDeleted: false
+      isDeleted: false,
+      companyName: ''
     }
   }
 

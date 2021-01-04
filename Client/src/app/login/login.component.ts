@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
 
   //@Output() private toggleFavorite: EventEmitter<number>;
   public login: LoginParameters;
-  constructor( private _location: Location, private authService: AuthService, private cookieService: CookieService, private route: Router,private _communicationService: CommunicationService)
+  public currentUser: User;
+  constructor(private userService: UserService, private _location: Location, private authService: AuthService, private cookieService: CookieService, private route: Router,private _communicationService: CommunicationService)
    {
      
     this.onSomething()
@@ -38,8 +39,8 @@ export class LoginComponent implements OnInit {
   invalidLogin : boolean;
   ngOnInit(): void {
     this.login = {
-      Username : 'mmarkovic',
-      Password : 'm123'
+      Username : 'ppetrovic',
+      Password : 'p123'
     }
   }
   logIn() {
@@ -61,6 +62,16 @@ export class LoginComponent implements OnInit {
                 console.log(err); },
              () => { console.log('hendling denflig');  } 
           );
+
+    this.userService.getUserData(this.login.Username).subscribe(
+    (response) => 
+    {
+      console.log('cuvanje podataka o korisniku', response);
+      this.currentUser = response;
+      localStorage.setItem('companyName', this.currentUser.companyName);
+    },
+    (error) => {console.error('nije uspelo prikupljanje podataka', error);}
+    )
 
     }
 

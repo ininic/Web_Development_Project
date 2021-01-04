@@ -14,6 +14,7 @@ namespace WebServer.Controllers
     public class CarRentalCompanyController : ControllerBase
     {
         readonly CarRentalCompanyDatabaseLogic Crdbl = new CarRentalCompanyDatabaseLogic();
+        readonly UserDatabaseLogic Udbl = new UserDatabaseLogic();
         // GET: api/CarRentalCompany
         [HttpGet]
         public IEnumerable<CarRentalCompany> Get()
@@ -22,12 +23,21 @@ namespace WebServer.Controllers
         }
 
         // GET: api/CarRentalCompany/5
-        [HttpGet("{id}")]
-        public CarRentalCompany Get(int id)
+        [HttpGet("{id}/{name}")]
+        public CarRentalCompany Get(int id, string name)
         {
-            return Crdbl.FindCompanyById(id);
+            if(name == "000")
+            { 
+                return Crdbl.FindCompanyById(id);
+            }
+            else
+            {
+                return Crdbl.FindCompanyByName(name);
+            }
         }
 
+    
+   
         // POST: api/CarRentalCompany
         [HttpPost]
         public void Post([FromBody] string value)
@@ -36,8 +46,21 @@ namespace WebServer.Controllers
 
         // PUT: api/CarRentalCompany/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] CarRentalCompany editedCompany)
         {
+            CarRentalCompany company = new CarRentalCompany();
+            CarRentalCompany companyTemp = new CarRentalCompany();
+            companyTemp = Crdbl.FindCompanyById(editedCompany.Id);
+            Udbl.EditUserByCompanyName(companyTemp.Name, editedCompany.Name);
+            company.Id = editedCompany.Id;
+            company.Name = editedCompany.Name;
+            company.Address = editedCompany.Address;
+            company.Branches = editedCompany.Branches;
+            company.PriceList = editedCompany.PriceList;
+            company.About = editedCompany.About;
+            Crdbl.EditCarRentalCompany(company);
+
+            return Ok();
         }
 
         // DELETE: api/ApiWithActions/5

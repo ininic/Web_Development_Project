@@ -10,4 +10,5 @@ export interface User {
     listOfFriends: string;
     loggedIn: boolean;
     isDeleted: boolean;
+    companyName: string;
  } 

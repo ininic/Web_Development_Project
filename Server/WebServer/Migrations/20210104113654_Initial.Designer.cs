@@ -9,7 +9,7 @@ using WebServer.DatabaseConfig;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(DatabaseAccess))]
-    [Migration("20201230161136_Initial")]
+    [Migration("20210104113654_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,8 @@ namespace WebServer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CompanyName");
 
                     b.Property<string>("Email");
 

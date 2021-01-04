@@ -19,6 +19,7 @@ namespace WebServer.Models
         public string ListOfFriends { get; set; }
         public bool LoggedIn { get; set; }
         public bool IsDeleted { get; set; }
+        public string CompanyName { get; set; }
 
         public User() { }
     }

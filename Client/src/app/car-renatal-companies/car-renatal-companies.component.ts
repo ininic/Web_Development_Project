@@ -20,7 +20,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public nameOfCompany: string;
   public mark: string;
   public companies: CarRentalCompany[];
-  public searchedcars: Car[] = [];;
+  public searchedcars: Car[] = [];
   public company: CarRentalCompany; 
   public sortedByName: number;
   public sortedByAbout: number;

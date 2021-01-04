@@ -1,0 +1,43 @@
+<div   style="text-align: center;" >
+    <form>
+        <p></p>
+        <div   id="cc">
+                <label  style="text-align: center;" for="inputAddress" >Company Name  </label>
+                <input class="form-control"  type="text"
+                    placeholder="Company Name"
+                    id="inputAddress"
+                    [value] = "company.name"           
+                    (input)="company.name=$event.target.value"   
+                     >
+                  
+        </div>
+            
+        <div   id="cc">
+            <label  style="text-align: center;" for="inputAddress" >Address  </label>
+            <input class="form-control"  type="text"
+                placeholder="Address"
+                id="inputAddress"
+                [value] = "company.address"           
+                (input)="company.address=$event.target.value"   
+                 >
+              
+        </div>
+
+        <div   id="cc">
+            <label  style="text-align: center;" for="inputAddress" >About  </label>
+            <input class="form-control"  type="text"
+                placeholder="About"
+                id="inputAddress"
+                [value] = "company.about"           
+                (input)="company.about=$event.target.value"   
+                 >
+              
+        </div>
+             
+</form>
+
+<div id="cc">
+    <p></p>
+    <button  class="btn btn-primary" (click) = onEditCompany() >Edit</button>  
+</div>
+</div>

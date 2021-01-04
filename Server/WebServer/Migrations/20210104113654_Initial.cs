@@ -73,7 +73,8 @@ namespace WebServer.Migrations
                     Role = table.Column<string>(nullable: true),
                     ListOfFriends = table.Column<string>(nullable: true),
                     LoggedIn = table.Column<bool>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CompanyName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

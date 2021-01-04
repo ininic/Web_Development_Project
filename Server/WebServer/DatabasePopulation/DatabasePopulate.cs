@@ -18,11 +18,11 @@ namespace WebServer.DatabasePopulation
             User user = new User();
             user.Username = "1111";
             Udbl.Register(user);
-            PopulateUsers("Marko", "Markovic", "sysadmin", "mmarkovic", "mmarkovic@gmail.com", "male", false, "m123");
-            PopulateUsers("Stefan", "Stefanovic", "airlineadmin", "sstefanovic", "sstefanovic@gmail.com", "male", false, "s123");
-            PopulateUsers("Petar", "Petrovic", "carrentaladmin", "ppetrovic", "ppetrovic@gmail.com", "male", false, "p123");
-            PopulateUsers("Jovana", "Jovanovic", "user", "jjovanovic", "jjovanovic@gmail.com", "male", false, "j123");
-            PopulateUsers("Ivana", "Ivanovic", "user", "iivanovic", "iivanovic@gmail.com", "male", false, "i123");
+            PopulateUsers("Marko", "Markovic", "sysadmin", "mmarkovic", "mmarkovic@gmail.com", "male", false, "m123", "system");
+            PopulateUsers("Stefan", "Stefanovic", "airlineadmin", "sstefanovic", "sstefanovic@gmail.com", "male", false, "s123", "Lufthansa");
+            PopulateUsers("Petar", "Petrovic", "carrentaladmin", "ppetrovic", "ppetrovic@gmail.com", "male", false, "p123", "Rentacar014");
+            PopulateUsers("Jovana", "Jovanovic", "user", "jjovanovic", "jjovanovic@gmail.com", "male", false, "j123","none");
+            PopulateUsers("Ivana", "Ivanovic", "user", "iivanovic", "iivanovic@gmail.com", "male", false, "i123", "none");
 
 
             PopulateAirlines("Nemacka kompanija koja se bavi avioprevozom", "Lufthansa", 4.55);
@@ -42,7 +42,7 @@ namespace WebServer.DatabasePopulation
 
         }
 
-        public void PopulateUsers(string firstName, string lastName, string role, string username, string email, string gender, bool logedIn, string password)
+        public void PopulateUsers(string firstName, string lastName, string role, string username, string email, string gender, bool logedIn, string password, string CompanyName)
         {
             User user = new User();
             user.FirstName = firstName;
@@ -53,6 +53,7 @@ namespace WebServer.DatabasePopulation
             user.Gender = gender;
             user.LoggedIn = logedIn;
             user.Password = password;
+            user.CompanyName = CompanyName;
             Udbl.AddUser(user);    
         }
         public void PopulateAirlines(string about, string name, double rating)

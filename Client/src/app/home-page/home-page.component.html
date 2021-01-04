@@ -12,5 +12,6 @@
   <a mat-tab-link label="Second"  routerLink = "hotels" >Hotels</a>
   <a mat-tab-link *ngIf="this.cookieValue != 'our cookie value'"  label="Third" routerLink="login">Login</a>
   <a mat-tab-link *ngIf="this.cookieValue == 'our cookie value'"  (click) = "onSomething()" label="Forth" routerLink="profile">Profile</a>
+  <a mat-tab-link *ngIf="this.role == 'carrentaladmin'"  label="Forth" routerLink="carrentaladmin">Admin Panel</a>
 </nav>
 

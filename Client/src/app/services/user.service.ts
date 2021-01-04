@@ -29,4 +29,8 @@ export class UserService {
 
     return this.http.post('https://localhost:44325/api/registration/', user, { headers: headers , });
   }
+
+  getUserData(username: String): Observable<User>{
+    return this.http.get<User>('https://localhost:44325/api/users/'+ username);
+  }
 }

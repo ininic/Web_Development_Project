@@ -246,5 +246,73 @@ namespace WebServer.DatabaseLogic
                 }
             }
         }
+
+
+        public User FindUserByUsername(string username)
+        {
+            User u = new User();
+            bool boolvalue = false;
+            lock (Obj)
+            {
+                using (var access = new DatabaseAccess())
+                {
+                    var users = access.Users;
+
+                    foreach (var user in users)
+                    {
+                        if (user.Username == username)
+                        {
+                            boolvalue = true;
+                            u = user;
+                        }
+                    }
+                }
+                if (boolvalue)
+                {
+                    return u;
+                }
+                else
+                {
+
+                }
+
+                return null;
+            }
+        }
+
+
+        public User EditUserByCompanyName(string companyName, string newCompanyName)
+        {
+            User u = new User();
+            bool boolvalue = false;
+            lock (Obj)
+            {
+                using (var access = new DatabaseAccess())
+                {
+                    var users = access.Users;
+
+                    foreach (var user in users)
+                    {
+                        if (user.CompanyName == companyName)
+                        {
+                            boolvalue = true;
+                            user.CompanyName = newCompanyName;
+                        }
+                    }
+                    int valid = access.SaveChanges();
+                }
+                
+                if (boolvalue)
+                {
+                    return u;
+                }
+                else
+                {
+
+                }
+
+                return null;
+            }
+        }
     }
 }

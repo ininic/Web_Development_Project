@@ -74,7 +74,8 @@ export class HomePageComponent implements OnInit {
       listOfFriends: '',
       id: 1,
       loggedIn: false,
-      isDeleted: false
+      isDeleted: false,
+      companyName: '',
 
        
       };

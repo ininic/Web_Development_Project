@@ -10,7 +10,7 @@
         <tbody>
                 <tr *ngFor="let clickd of airlines; index as i;">
       
-                        <td [routerLink] = "['/airlines', airlines[i].id]"> <a href="#">{{airlines[i].name}}</a> </td>
+                        <td > <a [routerLink] = "['/airlines', airlines[i].id]">{{airlines[i].name}}</a> </td>
                         <td>{{airlines[i].about}} </td>
                         <td>{{airlines[i].rating}} </td>
                 </tr>

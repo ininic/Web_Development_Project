@@ -86,5 +86,70 @@ namespace WebServer.DatabaseLogic
                 return null;
             }
         }
+
+
+        public CarRentalCompany FindCompanyByName(string name)
+        {
+            CarRentalCompany c = new CarRentalCompany();
+            bool boolvalue = false;
+            lock (Obj)
+            {
+                using (var access = new DatabaseAccess())
+                {
+                    var companies = access.CarRentalCompaies;
+
+                    foreach (var company in companies)
+                    {
+                        if (company.Name == name)
+                        {
+                            boolvalue = true;
+                            c = company;
+                        }
+                    }
+                }
+                if (boolvalue)
+                {
+                    return c;
+                }
+                else
+                {
+
+                }
+
+                return null;
+            }
+        }
+
+        public bool EditCarRentalCompany(CarRentalCompany newCompany)
+        {
+            lock (Obj)
+            {
+                using (var acess = new DatabaseAccess())
+                {
+                    var companies = acess.CarRentalCompaies;
+                    foreach (var company in companies)
+                    {
+                        if (company.Id == newCompany.Id)
+                        {
+
+                            company.Name = newCompany.Name;
+                            company.Address = newCompany.Address;
+                            company.Branches = newCompany.Branches;
+                            company.PriceList = newCompany.PriceList;
+                            company.About = newCompany.About;
+                        }
+                    }
+                    int valid = acess.SaveChanges();
+                    if (valid > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }

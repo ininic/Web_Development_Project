@@ -37,11 +37,11 @@ namespace WebServer.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("{id}", Name = "Get")]
-        public String Get(int id)
+        [HttpGet("{username}", Name = "Get")]
+        public User Get(String username)
         {
-           
-            return "assaa";
+
+            return Udbl.FindUserByUsername(username);
         }
 
         // POST: api/Users
