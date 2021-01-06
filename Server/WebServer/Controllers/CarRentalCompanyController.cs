@@ -15,6 +15,7 @@ namespace WebServer.Controllers
     {
         readonly CarRentalCompanyDatabaseLogic Crdbl = new CarRentalCompanyDatabaseLogic();
         readonly UserDatabaseLogic Udbl = new UserDatabaseLogic();
+        readonly CarDatabaseLogic Cdbl = new CarDatabaseLogic();
         // GET: api/CarRentalCompany
         [HttpGet]
         public IEnumerable<CarRentalCompany> Get()
@@ -52,6 +53,8 @@ namespace WebServer.Controllers
             CarRentalCompany companyTemp = new CarRentalCompany();
             companyTemp = Crdbl.FindCompanyById(editedCompany.Id);
             Udbl.EditUserByCompanyName(companyTemp.Name, editedCompany.Name);
+            Cdbl.EditCarsCompanyName(editedCompany.Name, editedCompany.Id);
+
             company.Id = editedCompany.Id;
             company.Name = editedCompany.Name;
             company.Address = editedCompany.Address;

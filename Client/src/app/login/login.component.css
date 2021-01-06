@@ -13,3 +13,14 @@
     width: 35%;
     height: 40%;
 }
+
+.username .ng-valid,
+.stock-code .ng-valid,
+.stock-price .ng-valid {
+    background-color: rgb(199, 255, 199);
+}
+.username .ng-invalid,
+.stock-code .ng-invalid,
+.stock-price .ng-invalid {
+    background-color: pink;
+}

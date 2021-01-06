@@ -43,36 +43,39 @@ export class LoginComponent implements OnInit {
       Password : 'p123'
     }
   }
-  logIn() {
-    this.authService.logIn(this.login)
-    .subscribe((response: any) => { 
-               const token: any = response.token;
-               console.log(response);
-               this.invalidLogin = false;
-               localStorage.setItem('jwt', token);
-               const helper = new JwtHelperService();
-               console.log("Jwt istice:", helper.getTokenExpirationDate(token));
-               const exp = helper.getTokenExpirationDate(token);
-               this.setCookie(exp); 
-               this.onSomething();
-               this._location.back();
-            },
-              (err : HttpErrorResponse) => { 
-                this.invalidLogin = true;
-                console.log(err); },
-             () => { console.log('hendling denflig');  } 
-          );
-
-    this.userService.getUserData(this.login.Username).subscribe(
-    (response) => 
+  logIn(stockForm) {
+    if(stockForm.valid)
     {
-      console.log('cuvanje podataka o korisniku', response);
-      this.currentUser = response;
-      localStorage.setItem('companyName', this.currentUser.companyName);
-    },
-    (error) => {console.error('nije uspelo prikupljanje podataka', error);}
-    )
+        this.authService.logIn(this.login)
+        .subscribe((response: any) => { 
+                const token: any = response.token;
+                console.log(response);
+                this.invalidLogin = false;
+                localStorage.setItem('jwt', token);
+                const helper = new JwtHelperService();
+                console.log("Jwt istice:", helper.getTokenExpirationDate(token));
+                const exp = helper.getTokenExpirationDate(token);
+                this.setCookie(exp); 
+                this.onSomething();
+                this._location.back();
+              },
+                (err : HttpErrorResponse) => { 
+                  this.invalidLogin = true;
+                  console.log(err); },
+              () => { console.log('hendling denflig');  } 
+            );
 
+      this.userService.getUserData(this.login.Username).subscribe(
+      (response) => 
+      {
+        console.log('cuvanje podataka o korisniku', response);
+        this.currentUser = response;
+        localStorage.setItem('companyName', this.currentUser.companyName);
+      },
+      (error) => {console.error('nije uspelo prikupljanje podataka', error);}
+      )
+    }
+    
     }
 
     setCookie(exp: any){

@@ -41,3 +41,36 @@
     <button  class="btn btn-primary" (click) = onEditCompany() >Edit</button>  
 </div>
 </div>
+
+<p></p>
+
+<table class="table" >
+    <thead>
+      <tr>
+        <th >Mark <i  scope="col"  class="fas fa-sort"></i> </th>
+        <th scope="col">Number of seats  <i  scope="col"  class="fas fa-sort"></i></th>
+        <th scope="col">Company  <i  scope="col"  class="fas fa-sort"></i></th>
+        <th scope="col">Action  <i  scope="col"  class="fas fa-sort"></i></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr *ngFor="let clickd of cars; index as i; let last = last">
+    
+              <td > <a [routerLink] = "['/carrentals', cars[i].id]" >{{cars[i].mark}}</a> </td>
+              <td>{{cars[i].model}} </td>
+              <td>{{cars[i].nameOfCompany}} </td>
+              <td><i class="fas fa-edit" style="color:rgb(0, 123, 255);"></i>  <i class="fas fa-trash-alt" style="color:rgb(0, 123, 255);   padding-left:5%;"></i> </td>
+            
+      </tr> 
+    
+    </tbody>
+            
+    
+    </table>
+
+
+   
+  
+        <i style="padding-left: 48%; color: rgb(0, 123, 255);"  class="fas fa-plus-circle fa-5x"></i>
+    

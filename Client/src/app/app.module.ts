@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
+
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { UserService } from './services/user.service';
@@ -55,6 +56,7 @@ export function tokengGetter(){
     HttpClientModule,
     BrowserAnimationsModule,
     MatTabsModule,
+    FormsModule,
     MatFormFieldModule,
     RouterModule.forRoot([
       {path: '', redirectTo: '/airlines', pathMatch: 'full'},

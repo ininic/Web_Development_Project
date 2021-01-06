@@ -1,16 +1,22 @@
-<div   style="text-align: center;" >
-        <form>
+<div class="form-group" style="text-align: center;" >
+        <form (ngSubmit)="logIn(stockForm)" #stockForm="ngForm">
             <p></p>
-            <div   id="cc">
+            <div   id="cc" class="username">
                     <label  style="text-align: center;" for="inputAddress" >username  </label>
                     <input class="form-control"  type="text"
                         placeholder="Username"
+                        required
                         id="inputAddress"
-                        [value]="login.Username"
-                        (input)="login.Username=$event.target.value"  >
+                        name = "username"
+                        #username="ngModel"
+                        [(ngModel)] = "login.Username"  >
                       
             </div>
-                
+            <div *ngIf="username.errors && username.errors.required">
+                Neki tekst
+                <i class="far fa-check-circle fa-1x" style="color: forestgreen;" ></i>
+
+            </div>
         
             <div id="cc"  > 
                     <label for="inputPassword4"  >password  </label>
@@ -26,15 +32,15 @@
              
              
      
-
+            <div id="cc">
+                <p></p>
+                <button  class="btn btn-primary" type="submit">Loggin</button>  
+                <p><label>Don't have an account?<a style= "font-weight: bold;" routerLink = "/registration" > Sign up</a></label></p>
+            </div>
           
     </form>
 
 
   
-    <div id="cc">
-        <p></p>
-        <button  class="btn btn-primary" (click)="logIn()">Loggin</button>  
-        <p><label>Don't have an account?<a style= "font-weight: bold;" routerLink = "/registration" > Sign up</a></label></p>
-    </div>
+    
 </div>

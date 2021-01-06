@@ -71,6 +71,26 @@ namespace WebServer.DatabaseLogic
             }
 
             return listOfCars;
+        } 
+
+        public void EditCarsCompanyName(string newCompanyName, int id)
+        {
+            List<Car> listOfCars = new List<Car>();
+
+            using (var access = new DatabaseAccess())
+            {
+                var cars = access.Cars;
+                foreach (var car in cars)
+                {
+                    if (car.CarRenalId == id)
+                    {
+                        car.NameOfCompany = newCompanyName;
+                    }
+                }
+         
+                int valid = access.SaveChanges();
+            }        
+           
         }
     }
 }

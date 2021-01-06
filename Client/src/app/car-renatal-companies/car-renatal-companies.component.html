@@ -69,7 +69,7 @@
 <tbody>
   <tr *ngFor="let clickd of searchedcars; index as i; let last = last">
 
-          <td [routerLink] = "['/carrentals', searchedcars[i].id]"> <a href="#">{{searchedcars[i].mark}}</a> </td>
+          <td > <a [routerLink] = "['/carrentals', searchedcars[i].id]">{{searchedcars[i].mark}}</a> </td>
           <td>{{searchedcars[i].model}} </td>
           <td>{{searchedcars[i].nameOfCompany}} </td>
           <span *ngIf="i == 4">{{scrollOn()}}</span>

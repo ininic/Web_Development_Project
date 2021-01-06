@@ -31,6 +31,7 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
     this.carservice.getCompany('000',this.companyName).subscribe((response) => 
     { 
     this.company = response; 
+    this.getCars(this.company.id.toString());
     console.log('OBSERVE "response" RESPONSE is ', this.company);
     this.carservice.getCompanyCars(this.company.id.toString()).subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);})
     });
@@ -44,4 +45,13 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
       (error) => { console.error(error);}
     );
   }
+  getCars(id: string)
+  {
+    this.carservice.getCompanyCars(id).subscribe(
+      (response) => {  this.cars = response;  console.log('Evo ih' + this.cars);},
+      (error) => { console.error(error); }
+    )
+  }
+
+  
 }
