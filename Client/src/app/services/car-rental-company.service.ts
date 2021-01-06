@@ -33,4 +33,8 @@ export class CarRentalCompanyService {
   editCompany(company:CarRentalCompany): Observable<any>{
     return this.http.put('https://localhost:44325/api/CarRentalCompany/1/', company)
   }
+
+  deleteCar(id: string): Observable<any>{
+    return this.http.delete('https://localhost:44325/api/car/'+ id);
+  }
 }

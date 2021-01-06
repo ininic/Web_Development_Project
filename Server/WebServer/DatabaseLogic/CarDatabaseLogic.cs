@@ -92,5 +92,33 @@ namespace WebServer.DatabaseLogic
             }        
            
         }
+
+        public int DeleteCar(int id)
+        {
+            int valid = 0;
+
+            using (var access = new DatabaseAccess())
+            {
+                var cars = access.Cars;
+                foreach (var car in cars)
+                {
+                    if (car.Id == id)
+                    {
+                        cars.Remove(car);
+                    }
+                }
+                valid = access.SaveChanges();
+            }
+            
+            if(valid > 0)
+            {
+                return valid;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
     }
 }

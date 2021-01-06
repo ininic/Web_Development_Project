@@ -60,7 +60,7 @@
               <td > <a [routerLink] = "['/carrentals', cars[i].id]" >{{cars[i].mark}}</a> </td>
               <td>{{cars[i].model}} </td>
               <td>{{cars[i].nameOfCompany}} </td>
-              <td><i class="fas fa-edit" style="color:rgb(0, 123, 255);"></i>  <i class="fas fa-trash-alt" style="color:rgb(0, 123, 255);   padding-left:5%;"></i> </td>
+              <td><i  class="fas fa-edit" style="color:rgb(0, 123, 255);"></i>  <i (click) = "onDeleteCar(cars[i].id)" class="fas fa-trash-alt" style="color:rgb(0, 123, 255);   padding-left:5%;"></i> </td>
             
       </tr> 
     

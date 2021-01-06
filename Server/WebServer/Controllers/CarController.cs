@@ -42,8 +42,16 @@ namespace WebServer.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult>  Delete(int id)
         {
+            if (Cdbl.DeleteCar(id) != 0)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

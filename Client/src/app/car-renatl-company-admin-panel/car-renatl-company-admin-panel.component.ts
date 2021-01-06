@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from '../model/car';
 import { CarRentalCompany } from '../model/car-rental-company';
 import { CarRentalCompanyService } from '../services/car-rental-company.service';
+import { CommunicationService } from '../services/comunication.service';
 
 @Component({
   selector: 'app-car-renatl-company-admin-panel',
@@ -14,8 +15,13 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
   public cars: Car[];
   public id: string;
   public companyName: string;
-  constructor(private carservice: CarRentalCompanyService) {
+  constructor(private _communicationService: CommunicationService, private carservice: CarRentalCompanyService) {
     this.companyName = localStorage.getItem('companyName');
+
+    _communicationService.changeEmitted$.subscribe(data => {
+      //this.ngOnInit();
+      //this.getCars(this.companyName);
+    });
    }
 
   ngOnInit(): void {
@@ -52,6 +58,17 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
       (error) => { console.error(error); }
     )
   }
-
+  onDeleteCar(id: string){
+    this.carservice.deleteCar(id).subscribe(
+      (response) => { console.log('Automobil izbrisan');
+      this.getCars(this.company.id.toString());
+    },
+      (error) => {console.error('Neuspelo'); }
+    );
+    //this.getCars(this.company.id.toString());
   
+  }
+  
+  
+
 }
