@@ -37,4 +37,8 @@ export class CarRentalCompanyService {
   deleteCar(id: string): Observable<any>{
     return this.http.delete('https://localhost:44325/api/car/'+ id);
   }
-}
+
+  addCar(car: Car): Observable<any>{
+    return this.http.post('https://localhost:44325/api/car/', car);
+  }
+} 

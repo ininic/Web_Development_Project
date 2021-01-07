@@ -14,6 +14,7 @@ namespace WebServer.Controllers
     public class CarController : ControllerBase
     {
         readonly CarDatabaseLogic Cdbl = new CarDatabaseLogic();
+        readonly CarRentalCompanyDatabaseLogic Crdbl = new CarRentalCompanyDatabaseLogic();
         // GET: api/Car
         [HttpGet]
         public List<Car> Get()
@@ -30,8 +31,29 @@ namespace WebServer.Controllers
 
         // POST: api/Car
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody]  Car newCar) 
         {
+            Car car = new Car();
+            CarRentalCompany company = new CarRentalCompany();
+            car.NameOfCompany = newCar.NameOfCompany;
+            company = Crdbl.FindCompanyByName(newCar.NameOfCompany);
+
+            car.CarRenalId = company.Id;
+            car.Mark = newCar.Mark;
+            car.Model = newCar.Model;
+            car.Type = newCar.Type;
+            car.Year = newCar.Year;
+            car.NumberOfSeats = newCar.NumberOfSeats;
+
+
+            if(Cdbl.AddCar(car))
+            {
+                return Ok();
+            }
+            {
+                return BadRequest();
+            }
+           
         }
 
         // PUT: api/Car/5

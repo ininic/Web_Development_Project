@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.DatabaseLogic;
@@ -47,11 +48,13 @@ namespace WebServer.Controllers
 
         // PUT: api/CarRentalCompany/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "carrentaladmin")]
         public async Task<IActionResult> Put(int id, [FromBody] CarRentalCompany editedCompany)
         {
             CarRentalCompany company = new CarRentalCompany();
             CarRentalCompany companyTemp = new CarRentalCompany();
             companyTemp = Crdbl.FindCompanyById(editedCompany.Id);
+            //moramo izmeniti i administratore i automobile te kompanije zbog polja companyName
             Udbl.EditUserByCompanyName(companyTemp.Name, editedCompany.Name);
             Cdbl.EditCarsCompanyName(editedCompany.Name, editedCompany.Id);
 
@@ -61,9 +64,30 @@ namespace WebServer.Controllers
             company.Branches = editedCompany.Branches;
             company.PriceList = editedCompany.PriceList;
             company.About = editedCompany.About;
-            Crdbl.EditCarRentalCompany(company);
 
-            return Ok();
+            //proveravamo da li je novoizabrano ime kompanije dozvoljeno
+            //ne mogu postojati dve kompanije sa istim imenom
+            //ali prvo moramo da provrimo da li se ime uopste menja
+            //jer ako se ne menja ne moramo da proveravamo da li je ime odgovarajuce
+            if(editedCompany.Name != companyTemp.Name)
+            {
+          
+                if(Crdbl.CheckCompanyName(company.Name))
+                {
+                    Crdbl.EditCarRentalCompany(company);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                Crdbl.EditCarRentalCompany(company);
+                return Ok();
+            }
+           
         }
 
         // DELETE: api/ApiWithActions/5

@@ -151,5 +151,26 @@ namespace WebServer.DatabaseLogic
                 }
             }
         }
+        public bool CheckCompanyName(string companyName)
+        {
+
+            lock (Obj)
+            {
+                using (var acess = new DatabaseAccess())
+                {
+                    var companies = acess.CarRentalCompaies;
+                    foreach (var company in companies)
+                    {
+                        if (company.Name == companyName)
+                        {
+                            return false;
+
+
+                        }
+                    }
+                }
+            }
+            return true;
+        }
     }
 }
