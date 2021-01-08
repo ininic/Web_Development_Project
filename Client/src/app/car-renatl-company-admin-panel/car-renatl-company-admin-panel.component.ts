@@ -14,6 +14,7 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
   public company: CarRentalCompany; 
   public cars: Car[];
   public id: string;
+  //public car: Car;
   public companyName: string;
   constructor(private _communicationService: CommunicationService, private carservice: CarRentalCompanyService) {
     this.companyName = localStorage.getItem('companyName');
@@ -39,7 +40,7 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
     this.company = response; 
     this.getCars(this.company.id.toString());
     console.log('OBSERVE "response" RESPONSE is ', this.company);
-    this.carservice.getCompanyCars(this.company.id.toString()).subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);})
+    this.carservice.getCompanyCars(this.company.id.toString(), "000").subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);})
     });
   }
 
@@ -53,7 +54,7 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
   }
   getCars(id: string)
   {
-    this.carservice.getCompanyCars(id).subscribe(
+    this.carservice.getCompanyCars(id, "000").subscribe(
       (response) => {  this.cars = response;  console.log('Evo ih' + this.cars);},
       (error) => { console.error(error); }
     )

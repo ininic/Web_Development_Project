@@ -1,0 +1,76 @@
+<div class="form-group" style="text-align: center;" >
+    <form (ngSubmit)="editCar()" #stockForm="ngForm">
+        <p></p>
+        <div   id="cc" >
+                <label  style="text-align: center;" for="inputAddress" >Mark  </label>
+                <input class="form-control"  type="text"
+                    placeholder="Mark"
+                    required
+                    id="inputAddress"
+                    name = "mark"
+                    #username="ngModel"
+                    [(ngModel)] = "car.mark"  >
+                  
+        </div>
+     
+    
+        <div id="cc"  > 
+                <label for="inputPassword4"  >Model  </label>
+                <input type="text"
+                    class="form-control" 
+                    placeholder="Model"
+                    name = "model"
+                    #model="ngModel"
+                    [(ngModel)] = "car.model"  >
+                   
+        </div>
+     
+        <div   id="cc" >
+            <label  style="text-align: center;" for="inputAddress" >Type  </label>
+            <input class="form-control"  type="text"
+                placeholder="Type"
+                required
+                id="inputAddress"
+                name = "type"
+                #type="ngModel"
+                [(ngModel)] = "car.type"  >
+              
+          </div>
+
+        <div   id="cc" >
+            <label  style="text-align: center;" for="inputAddress" >Year  </label>
+            <input class="form-control"  type="text"
+                placeholder="year"
+                required
+                id="inputAddress"
+                name = "year"
+                #year="ngModel"
+                [(ngModel)] = "car.year"  >
+                
+        </div>
+        
+      
+        <div   id="cc" >
+            <label  style="text-align: center;" for="inputAddress" >Number of seats  </label>
+            <input class="form-control"  type="text"
+                placeholder="number of seats"
+                required
+                id="inputAddress"
+                name = "numberofseats"
+                #numberofseats="ngModel"
+                [(ngModel)] = "car.numberOfSeats"  >
+              
+          </div>
+         
+    
+        <div id="cc">
+            <p></p>
+            <button  class="btn btn-primary" type="submit">Edit car</button>  
+        </div>
+      
+</form>
+
+
+
+
+</div>

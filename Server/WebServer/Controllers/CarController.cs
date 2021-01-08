@@ -23,10 +23,18 @@ namespace WebServer.Controllers
         }
 
         // GET: api/Car/5
-        [HttpGet("{id}")]
-        public List<Car> Get(int id)
+        [HttpGet("{companyId}/{carId}")]
+        public List<Car> Get(int companyId, string carId)
         {
-            return Cdbl.GetCarsByRentalId(id);
+            if(carId == "000")
+            {
+                return Cdbl.GetCarsByRentalId(companyId);
+            }
+            else
+            {
+                return Cdbl.GetCarById(Int32.Parse(carId));
+            }
+            
         }
 
         // POST: api/Car
@@ -58,8 +66,25 @@ namespace WebServer.Controllers
 
         // PUT: api/Car/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] Car editedCar) 
         {
+            Car car = new Car();
+            car.Id = editedCar.Id;
+            car.Mark = editedCar.Mark;
+            car.Model = editedCar.Model;
+            car.Type = editedCar.Type;
+            car.NameOfCompany = editedCar.NameOfCompany;
+            car.Year = editedCar.Year;
+            car.NumberOfSeats = editedCar.NumberOfSeats;
+            car.CarRenalId = editedCar.CarRenalId;
+            if(Cdbl.EditCar(car))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // DELETE: api/ApiWithActions/5
@@ -75,5 +100,6 @@ namespace WebServer.Controllers
                 return NotFound();
             }
         }
+
     }
 }

@@ -120,5 +120,56 @@ namespace WebServer.DatabaseLogic
             }
         }
 
+
+        public List<Car> GetCarById(int carId)
+        {
+            List<Car> listOfCars = new List<Car>();
+
+            using (var access = new DatabaseAccess())
+            {
+                var cars = access.Cars;
+                foreach (var car in cars)
+                {
+                    if (car.Id == carId)
+                    {
+                        listOfCars.Add(car);
+                    }
+                }
+            }
+
+            return listOfCars;
+        }
+
+        public bool EditCar(Car editedCar)
+        {
+            int valid = 0;
+            using (var access = new DatabaseAccess())
+            {
+                var cars = access.Cars;
+                foreach (var car in cars)
+                {
+                    if (car.Id == editedCar.Id)
+                    {                       
+                        car.Mark = editedCar.Mark;
+                        car.Model = editedCar.Model;
+                        car.Type = editedCar.Type;
+                        car.NameOfCompany = editedCar.NameOfCompany;
+                        car.Year = editedCar.Year;
+                        car.NumberOfSeats = editedCar.NumberOfSeats;
+                        car.CarRenalId = car.CarRenalId;
+                        break;
+                    }
+                }
+                valid = access.SaveChanges();
+            }
+            if(valid > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
