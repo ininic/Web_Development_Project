@@ -21,6 +21,7 @@ namespace WebServer.Models
         public bool IsDeleted { get; set; }
         public string CompanyName { get; set; }
 
+
         public User() { }
     }
 }

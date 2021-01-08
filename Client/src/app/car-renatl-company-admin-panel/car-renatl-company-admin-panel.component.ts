@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Car } from '../model/car';
 import { CarRentalCompany } from '../model/car-rental-company';
@@ -16,9 +17,10 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
   public id: string;
   //public car: Car;
   public companyName: string;
+  public companyId: string;
   constructor(private _communicationService: CommunicationService, private carservice: CarRentalCompanyService) {
     this.companyName = localStorage.getItem('companyName');
-
+    this.companyId = localStorage.getItem('companyId');
     _communicationService.changeEmitted$.subscribe(data => {
       //this.ngOnInit();
       //this.getCars(this.companyName);
@@ -35,13 +37,31 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
       branches: '', 
       };
 
-    this.carservice.getCompany('000',this.companyName).subscribe((response) => 
-    { 
-    this.company = response; 
-    this.getCars(this.company.id.toString());
-    console.log('OBSERVE "response" RESPONSE is ', this.company);
-    this.carservice.getCompanyCars(this.company.id.toString(), "000").subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);})
-    });
+     
+    
+    //prvi put kada se komponenta ucitava, tada se uzima kopanija preko imena
+    //drugi put to se radi preko sacuvanog id-ja zbog toga sto je moguce, da je 
+    //neko ko koristi isti nalog sa druge sesije u medjuvremenu u bazi izmenio ime kompanije
+    if(this.companyId == null)
+    {
+      this.carservice.getCompany('000',this.companyName).subscribe((response) => 
+      {   
+      this.company = response; 
+      localStorage.setItem('companyId', this.company.id.toString());
+      this.getCars(this.company.id.toString());
+      console.log('OBSERVE "response" RESPONSE is ', this.company);
+      this.carservice.getCompanyCars(this.company.id.toString(), "000").subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);})
+      });
+    }
+    else{
+      this.carservice.getCompany(this.companyId,"000").subscribe((response) => 
+      {   
+      this.company = response; 
+      this.getCars(this.company.id.toString());
+      console.log('OBSERVE "response" RESPONSE is ', this.company);
+      this.carservice.getCompanyCars(this.company.id.toString(), "000").subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);})
+      });
+    }
   }
 
   onEditCompany(){
