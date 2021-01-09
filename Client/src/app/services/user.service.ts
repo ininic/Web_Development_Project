@@ -30,7 +30,11 @@ export class UserService {
     return this.http.post('https://localhost:44325/api/registration/', user, { headers: headers , });
   }
 
-  getUserData(username: String): Observable<User>{
-    return this.http.get<User>('https://localhost:44325/api/users/'+ username);
+  getUserData(id: string, username: string): Observable<User>{
+    return this.http.get<User>('https://localhost:44325/api/users/'+ id +'/'+ username);
+  }
+
+  editUserData(id: string, user: User): Observable<any>{
+    return this.http.put('https://localhost:44325/api/users/'+ id +'/', user );
   }
 }

@@ -65,6 +65,7 @@ namespace WebServer.DatabaseLogic
                         {
                             boolvalue = true;
                             u = user;
+                            break;
                         }
                     }
                 }
@@ -92,7 +93,13 @@ namespace WebServer.DatabaseLogic
                     {
                         if (us.Id == u.Id)
                         {
-                            us.Email = "aaa";
+                            us.CompanyName = u.CompanyName;
+                            us.Email = u.Email;
+                            us.FirstName = u.FirstName;
+                            us.Gender = u.Gender;
+                            us.Lastname = u.Lastname;
+                            us.Role = u.Role;
+                            us.Username = u.Username;
                             goto label;
                         }
                     }

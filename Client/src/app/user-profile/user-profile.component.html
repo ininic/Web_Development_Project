@@ -17,11 +17,11 @@
             <input class="form-control"  type="text"
                 placeholder="Last Name"
                 id="inputAddress"
-                [value]="user.lastName"
-                (input)="user.lastName=$event.target.value"
+                [value]="user.lastname"
+                (input)="user.lastname=$event.target.value"
                  >
               
-        </div>
+        </div> 
 
         <div   id="cc">
             <label  style="text-align: center;" for="inputAddress" >Username  </label>
@@ -68,7 +68,7 @@
          
         <div id="cc">
             <p></p>
-            <button  class="btn btn-primary"  type="submit">Edit </button>  
+            <button  class="btn btn-primary" type="submit"> Edit </button>  
             <p><label>You're done here?<a style= "font-weight: bold;" (click) = logOut() href="" > Log out</a></label></p>
         </div>
 

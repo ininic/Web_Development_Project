@@ -37,11 +37,16 @@ namespace WebServer.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("{username}", Name = "Get")]
-        public User Get(String username)
+        [HttpGet("{userId}/{username}")]
+        public User Get(int userId, string username)
         {
-
-            return Udbl.FindUserByUsername(username);
+            if(username == "000")
+            {
+                return Udbl.FindUserById(userId);
+            }
+            { 
+                return Udbl.FindUserByUsername(username);
+            }
         }
 
         // POST: api/Users
@@ -67,8 +72,9 @@ namespace WebServer.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] User user)
         {
+            Udbl.EditUser(user);
         }
 
         // DELETE: api/ApiWithActions/5

@@ -65,12 +65,14 @@ export class LoginComponent implements OnInit {
               () => { console.log('hendling denflig');  } 
             );
 
-      this.userService.getUserData(this.login.Username).subscribe(
+      this.userService.getUserData( "000", this.login.Username).subscribe(
       (response) => 
       {
         console.log('cuvanje podataka o korisniku', response);
         this.currentUser = response;
         localStorage.setItem('companyName', this.currentUser.companyName);
+        localStorage.setItem('currentUserUsername', this.currentUser.username);
+        localStorage.setItem('currentUserId', this.currentUser.id.toString());
       },
       (error) => {console.error('nije uspelo prikupljanje podataka', error);}
       )

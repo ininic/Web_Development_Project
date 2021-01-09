@@ -67,7 +67,7 @@ export class HomePageComponent implements OnInit {
       username: 'ininic',
       password: '123',
       firstName: 'ininic',
-      lastName: 'ininic',
+      lastname: 'ininic',
       role: 'ininic',
       gender:'ininic',
       email: 'ininic',
