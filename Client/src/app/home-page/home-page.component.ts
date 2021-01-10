@@ -37,6 +37,7 @@ export class HomePageComponent implements OnInit {
       {
       this.jwt = localStorage.getItem('jwt');
       this.role = helper.decodeToken(this.jwt)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+      localStorage.setItem('role', this.role.toString());
       }
       else{
         this.role="";
@@ -51,6 +52,7 @@ export class HomePageComponent implements OnInit {
       this.jwt = localStorage.getItem('jwt');
       const helper = new JwtHelperService();
       this.role = helper.decodeToken(this.jwt)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+      localStorage.setItem('role', this.role.toString());
       }
       else{
         this.role="";

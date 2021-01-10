@@ -13,5 +13,7 @@
   <a mat-tab-link *ngIf="this.cookieValue != 'our cookie value'"  label="Third" routerLink="login">Login</a>
   <a mat-tab-link *ngIf="this.cookieValue == 'our cookie value'"  (click) = "onSomething()" label="Forth" routerLink="profile">Profile</a>
   <a mat-tab-link *ngIf="this.role == 'carrentaladmin'"  label="Forth" routerLink="carrentaladmin">Admin Panel</a>
+  <a mat-tab-link *ngIf="this.role == 'airlineadmin'"  label="Forth" routerLink="airlineadmin">Admin Panel</a>
+  <a mat-tab-link *ngIf="this.role == 'sysadmin'"  label="Forth" routerLink="systemadmin">Admin Panel</a>
 </nav>
 

@@ -22,7 +22,7 @@ export class RegistrationComponent implements OnInit {
       username: '',
       password: '',
       firstName: '',
-      lastName: '',
+      lastname: '',
       role: '',
       gender:'male',
       email: '',

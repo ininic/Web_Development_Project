@@ -31,6 +31,11 @@ import { RegistrationComponent } from './registration/registration.component';
 import { CarRenatlCompanyAdminPanelComponent } from './car-renatl-company-admin-panel/car-renatl-company-admin-panel.component';
 import { AddCarComponent } from './add-car/add-car.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
+import { AuthGuardCarRentalAdminService } from './services/auth-guard-car-rental-admin.service';
+import { AirlineAdminPanelComponent } from './airline-admin-panel/airline-admin-panel.component';
+import { AuthGuardAirlineAdminService } from './services/auth-guard-airline-admin.service';
+import { SystemAdminPanelComponent } from './system-admin-panel/system-admin-panel.component';
+import { AuthGuardSystemAdminService } from './services/auth-guard-system-admin.service';
 
 
 export function tokengGetter(){
@@ -53,7 +58,8 @@ export function tokengGetter(){
     RegistrationComponent,
     CarRenatlCompanyAdminPanelComponent,
     AddCarComponent,
-    EditCarComponent
+    EditCarComponent,
+    SystemAdminPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -73,9 +79,11 @@ export function tokengGetter(){
       {path: 'hotels', component: HotelsComponent, canActivate: [AuthGuardService]},
       {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardService]},
       {path: 'registration', component: RegistrationComponent},
-      {path: 'carrentaladmin', component: CarRenatlCompanyAdminPanelComponent},
-      {path: 'addcar', component: AddCarComponent},
-      {path: 'editcar/:id', component: EditCarComponent}
+      {path: 'carrentaladmin', component: CarRenatlCompanyAdminPanelComponent, canActivate: [AuthGuardCarRentalAdminService]},
+      {path: 'addcar', component: AddCarComponent, canActivate: [AuthGuardCarRentalAdminService]},
+      {path: 'editcar/:id', component: EditCarComponent, canActivate: [AuthGuardCarRentalAdminService]},
+      {path: 'airlineadmin', component: AirlineAdminPanelComponent, canActivate: [AuthGuardAirlineAdminService]},
+      {path: 'systemadmin', component: SystemAdminPanelComponent, canActivate: [AuthGuardSystemAdminService]}
       
     ]),
     JwtModule.forRoot({

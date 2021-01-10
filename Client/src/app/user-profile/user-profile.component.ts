@@ -47,6 +47,8 @@ export class UserProfileComponent implements OnInit {
 }
   logOut(){
     console.log('Odjavljivanje');
+    localStorage.setItem('role', '');
+    localStorage.setItem('jwt','')
     this.cookieService.set('cookie-name','loggedOut');
   }
 
