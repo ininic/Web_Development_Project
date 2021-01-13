@@ -26,11 +26,17 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public sortedByAbout: number;
   public sortedByAddress: number;
   public cars: Car[];
+  public searchedcarspom: Car[] = [];
   public car: Car; 
   public issearched: number;
+  public numberOfSeats: number;
+  public model: string;
   constructor(private carservice: CarRentalCompanyService, private route: ActivatedRoute) { 
     this.nameOfCompany = "";
     this.mark = "";
+    this.model = "";
+    this.numberOfSeats = 0;
+  
   }
  
   ngOnInit(): void {
@@ -86,72 +92,76 @@ export class CarRenatalCompaniesComponent implements OnInit {
   }
 
 
+
   Search() : void{
-   
     this.searchedcars = [];
-    let i = 0;
     this.issearched = 1;  
-    if(this.nameOfCompany != "" && this.mark != "")
-    {
-      for (let entry of this.cars) {
-
-        console.log(entry);
-        if(entry.nameOfCompany.localeCompare(this.nameOfCompany) == 0 && entry.mark.localeCompare(this.mark) == 0  )
-        {
-          
+    //let i = 0;
+      for (let entry of this.cars) {     
           this.searchedcars.push(entry);
-          i++;
-        }
+          i++;      
       }
-    }
-    else if(this.nameOfCompany != "" && this.mark == "")
-    {
-      i = 0;
-        for (let entry of this.cars) {
-  
-          console.log(entry);
-          if(entry.nameOfCompany.localeCompare(this.nameOfCompany) == 0 )
-          {
-            
-            this.searchedcars.push(entry);
-            i++;
-          }
-        }
-      
-    }
-    else if(this.nameOfCompany == "" && this.mark != "")
-    {
-      i = 0;
-        for (let entry of this.cars) {
-  
-          console.log(entry);
-          if(entry.mark.localeCompare(this.mark) == 0 )
-          {
-            
-            this.searchedcars.push(entry);
-            i++;
-          }
-        }
-      
-    }
-    else{
-      i = 0;
-      for (let entry of this.cars) {
+     // console.log('svi automobili:',  this.cars);
+      console.log('svi automobili:',  this.searchedcars);
 
-        
-          this.searchedcars.push(entry);
-          i++;
-        
-      }
+    if(this.nameOfCompany != "")
+    {
+        //i = 0;
+        for (var i = 0; i < this.searchedcars.length; i++) {
+
+          if(this.searchedcars[i].nameOfCompany.localeCompare(this.nameOfCompany) != 0 )
+          {         
+          this.searchedcars.splice(i, 1)    
+          i--;
+          }
+         }
     }
+
     
+    if(this.mark != "")
+    {
+      for (var i = 0; i < this.searchedcars.length; i++) {
 
+        if(this.searchedcars[i].mark.localeCompare(this.mark) != 0 )
+        {         
+        this.searchedcars.splice(i, 1)    
+        i--;
+        }
+      }
+    }
 
+    if(this.model != "")
+    {
+      for (var i = 0; i < this.searchedcars.length; i++) {
 
+        if(this.searchedcars[i].model.localeCompare(this.model) != 0 )
+        {         
+        this.searchedcars.splice(i, 1)    
+        i--;
+        }
+      }
+    }
 
-    console.log('srcovani' + this.searchedcars);
+    if(this.numberOfSeats != 0)
+    {
+      for (var i = 0; i < this.searchedcars.length; i++) {
+
+        if(this.searchedcars[i].numberOfSeats!= this.numberOfSeats )
+        {         
+        this.searchedcars.splice(i, 1)    
+        i--;
+        }
+      }
+    }
+
+    
     this.scroll  = 1;
+
   }
+
+  
+
+
 
   scrollOn(): void {
     // setTimeout(() => window.scroll(0,450),1000)
