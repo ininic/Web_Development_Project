@@ -14,6 +14,7 @@ namespace WebServer.DatabaseConfig
         public DbSet<Airline> Airlines { get; set; }
         public DbSet<CarRentalCompany> CarRentalCompaies { get; set; }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
          
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

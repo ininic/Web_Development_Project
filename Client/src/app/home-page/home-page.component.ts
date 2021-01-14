@@ -41,6 +41,7 @@ export class HomePageComponent implements OnInit {
       }
       else{
         this.role="";
+        localStorage.setItem('jwt','')
       }
     
     _communicationService.changeEmitted$.subscribe(data => {

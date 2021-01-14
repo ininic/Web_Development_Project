@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('companyName', this.currentUser.companyName);
         localStorage.setItem('currentUserUsername', this.currentUser.username);
         localStorage.setItem('currentUserId', this.currentUser.id.toString());
+        localStorage.setItem('companyId', "");
       },
       (error) => {console.error('nije uspelo prikupljanje podataka', error);}
       )

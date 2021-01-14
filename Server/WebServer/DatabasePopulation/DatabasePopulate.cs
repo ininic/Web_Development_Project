@@ -13,6 +13,7 @@ namespace WebServer.DatabasePopulation
         readonly AirlineDatabaseLogic Adbl = new AirlineDatabaseLogic();
         readonly CarRentalCompanyDatabaseLogic Crdbl = new CarRentalCompanyDatabaseLogic();
         readonly CarDatabaseLogic Cdbl = new CarDatabaseLogic();
+        readonly ReservationDatabaseLogic Rdbl = new ReservationDatabaseLogic();
         public void Populate()
         {
             User user = new User();
@@ -39,7 +40,13 @@ namespace WebServer.DatabasePopulation
             PopulateCarRentalCompanies("Niška komanija", "Sinđelićeva 22", "Rentacar018", "u izradi", "trenutno nedostupno");
             PopulateCarRentalCompanies("Pančevačka komanija", "Miloša Crnjanskog 33", "Rentacar013", "u izradi", "trenutno nedostupno");
 
-
+            DateTime dt = new DateTime(2021, 11, 05, 14, 5, 11);
+            Reservation r = new Reservation();
+            r.Start = DateTime.Now;
+            r.End = dt;
+            r.CarId = 6;
+            r.UserId = 17;
+            Rdbl.AddReservation(r);
         }
 
         public void PopulateUsers(string firstName, string lastName, string role, string username, string email, string gender, bool logedIn, string password, string CompanyName)
