@@ -6,6 +6,9 @@ import { Car } from '../model/car';
 import { interval } from 'rxjs';
 import { ViewChild, ElementRef } from '@angular/core';
 import { _getOptionScrollPosition } from '@angular/material/core';
+import { Console } from 'console';
+import { ReservationService } from '../services/reservation.service';
+
 
 
 @Component({
@@ -31,11 +34,15 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public issearched: number;
   public numberOfSeats: number;
   public model: string;
-  constructor(private carservice: CarRentalCompanyService, private route: ActivatedRoute) { 
+  public selectedStartDate: Date;
+  public selectedEndDate: Date;
+  constructor(private carservice: CarRentalCompanyService, private reservationService: ReservationService, private route: ActivatedRoute) { 
     this.nameOfCompany = "";
     this.mark = "";
     this.model = "";
     this.numberOfSeats = 0;
+    this.selectedStartDate = null;
+    this.selectedEndDate = null;
   
   }
  
@@ -94,13 +101,37 @@ export class CarRenatalCompaniesComponent implements OnInit {
 
 
   Search() : void{
-    this.searchedcars = [];
+    
+    if(this.selectedStartDate != null && this.selectedEndDate)
+    {
+      console.log('aaaaaa',this.selectedStartDate);
+      console.log('bbbbb',this.selectedEndDate);
+      this.reservationService.getIdOfAvailableCar(this.selectedStartDate, this.selectedEndDate).subscribe(
+        (response) => {console.log('Available cars', response);
+      
+        this.searchedcars = response;
+      this.basicSearch();
+    },
+        (error) => {}
+        );
+      
+    }
+    else{
+      this.searchedcars = [];
+      for (let entry of this.cars) {     
+        this.searchedcars.push(entry);   
+       }
+       this.basicSearch();
+    }
+    
+  }
+  
+  basicSearch(){
+
+    //this.searchedcars = [];
     this.issearched = 1;  
     //let i = 0;
-      for (let entry of this.cars) {     
-          this.searchedcars.push(entry);
-          i++;      
-      }
+    
      // console.log('svi automobili:',  this.cars);
       console.log('svi automobili:',  this.searchedcars);
 
@@ -158,10 +189,9 @@ export class CarRenatalCompaniesComponent implements OnInit {
     this.scroll  = 1;
 
   }
-
   
 
-
+ 
 
   scrollOn(): void {
     // setTimeout(() => window.scroll(0,450),1000)

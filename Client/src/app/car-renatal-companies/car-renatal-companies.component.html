@@ -1,3 +1,5 @@
+
+
 <table class="table">
         <thead>
                 <tr>
@@ -48,8 +50,28 @@
           placeholder="City"
           (input) = "this.model = $event.target.value">
         </div>  
+
+        <div  class="form-group col-md-4">
+          <label for="inputAddress">Start time</label>
+          <input type="datetime-local" class="form-control" id="inputAddress" 
+          placeholder="City"
+          (input) = "this.selectedStartDate = $event.target.value">
+        </div>  
+
+        <div  class="form-group col-md-4">
+          <label for="inputAddress">End time</label>
+          <input type="datetime-local" class="form-control" id="inputAddress" 
+          placeholder="City"
+          (input) = "this.selectedEndDate = $event.target.value">
+        </div>  
       </div>
-</form>
+
+   
+  
+    
+  </form>
+
+
 
 <div style="text-align:center" >
 <button style="width: 20%; height: 20%;" class="btn btn-primary" (click)="Search()">Search</button>  
@@ -85,3 +107,5 @@
 
 </table>
 </div>
+
+

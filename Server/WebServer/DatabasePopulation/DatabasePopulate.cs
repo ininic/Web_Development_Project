@@ -44,9 +44,17 @@ namespace WebServer.DatabasePopulation
             Reservation r = new Reservation();
             r.Start = DateTime.Now;
             r.End = dt;
-            r.CarId = 6;
+            r.CarId = 510;
             r.UserId = 17;
             Rdbl.AddReservation(r);
+       
+
+
+            List<int> list = new List<int>();
+
+            //list = Rdbl.GetIdOfAvailableCars(r.Start,r.End);
+            int a = 6;
+            a++;
         }
 
         public void PopulateUsers(string firstName, string lastName, string role, string username, string email, string gender, bool logedIn, string password, string CompanyName)

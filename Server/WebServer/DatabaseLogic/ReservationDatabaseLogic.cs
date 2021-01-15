@@ -33,5 +33,25 @@ namespace WebServer.DatabaseLogic
             }
         }
 
+        public List<Reservation> GetReservation()
+        {
+            lock (Obj)
+            {
+                //List<int> allCars = new List<int>();
+                //int[] allCars = new int[5];
+                List<Reservation> listOfReservation = new List<Reservation>();
+
+                using (var access = new DatabaseAccess())
+                {
+                    var reservations = access.Reservations;
+                    listOfReservation = reservations.ToList();
+
+
+                }
+
+                return listOfReservation;
+            }
+        }
+
     }
 }
