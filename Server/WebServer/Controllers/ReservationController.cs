@@ -61,8 +61,9 @@ namespace WebServer.Controllers
         }
         // POST: api/Reservation
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody]  Reservation newReseration)
         {
+            return Ok();
         }
 
         // PUT: api/Reservation/5

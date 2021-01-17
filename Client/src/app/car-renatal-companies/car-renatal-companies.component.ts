@@ -10,6 +10,8 @@ import { Console } from 'console';
 import { ReservationService } from '../services/reservation.service';
 import {Router} from '@angular/router'
 import { CommunicationService } from '../services/comunication.service';
+import { DlYearModelProvider } from 'angular-bootstrap-datetimepicker';
+import { getLocaleDateFormat } from '@angular/common';
 
 
 @Component({
@@ -37,13 +39,32 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public model: string;
   public selectedStartDate: Date;
   public selectedEndDate: Date;
+  public startDate: string;
+  public endDate: string;
+
   constructor(private communicationService: CommunicationService, private router: Router, private carservice: CarRentalCompanyService, private reservationService: ReservationService, private route: ActivatedRoute) { 
     this.nameOfCompany = "";
     this.mark = "";
     this.model = "";
     this.numberOfSeats = 0;
-    this.selectedStartDate = null;
-    this.selectedEndDate = null;
+   // this.selectedStartDate = null;
+   // this.selectedEndDate = null;
+
+    var d = new Date();
+
+   this.selectedStartDate =  new Date(d.toISOString().slice(0, 16));
+   
+    this.startDate = d.toISOString().slice(0, 16);
+    d.setDate(d.getUTCDate() + 7)
+    this.endDate = d.toISOString().slice(0, 16);
+   this.selectedEndDate = new Date(d.toISOString().slice(0, 16));
+
+    //console.log(this.endDate )
+    //console.log(this.startDate);
+    //this.selectedStartDate = this.selectedStartDate.getTime();
+    //this.selectedEndDate = Date.;
+    //this.selectedEndDate = new Date;
+   
   
   }
  
@@ -65,7 +86,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
     this.communicationService.nextMessage(car)
     //localStorage.setItem('car', car.);
     //this.comunicationService.sendData(car);
-    this.router.navigate(['/reservationdetails']);
+    this.router.navigate(['/reservationdetails', this.startDate, this.endDate]);
   }
 
   sortByName(): void{
@@ -114,11 +135,11 @@ export class CarRenatalCompaniesComponent implements OnInit {
 
   Search() : void{
     
-    if(this.selectedStartDate != null && this.selectedEndDate)
+    if(this.startDate != null || this.endDate != null)
     {
       console.log('aaaaaa',this.selectedStartDate);
       console.log('bbbbb',this.selectedEndDate);
-      this.reservationService.getIdOfAvailableCar(this.selectedStartDate, this.selectedEndDate).subscribe(
+      this.reservationService.getIdOfAvailableCar(this.startDate, this.endDate).subscribe(
         (response) => {console.log('Available cars', response);
       
         this.searchedcars = response;

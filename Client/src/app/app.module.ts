@@ -87,7 +87,7 @@ export function tokengGetter(){
       {path: 'editcar/:id', component: EditCarComponent, canActivate: [AuthGuardCarRentalAdminService]},
       {path: 'airlineadmin', component: AirlineAdminPanelComponent, canActivate: [AuthGuardAirlineAdminService]},
       {path: 'systemadmin', component: SystemAdminPanelComponent, canActivate: [AuthGuardSystemAdminService]},
-      {path: 'reservationdetails', component: ReservationDetailsComponent, canActivate: [AuthGuardService]}
+      {path: 'reservationdetails/:start/:end', component: ReservationDetailsComponent, canActivate: [AuthGuardService]}
       
     ]),
     JwtModule.forRoot({

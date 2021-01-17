@@ -62,6 +62,24 @@
 
     <tr>
         <td>
+            <label  style="text-align: center;" for="inputAddress" >Pick-up:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label id="dd" style="text-align: center;" for="inputAddress" >{{this.startPrintDate}}  </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Drop-off:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label id="dd" style="text-align: center;" for="inputAddress" >{{this.endPrintDate}}  </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
             <p></p>
         </td>
     </tr>
@@ -72,10 +90,10 @@
      
     <tr>
         <td style="padding-left:10px;">
-            <button  style="width: 70%; height: 20%; "  class="btn btn-danger"  (click)="a()">Abort</button> 
+            <button  style="width: 70%; height: 20%; "  class="btn btn-danger"  (click)="abort()">Abort</button> 
         </td>
         <td  style="padding-left:10px;">
-            <button  style="width: 70%; height: 20%;" class="btn btn-success"  (click)="a()">Confirm</button> 
+            <button  style="width: 70%; height: 20%;" class="btn btn-success"  (click)="makeReservation()">Confirm</button> 
         </td>
     </tr>
 </table>

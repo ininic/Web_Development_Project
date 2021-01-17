@@ -55,14 +55,16 @@
           <label for="inputAddress">Start time</label>
           <input type="datetime-local" class="form-control" id="inputAddress" 
           placeholder="City"
-          (input) = "this.selectedStartDate = $event.target.value">
+          name= "start"
+          [(ngModel)] = "this.startDate" >
         </div>  
 
         <div  class="form-group col-md-4">
           <label for="inputAddress">End time</label>
           <input type="datetime-local" class="form-control" id="inputAddress" 
           placeholder="City"
-          (input) = "this.selectedEndDate = $event.target.value">
+          name= "end"
+          [(ngModel)] = "this.endDate">
         </div>  
       </div>
 
