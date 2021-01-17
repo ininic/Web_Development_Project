@@ -8,7 +8,8 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { _getOptionScrollPosition } from '@angular/material/core';
 import { Console } from 'console';
 import { ReservationService } from '../services/reservation.service';
-
+import {Router} from '@angular/router'
+import { CommunicationService } from '../services/comunication.service';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public model: string;
   public selectedStartDate: Date;
   public selectedEndDate: Date;
-  constructor(private carservice: CarRentalCompanyService, private reservationService: ReservationService, private route: ActivatedRoute) { 
+  constructor(private communicationService: CommunicationService, private router: Router, private carservice: CarRentalCompanyService, private reservationService: ReservationService, private route: ActivatedRoute) { 
     this.nameOfCompany = "";
     this.mark = "";
     this.model = "";
@@ -56,6 +57,17 @@ export class CarRenatalCompaniesComponent implements OnInit {
     this.carservice.getCompanies().subscribe((response) => { this.companies = response; console.log('OBSERVE "response" RESPONSE is ', this.companies);
  });
   }
+
+
+ 
+  Redirect(car: Car)
+  {
+    this.communicationService.nextMessage(car)
+    //localStorage.setItem('car', car.);
+    //this.comunicationService.sendData(car);
+    this.router.navigate(['/reservationdetails']);
+  }
+
   sortByName(): void{
     if(this.sortedByName == -1)
     {

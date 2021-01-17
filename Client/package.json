@@ -24,6 +24,7 @@
     "@angular/router": "~10.1.5",
     "@auth0/angular-jwt": "^5.0.2",
     "angular-bootstrap-datetimepicker": "^4.0.2",
+    "angular2-navigate-with-data": "^1.1.11",
     "bootstrap": "^4.5.3",
     "linked-list-typescript": "^1.0.15",
     "moment": "^2.29.1",

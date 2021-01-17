@@ -1,0 +1,86 @@
+<div id="cc">
+    <table id="fixedheight">   
+        <tr >
+            <td style="text-align: center;" colspan="2" ><label style=" text-align: center;  color:  black; font-size: xx-large;">Your reservation:</label></td>
+        </tr>
+        <tr >
+           <td><p></p></td>
+        </tr>
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Compnay name: </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label id="dd" style="text-align: center;" for="inputAddress" >{{car.nameOfCompany}}  </label>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Car mark:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label  id="dd" style="text-align: center;" for="inputAddress" >{{car.mark}}  </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Car model:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label  id="dd" style="text-align: center;" for="inputAddress" >{{car.model}}  </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Type:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label  id="dd" style="text-align: center;" for="inputAddress" >{{car.type}}  </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Seats:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label  id="dd" style="text-align: center;" for="inputAddress" >{{car.numberOfSeats}}  </label>
+        </td>
+    </tr>
+
+    
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Year:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label id="dd" style="text-align: center;" for="inputAddress" >{{car.year}}  </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <p></p>
+        </td>
+    </tr>
+    <tr>
+        <td  colspan="2" style="text-align: center; font-size:medium;"  >If you check the details, please confirm you reservation to finish the proccess!</td>
+    </tr>
+
+     
+    <tr>
+        <td style="padding-left:10px;">
+            <button  style="width: 70%; height: 20%; "  class="btn btn-danger"  (click)="a()">Abort</button> 
+        </td>
+        <td  style="padding-left:10px;">
+            <button  style="width: 70%; height: 20%;" class="btn btn-success"  (click)="a()">Confirm</button> 
+        </td>
+    </tr>
+</table>
+
+</div>
+
+
+

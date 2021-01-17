@@ -8,7 +8,7 @@ import {MatFormField } from '@angular/material/form-field'
 import { RouterModule } from '@angular/Router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+
 
  
 
@@ -37,6 +37,7 @@ import { AirlineAdminPanelComponent } from './airline-admin-panel/airline-admin-
 import { AuthGuardAirlineAdminService } from './services/auth-guard-airline-admin.service';
 import { SystemAdminPanelComponent } from './system-admin-panel/system-admin-panel.component';
 import { AuthGuardSystemAdminService } from './services/auth-guard-system-admin.service';
+import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
 
 
 export function tokengGetter(){
@@ -60,7 +61,8 @@ export function tokengGetter(){
     CarRenatlCompanyAdminPanelComponent,
     AddCarComponent,
     EditCarComponent,
-    SystemAdminPanelComponent
+    SystemAdminPanelComponent,
+    ReservationDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +86,8 @@ export function tokengGetter(){
       {path: 'addcar', component: AddCarComponent, canActivate: [AuthGuardCarRentalAdminService]},
       {path: 'editcar/:id', component: EditCarComponent, canActivate: [AuthGuardCarRentalAdminService]},
       {path: 'airlineadmin', component: AirlineAdminPanelComponent, canActivate: [AuthGuardAirlineAdminService]},
-      {path: 'systemadmin', component: SystemAdminPanelComponent, canActivate: [AuthGuardSystemAdminService]}
+      {path: 'systemadmin', component: SystemAdminPanelComponent, canActivate: [AuthGuardSystemAdminService]},
+      {path: 'reservationdetails', component: ReservationDetailsComponent, canActivate: [AuthGuardService]}
       
     ]),
     JwtModule.forRoot({
