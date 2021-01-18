@@ -55,7 +55,7 @@ namespace WebServer.Controllers
                     issuer: "https://localhost:44325",
                     audience: "https://localhost:44325",
                     claims: claims,
-                    expires: DateTime.Now.AddSeconds(27),
+                    expires: DateTime.Now.AddSeconds(57),
                     signingCredentials: signingCredentials
                     );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);

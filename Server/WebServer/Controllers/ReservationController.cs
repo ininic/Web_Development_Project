@@ -61,9 +61,22 @@ namespace WebServer.Controllers
         }
         // POST: api/Reservation
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]  Reservation newReseration)
+        public async Task<IActionResult> Post([FromBody]  Reservation newReservation)
         {
-            return Ok();
+            Reservation res = new Reservation();
+            res.CarId = newReservation.CarId;
+            res.UserId = newReservation.UserId;
+            res.End = newReservation.End;
+            res.Start = newReservation.Start;
+
+            if(Rdbl.AddReservation(res))
+            { 
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // PUT: api/Reservation/5

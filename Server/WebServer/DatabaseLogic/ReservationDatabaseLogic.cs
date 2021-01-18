@@ -17,6 +17,22 @@ namespace WebServer.DatabaseLogic
                 int valid = 0;
                 using (var access = new DatabaseAccess())
                 {
+                    var reservations = access.Reservations;
+
+                    foreach(var res in reservations)
+                    {
+                        //trazimo samo rezervacije za trazeni automobil
+                        if(newReservation.CarId == res.CarId)
+                        {
+                            //za svaku koju nadjemo, proverimo da li se preklapa na neki nacin sa 
+                            //terminom nove rezervacije, ako je to slucaj vracamo false
+                            if((res.Start <= newReservation.Start && res.End >= newReservation.Start) || (res.Start <= newReservation.End && res.End >= newReservation.End) || (res.Start > newReservation.Start && res.End < newReservation.End))
+                            {
+                                return false;
+                            }
+                        }
+
+                    }
                     access.Reservations.Add(newReservation);
                     valid = access.SaveChanges();
 
