@@ -87,8 +87,17 @@ namespace WebServer.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+
+            if (Rdbl.DeleteReservation(id) == 0)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok();
+            }
         }
     }
 }

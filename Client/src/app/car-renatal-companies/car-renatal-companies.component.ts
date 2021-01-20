@@ -51,6 +51,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
    // this.selectedEndDate = null;
 
     var d = new Date();
+   
 
    this.selectedStartDate =  new Date(d.toISOString().slice(0, 16));
    
@@ -83,10 +84,10 @@ export class CarRenatalCompaniesComponent implements OnInit {
  
   Redirect(car: Car)
   {
-    this.communicationService.nextMessage(car)
+    this.communicationService.nextCar(car)
     //localStorage.setItem('car', car.);
     //this.comunicationService.sendData(car);
-    this.router.navigate(['/reservationdetails', this.startDate, this.endDate]);
+    this.router.navigate(['/reservationdetails', this.startDate, this.endDate, 'add']);
   }
 
   sortByName(): void{

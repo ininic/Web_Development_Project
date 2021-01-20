@@ -140,6 +140,24 @@ namespace WebServer.DatabaseLogic
             return listOfCars;
         }
 
+        public Car GetCarObjectById(int carId) 
+        {
+            Car carObj = new Car();
+
+            using (var access = new DatabaseAccess())
+            {
+                var cars = access.Cars;
+                foreach (var car in cars)
+                {
+                    if (car.Id == carId)
+                    {
+                        carObj = car;
+                    }
+                }
+            }
+
+            return carObj;
+        }
         public bool EditCar(Car editedCar)
         {
             int valid = 0;

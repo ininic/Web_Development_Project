@@ -21,4 +21,12 @@ export class ReservationService {
   makeReservation(reservation: Reservation): Observable<any>{
     return this.http.post('https://localhost:44325/api/reservation/', reservation);
   }
+
+  getResrvations(userId: string): Observable<any> {
+    return this.http.get<any>('https://localhost:44325/api/AdditionalQuery/' + userId); 
+  }
+
+  cancelReservation(id: string): Observable<any>{
+    return this.http.delete('https://localhost:44325/api/reservation/'+ id);
+  }
 }

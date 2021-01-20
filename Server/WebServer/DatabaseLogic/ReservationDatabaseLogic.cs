@@ -69,5 +69,66 @@ namespace WebServer.DatabaseLogic
             }
         }
 
+        public List<Reservation> GetReservationByUserId(int userId)
+        {
+            lock (Obj)
+            {
+                List<Reservation> listOfReservation = new List<Reservation>();
+                using (var access = new DatabaseAccess())
+                {
+                    var reservations = access.Reservations;
+                    foreach(var res in reservations)
+                    {
+                        if(res.UserId == userId)
+                        {
+                        listOfReservation.Add(res);
+                        }
+                    }              
+                }
+
+                return listOfReservation;
+            }
+        }
+
+        public int DeleteReservation(int id)
+        {
+            int valid = 0;
+            TimeSpan diff;
+            DateTime dtl = new DateTime();
+           // DateTime dtl = new DateTime();
+            dtl = DateTime.Now;
+            using (var access = new DatabaseAccess())
+            {
+                var reservations = access.Reservations;
+                foreach (var res in reservations)
+                {
+                    if (res.Id == id)
+                    {
+
+                        DateTime dt = new DateTime(res.Start.Year, res.Start.Month, res.Start.Day, res.Start.Hour, res.Start.Minute, res.Start.Second);
+                      
+                        diff = dt - dtl;
+                        if(diff.TotalMinutes < 30)
+                            {
+                                return 0;
+                            }   
+                        
+
+                        reservations.Remove(res);
+                    }
+                }
+                valid = access.SaveChanges();
+            }
+
+            if (valid > 0)
+            {
+                return valid;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
     }
 }

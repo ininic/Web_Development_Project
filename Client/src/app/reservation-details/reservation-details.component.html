@@ -83,17 +83,31 @@
             <p></p>
         </td>
     </tr>
-    <tr>
+    <tr *ngIf="this.action == 'add'">
         <td  colspan="2" style="text-align: center; font-size:medium;"  >If you check the details, please confirm you reservation to finish the proccess!</td>
     </tr>
 
      
-    <tr>
+    <tr *ngIf="this.action == 'add'">
         <td style="padding-left:10px;">
             <button  style="width: 70%; height: 20%; "  class="btn btn-danger"  (click)="abort()">Abort</button> 
         </td>
         <td  style="padding-left:10px;">
             <button  style="width: 70%; height: 20%;" class="btn btn-success"  (click)="makeReservation()">Confirm</button> 
+        </td>
+    </tr>
+
+    <tr *ngIf="this.action == 'delete'">
+        <td  colspan="2" style="text-align: center; font-size:medium;"  >Are you sure you want to irrevocably cancel this reservation?</td>
+    </tr>
+
+     
+    <tr *ngIf="this.action == 'delete'">
+        <td style="padding-left:10px;">
+            <button  style="width: 70%; height: 20%; "  class="btn btn-danger"  (click)="abort()">No</button> 
+        </td>
+        <td  style="padding-left:10px;">
+            <button  style="width: 70%; height: 20%;" class="btn btn-success"  (click)="cancelReservation()">Yes</button> 
         </td>
     </tr>
 </table>

@@ -23,12 +23,16 @@ export class ReservationDetailsComponent implements OnInit {
   public startPrintDate: string;
   public endPrintDate: string;
   public reservation: Reservation;
+  public currentReservation: Reservation;
   public userId: string;
+  public action: string;
   constructor(private reservationService: ReservationService, private _location: Location, private route: ActivatedRoute, private communicationService: CommunicationService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {this.startDate = params.get('start'); this.endDate = params.get('end');  console.log(params.get('id')) });
+    this.route.paramMap.subscribe(params => {this.startDate = params.get('start'); this.endDate = params.get('end');  this.action = params.get('action'); console.log(params.get('id')) });
     this.communicationService.sharedMessage.subscribe(message => this.car = message)
+    this.communicationService.sharedMessage2.subscribe(message2 => this.currentReservation= message2)
+    console.log(this.currentReservation);
     this.startPrintDate = this.startDate.replace('T','  ');
     this.endPrintDate = this.endDate.replace('T','  ');
     this.userId = localStorage.getItem('currentUserId');
@@ -48,6 +52,14 @@ export class ReservationDetailsComponent implements OnInit {
      this.reservationService.makeReservation(this.reservation).subscribe(
      (response) => {console.log('uspeh');},
      (error) => {console.log('neuspeh');}
+     )
+  }
+
+  cancelReservation()
+  {
+     this.reservationService.cancelReservation(this.currentReservation.id.toString()).subscribe(
+     (response) => {console.log('uspeh'); this._location.back();},
+     (error) => {console.error('neuspeh');}
      )
   }
 
