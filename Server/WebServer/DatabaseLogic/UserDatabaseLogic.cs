@@ -21,17 +21,7 @@ namespace WebServer.DatabaseLogic
                     {
                         if (user.Username == newUser.Username)
                         {
-                            if (user.IsDeleted == false)
-                            {
-                                //exists in database, but it is not deleted
-                                return false;
-                            }
-                            else
-                            {
-                                // exists in database, and it is deleted(logicaly), so we can add another one
-                                // with same name
-                                acess.Users.Add(newUser);
-                            }
+                            return false;
                         }
                     }
 
@@ -100,6 +90,7 @@ namespace WebServer.DatabaseLogic
                             us.Lastname = u.Lastname;
                             us.Role = u.Role;
                             us.Username = u.Username;
+                            us.Password = u.Password;
                             goto label;
                         }
                     }

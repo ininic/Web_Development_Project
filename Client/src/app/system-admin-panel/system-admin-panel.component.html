@@ -1,1 +1,147 @@
-<p>system-admin-panel works!</p>
+<div style="text-align:center">
+    <button  style="width: 30%; height: 10%; background-color: white; color: gray; border-color: white;" class="btn btn-primary" (click)="setState('carrentalcompany')">Add car rental company</button> 
+    <button  style="width: 30%; height: 10%;  background-color: white; color: gray; border-color: white; "  class="btn btn-primary" (click)="setState('carrentalcompanyadmin')">Add car rental administrator</button> 
+    <p></p>
+    <button  style="width: 30%; height: 10%; background-color: white; color: gray; border-color: white;" class="btn btn-primary" (click)="setState('airlinecompany')">Add airline company</button> 
+    <button  style="width: 30%; height: 10%;  background-color: white; color: gray; border-color: white; "  class="btn btn-primary" (click)="setState('airlinecompanyadmin')">Add airline administrator</button> 
+    <p></p>
+</div>
+
+
+
+<div  *ngIf = 'this.state == "carrentalcompany"'  style="text-align: center;" >
+    <form>
+        <p></p>
+        <div   id="cc">
+                <label  style="text-align: center;" for="inputAddress" >Company name  </label>
+                <input class="form-control"  type="text"
+                    placeholder="Company name"
+                    id="inputAddress"
+                    [value]="carrentalcompany.name"
+                    (input)="carrentalcompany.name=$event.target.value"
+                     >
+                  
+        </div>
+            
+        <div   id="cc">
+            <label  style="text-align: center;" for="inputAddress" >Address</label>
+            <input class="form-control"  type="text"
+                placeholder="Address"
+                id="inputAddress"
+                [value]="carrentalcompany.address"
+                (input)="carrentalcompany.address=$event.target.value"
+                 >
+              
+        </div>
+
+        <div   id="cc">
+            <label  style="text-align: center;" for="inputAddress" >About  </label>
+            <input class="form-control"  type="text"
+                placeholder="About"
+                id="inputAddress"
+                [value]="carrentalcompany.about"
+                (input)="carrentalcompany.about=$event.target.value"
+                 >
+              
+        </div>
+          
+</form>
+
+<div id="cc">
+    <p></p>
+    <button  class="btn btn-primary"  (click)="addCarRentalCompany()">Add company</button>  
+</div>
+</div>
+
+
+
+
+<div  *ngIf = 'this.state == "carrentalcompanyadmin"'  style="text-align: center;" >
+    <form>
+        <p></p>
+        <div   id="cc">
+                <label  style="text-align: center;" for="inputAddress" >First Name  </label>
+                <input class="form-control"  type="text"
+                    placeholder="First Name"
+                    id="inputAddress"
+                    [value]="user.firstName"
+                    (input)="user.firstName=$event.target.value"
+                     >
+                  
+        </div>
+            
+        <div   id="cc">
+            <label  style="text-align: center;" for="inputAddress" >Last Name  </label>
+            <input class="form-control"  type="text"
+                placeholder="Last Name"
+                id="inputAddress"
+                [value]="user.lastname"
+                (input)="user.lastname=$event.target.value"
+                 >
+              
+        </div>
+
+        <div   id="cc">
+            <label  style="text-align: center;" for="inputAddress" >Username  </label>
+            <input class="form-control"  type="text"
+                placeholder="Username"
+                id="inputAddress"
+                [value]="user.username"
+                (input)="user.username=$event.target.value"
+                 >
+              
+        </div>
+        <div id="cc">
+            <label for="inputState">Gender</label>
+            <select id="inputState" class="form-control"  (input)="user.gender=$event.target.value"
+            [value]="user.gender">
+              <option  value="male">Male</option>
+              <option value = "female">Female</option>
+            </select>
+          </div>
+
+    
+
+        <div   id="cc">
+            <label  style="text-align: center;" for="inputAddress" >Email  </label>
+            <input class="form-control"  type="email"
+                placeholder="Email"
+                id="inputAddress"
+                [value] = "user.email"
+                (input)="user.email=$event.target.value"
+                 >
+              
+        </div>
+
+        <div id="cc"  > 
+                <label for="inputPassword4"  >Password  </label>
+                <input type="text"
+                    type="password" 
+                    class="form-control" 
+                    placeholder="Password"     
+                    [value] = "user.password"           
+                    (input)="user.password=$event.target.value"   
+                   >
+        </div>
+     
+        <div id="cc"  > 
+            <label for="inputPassword4"  >Company name  </label>
+            <input type="text"
+                type="text" 
+                class="form-control" 
+                placeholder="Company name"     
+                [value] = "user.companyName"           
+                (input)="user.companyName=$event.target.value"   
+               >
+    </div>
+         
+ 
+
+      
+</form>
+
+<div id="cc">
+    <p></p>
+    <button  class="btn btn-primary"  (click)="addAdmin()">Add administrator</button>  
+</div>
+</div>

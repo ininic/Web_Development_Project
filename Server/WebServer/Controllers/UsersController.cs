@@ -51,20 +51,31 @@ namespace WebServer.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public ActionResult Post(User user)
-        { 
-            
-            bool flag = Udbl.AddUser(user);
-            if (flag)
-            {
-                return Content("Here's the ContentResult message.");
-            }
+        public async Task<IActionResult> Post([FromBody] User user)
+        {
+            User newUser = new User();
+            newUser.FirstName = user.FirstName;
+            newUser.Lastname = user.Lastname;
+            newUser.Username = user.Username;
+            newUser.ListOfFriends = "";
+            newUser.Role = user.Role;
+            newUser.Email = user.Email;
+            newUser.Password = user.Password;
+            newUser.LoggedIn = false;
+            newUser.IsDeleted = false;
+            newUser.Gender = user.Gender;
+            newUser.CompanyName = user.CompanyName;
 
-    
-            else
+            if (Udbl.AddUser(newUser))
             {
                 return Ok();
             }
+            else
+            {
+                return BadRequest();
+            }
+           
+            
             
         }
 

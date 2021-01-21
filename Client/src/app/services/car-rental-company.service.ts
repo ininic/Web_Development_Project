@@ -48,4 +48,8 @@ export class CarRentalCompanyService {
   getCarById(id:string): Observable<Car>{
     return this.http.get<Car>('https://localhost:44325/api/car/byCarId' + id);
   }
+  addCarRentalCompany(company: CarRentalCompany): Observable<any>{
+    return this.http.post('https://localhost:44325/api/CarRentalCompany/', company)
+  }
+
 } 

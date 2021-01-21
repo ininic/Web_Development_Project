@@ -37,4 +37,8 @@ export class UserService {
   editUserData(id: string, user: User): Observable<any>{
     return this.http.put('https://localhost:44325/api/users/'+ id +'/', user );
   }
+
+  addAdmin(user: User): Observable<any>{
+    return this.http.post('https://localhost:44325/api/users/', user);
+  }
 }

@@ -39,7 +39,7 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
 
      
     
-    //prvi put kada se komponenta ucitava, tada se uzima kopanija preko imena
+    //prvi put kada se komponenta ucitava, tada se uzima kompanija preko imena
     //drugi put to se radi preko sacuvanog id-ja zbog toga sto je moguce, da je 
     //neko ko koristi isti nalog sa druge sesije u medjuvremenu u bazi izmenio ime kompanije
     if(this.companyId == "")

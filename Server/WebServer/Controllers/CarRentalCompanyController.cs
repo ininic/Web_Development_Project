@@ -42,8 +42,22 @@ namespace WebServer.Controllers
    
         // POST: api/CarRentalCompany
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] CarRentalCompany company)
         {
+            CarRentalCompany newCompany = new CarRentalCompany();
+            newCompany.Name = company.Name;
+            newCompany.Address = company.Address;
+            newCompany.Branches = company.Branches;
+            newCompany.PriceList = company.PriceList;
+            newCompany.About = company.About;
+            if(Crdbl.AddCarRentalCompany(newCompany))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // PUT: api/CarRentalCompany/5
