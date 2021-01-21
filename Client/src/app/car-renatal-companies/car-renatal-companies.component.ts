@@ -26,6 +26,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public nameOfCompany: string;
   public mark: string;
   public companies: CarRentalCompany[];
+  public searchedCompanies: CarRentalCompany[];
   public searchedcars: Car[] = [];
   public company: CarRentalCompany; 
   public sortedByName: number;
@@ -42,11 +43,16 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public startDate: string;
   public endDate: string;
 
+  public state: string;
+  public companyName: string;
+
   constructor(private communicationService: CommunicationService, private router: Router, private carservice: CarRentalCompanyService, private reservationService: ReservationService, private route: ActivatedRoute) { 
     this.nameOfCompany = "";
+    this.companyName = "";
     this.mark = "";
     this.model = "";
     this.numberOfSeats = 0;
+    this.state = "company";
    // this.selectedStartDate = null;
    // this.selectedEndDate = null;
 
@@ -234,6 +240,32 @@ export class CarRenatalCompaniesComponent implements OnInit {
       console.log("skrolujem");
       this.scroll = 0;
     }
+  }
+
+  setState(state: string){
+    this.state = state;
+    console.log(this.state);
+  }
+
+  searchCompanies(){
+    console.log('pretrazujem kompanije!');
+
+    console.log(this.companyName);
+    this.carservice.getCompanies().subscribe((response) => { this.companies = response; console.log('OBSERVE "response" RESPONSE is ', this.companies);
+
+    if(this.companyName != "")
+    {
+        //i = 0;
+        for (var i = 0; i < this.companies.length; i++) {
+          console.log(this.companies[i].name);
+          if(this.companies[i].name.localeCompare(this.companyName) != 0 )
+          {         
+          this.companies.splice(i, 1)    
+          i--;
+          }
+         }
+    }
+  });
   }
 
 }
