@@ -36,7 +36,7 @@ namespace WebServer.Controllers
 
         // POST: api/Login
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]  LoginParameters login)
+        public IActionResult Post([FromBody]  LoginParameters login)
         {
 
             User user = new User();
@@ -55,7 +55,7 @@ namespace WebServer.Controllers
                     issuer: "https://localhost:44325",
                     audience: "https://localhost:44325",
                     claims: claims,
-                    expires: DateTime.Now.AddSeconds(57),
+                    expires: DateTime.Now.AddSeconds(157),
                     signingCredentials: signingCredentials
                     );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);

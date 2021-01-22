@@ -42,7 +42,8 @@ namespace WebServer.Controllers
    
         // POST: api/CarRentalCompany
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CarRentalCompany company)
+        [Authorize(Roles = "sysadmin")]
+        public IActionResult Post([FromBody] CarRentalCompany company)
         {
             CarRentalCompany newCompany = new CarRentalCompany();
             newCompany.Name = company.Name;
@@ -63,7 +64,7 @@ namespace WebServer.Controllers
         // PUT: api/CarRentalCompany/5
         [HttpPut("{id}")]
         [Authorize(Roles = "carrentaladmin")]
-        public async Task<IActionResult> Put(int id, [FromBody] CarRentalCompany editedCompany)
+        public IActionResult Put(int id, [FromBody] CarRentalCompany editedCompany)
         {
             CarRentalCompany company = new CarRentalCompany();
             CarRentalCompany companyTemp = new CarRentalCompany();

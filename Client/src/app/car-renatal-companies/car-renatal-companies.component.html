@@ -116,7 +116,7 @@
     <th >Mark <i  scope="col"  class="fas fa-sort"></i> </th>
     <th scope="col">Number of seats  <i  scope="col"  class="fas fa-sort"></i></th>
     <th scope="col">Company  <i  scope="col"  class="fas fa-sort"></i></th>
-    <th scope="col">Action  <i  scope="col" ></i></th>
+    <th *ngIf="this.cookieValue == 'our cookie value'" scope="col">Action  <i  scope="col" ></i></th>
   </tr>
 </thead>
 
@@ -126,7 +126,7 @@
           <td > <a [routerLink] = "['/carrentals', searchedcars[i].id]">{{searchedcars[i].mark}}</a> </td>
           <td>{{searchedcars[i].numberOfSeats}} </td>
           <td>{{searchedcars[i].nameOfCompany}} </td>
-          <td><button  style="width: 30%; height: 20%;" class="btn btn-primary" (click)="Redirect(searchedcars[i])">Choose this car</button>  </td>
+          <td *ngIf="this.cookieValue == 'our cookie value'"><button  style="width: 30%; height: 20%;" class="btn btn-primary" (click)="Redirect(searchedcars[i])">Choose this car</button>  </td>
           <span *ngIf="i == 4">{{scrollOn()}}</span>
   </tr> 
 

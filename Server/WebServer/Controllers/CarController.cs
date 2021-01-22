@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.DatabaseLogic;
@@ -39,7 +40,8 @@ namespace WebServer.Controllers
 
         // POST: api/Car
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]  Car newCar) 
+        [Authorize(Roles = "carrentaladmin")]
+        public IActionResult Post([FromBody]  Car newCar) 
         {
             Car car = new Car();
             CarRentalCompany company = new CarRentalCompany();
@@ -66,7 +68,8 @@ namespace WebServer.Controllers
 
         // PUT: api/Car/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Car editedCar) 
+        [Authorize(Roles = "carrentaladmin")]
+        public IActionResult Put(int id, [FromBody] Car editedCar) 
         {
             Car car = new Car();
             car.Id = editedCar.Id;
@@ -89,6 +92,7 @@ namespace WebServer.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "carrentaladmin")]
         public async Task<IActionResult>  Delete(int id)
         {
             if (Cdbl.DeleteCar(id) != 0)

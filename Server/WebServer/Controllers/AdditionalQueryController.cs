@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.DatabaseLogic;
@@ -24,6 +25,7 @@ namespace WebServer.Controllers
 
         // GET: api/AdditionalQuery/5
         [HttpGet("{userId}")]
+        [Authorize]
         public object Get(int userId)
         {
             List<Reservation> listOfReservations = Rdbl.GetReservationByUserId(userId);

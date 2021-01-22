@@ -30,7 +30,7 @@ namespace WebServer.Controllers
 
         // POST: api/Registration
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User user)
+        public IActionResult Post([FromBody] User user)
         {
             User newUser = new User();
             newUser.FirstName = user.FirstName;

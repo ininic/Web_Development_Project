@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.DatabaseLogic;
@@ -61,15 +62,28 @@ namespace WebServer.Controllers
         }
         // POST: api/Reservation
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]  Reservation newReservation)
+        [Authorize]
+        public IActionResult Post([FromBody]  Reservation newReservation)
         {
+            DateTime dtl = new DateTime();
+            dtl = DateTime.Now;
+            TimeSpan diff;
+
+
             Reservation res = new Reservation();
             res.CarId = newReservation.CarId;
             res.UserId = newReservation.UserId;
             res.End = newReservation.End;
             res.Start = newReservation.Start;
 
-            if(Rdbl.AddReservation(res))
+            DateTime dt = new DateTime(res.Start.Year, res.Start.Month, res.Start.Day, res.Start.Hour, res.Start.Minute, res.Start.Second);
+
+            diff = dt - dtl; ;
+            if (diff.TotalMinutes < 60)
+            {
+               return BadRequest();
+            }
+            if (Rdbl.AddReservation(res))
             { 
                 return Ok();
             }
@@ -87,7 +101,8 @@ namespace WebServer.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [Authorize]
+        public IActionResult Delete(int id)
         {
 
             if (Rdbl.DeleteReservation(id) == 0)

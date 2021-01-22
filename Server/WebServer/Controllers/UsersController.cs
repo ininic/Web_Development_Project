@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.DatabaseLogic;
@@ -51,7 +52,8 @@ namespace WebServer.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User user)
+        [Authorize(Roles = "sysadmin")]
+        public IActionResult Post([FromBody] User user)
         {
             User newUser = new User();
             newUser.FirstName = user.FirstName;

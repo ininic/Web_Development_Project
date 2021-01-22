@@ -12,6 +12,7 @@ import {Router} from '@angular/router'
 import { CommunicationService } from '../services/comunication.service';
 import { DlYearModelProvider } from 'angular-bootstrap-datetimepicker';
 import { getLocaleDateFormat } from '@angular/common';
+import { CookieService} from 'ngx-cookie-service';
 
 
 @Component({
@@ -46,13 +47,16 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public state: string;
   public companyName: string;
 
-  constructor(private communicationService: CommunicationService, private router: Router, private carservice: CarRentalCompanyService, private reservationService: ReservationService, private route: ActivatedRoute) { 
+   public cookieValue: string; 
+
+  constructor(private cookieService: CookieService, private communicationService: CommunicationService, private router: Router, private carservice: CarRentalCompanyService, private reservationService: ReservationService, private route: ActivatedRoute) { 
     this.nameOfCompany = "";
     this.companyName = "";
     this.mark = "";
     this.model = "";
     this.numberOfSeats = 0;
     this.state = "company";
+    this.cookieValue = this.cookieService.get('cookie-name');
    // this.selectedStartDate = null;
    // this.selectedEndDate = null;
 

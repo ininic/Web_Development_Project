@@ -55,7 +55,7 @@ namespace WebServer.DatabaseLogic
             return listOfAirlines;
         }
 
-        public Airline FindUserById(int id)
+        public Airline FindAirlineById(int id)
         {
             Airline a = new Airline();
             bool boolvalue = false;
