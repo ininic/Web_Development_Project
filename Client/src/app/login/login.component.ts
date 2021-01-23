@@ -13,6 +13,7 @@ import { EventEmitter } from '@angular/core';
 import { CommunicationService } from '../services/comunication.service';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import {Location} from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
   //@Output() private toggleFavorite: EventEmitter<number>;
   public login: LoginParameters;
   public currentUser: User;
-  constructor(private userService: UserService, private _location: Location, private authService: AuthService, private cookieService: CookieService, private route: Router,private _communicationService: CommunicationService)
+  constructor(private toastr: ToastrService, private userService: UserService, private _location: Location, private authService: AuthService, private cookieService: CookieService, private route: Router,private _communicationService: CommunicationService)
    {
      
     this.onSomething()
@@ -43,8 +44,8 @@ export class LoginComponent implements OnInit {
       Password : 'm123'
     }
   }
-  logIn(stockForm) {
-    if(stockForm.valid)
+  logIn(userForm) {
+    if(userForm.valid)
     {
         this.authService.logIn(this.login)
         .subscribe((response: any) => { 
@@ -58,25 +59,38 @@ export class LoginComponent implements OnInit {
                 this.setCookie(exp); 
                 this.onSomething();
                 this._location.back();
+
+
+                this.userService.getUserData( "000", this.login.Username).subscribe(
+                  (response) => 
+                  {
+                    console.log('cuvanje podataka o korisniku', response);
+                    this.currentUser = response;
+                    localStorage.setItem('companyName', this.currentUser.companyName);
+                    localStorage.setItem('currentUserUsername', this.currentUser.username);
+                    localStorage.setItem('currentUserId', this.currentUser.id.toString());
+                    localStorage.setItem('companyId', "");
+                  },
+                  (error) => {console.error('nije uspelo prikupljanje podataka', error);}
+                  )
+
+
+
+                this.showSuccess();
               },
                 (err : HttpErrorResponse) => { 
                   this.invalidLogin = true;
+                  this.showError();
+                  this.login.Password = "";
+                  this.login.Username = "";
                   console.log(err); },
               () => { console.log('hendling denflig');  } 
             );
 
-      this.userService.getUserData( "000", this.login.Username).subscribe(
-      (response) => 
-      {
-        console.log('cuvanje podataka o korisniku', response);
-        this.currentUser = response;
-        localStorage.setItem('companyName', this.currentUser.companyName);
-        localStorage.setItem('currentUserUsername', this.currentUser.username);
-        localStorage.setItem('currentUserId', this.currentUser.id.toString());
-        localStorage.setItem('companyId', "");
-      },
-      (error) => {console.error('nije uspelo prikupljanje podataka', error);}
-      )
+  
+    }
+    else{
+      this.showWarning();
     }
     
     }
@@ -92,5 +106,15 @@ export class LoginComponent implements OnInit {
    
     onSomething() {
       this._communicationService.emitChange({proprty: 'value'});
+  }
+
+  showSuccess() {
+    this.toastr.success("You Have Successfully Logged in!");
+  }
+  showWarning(){
+    this.toastr.warning("Please fill in all the required fields!")
+  }
+  showError(){
+    this.toastr.error("Login failed: Invalid username or password.")
   }
 }

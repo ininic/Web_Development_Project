@@ -13,3 +13,19 @@
     width: 35%;
     height: 40%;
 }
+.firstName .ng-valid,
+.email .ng-valid,
+.lastname .ng-valid,
+.username .ng-valid,
+.password .ng-valid,
+.gender .ng-valid {
+    background-color: rgb(199, 255, 199);
+}
+.firstName .ng-invalid.ng-touched,
+.email .ng-invalid.ng-touched,
+.lastname .ng-invalid.ng-touched,
+.username .ng-invalid.ng-touched,
+.password .ng-invalid.ng-touched,
+.gender .ng-invalid.ng-touched {
+    border-color:red;
+}

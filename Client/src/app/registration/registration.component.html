@@ -1,79 +1,100 @@
 <div   style="text-align: center;" >
-    <form>
+    <form (ngSubmit)="register(registerForm)" #registerForm="ngForm">
         <p></p>
-        <div   id="cc">
+        <div   id="cc" class="firstName">
                 <label  style="text-align: center;" for="inputAddress" >First Name  </label>
                 <input class="form-control"  type="text"
                     placeholder="First Name"
                     id="inputAddress"
-                    [value]="user.firstName"
-                    (input)="user.firstName=$event.target.value"
+                    required
+                    name = "userName"
+                    #userNme="ngModel"
+                    [(ngModel)]="user.firstName"
                      >
                   
         </div>
             
-        <div   id="cc">
+        <div   id="cc" class="lastname">
             <label  style="text-align: center;" for="inputAddress" >Last Name  </label>
             <input class="form-control"  type="text"
                 placeholder="Last Name"
                 id="inputAddress"
-                [value]="user.lastname"
-                (input)="user.lastname=$event.target.value"
+                required
+                name = "lastname"
+                #lastname="ngModel"
+                [(ngModel)]="user.lastname"
+
                  >
               
         </div>
 
-        <div   id="cc">
+        <div   id="cc" class="username">
             <label  style="text-align: center;" for="inputAddress" >Username  </label>
             <input class="form-control"  type="text"
                 placeholder="Username"
                 id="inputAddress"
-                [value]="user.username"
-                (input)="user.username=$event.target.value"
-                 >
+                required
+                name = "username"
+                #username="ngModel"
+                [(ngModel)]="user.username">
               
         </div>
-        <div id="cc">
+        <div id="cc" class = "gender">
             <label for="inputState">Gender</label>
-            <select id="inputState" class="form-control"  (input)="user.gender=$event.target.value"
-            [value]="user.gender">
+            <select id="inputState" class="form-control"  
+            required
+            name = "gender"
+            #gender="ngModel"
+            [(ngModel)] = "user.gender">
               <option  value="male">Male</option>
               <option value = "female">Female</option>
             </select>
           </div>
 
-        <div   id="cc">
+        <div   id="cc" class = "email">
             <label  style="text-align: center;" for="inputAddress" >Email  </label>
             <input class="form-control"  type="email"
                 placeholder="Email"
                 id="inputAddress"
-                [value] = "user.email"
-                (input)="user.email=$event.target.value"
-                 >
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+                required
+                name = "email"
+                #email="ngModel"
+                [(ngModel)] = "user.email">
+
+                <div *ngIf="email.touched">
+                    <p *ngIf="email.errors?.pattern">Please enter the valid Email.</p>
+                </div>
               
         </div>
 
-        <div id="cc"  > 
+        <div id="cc" class="password" > 
                 <label for="inputPassword4"  >Password  </label>
                 <input type="text"
                     type="password" 
                     class="form-control" 
-                    placeholder="Password"     
-                    [value] = "user.password"           
-                    (input)="user.password=$event.target.value"   
-                   >
+                    placeholder="Password"   
+                    pattern=".{5,}"    
+                    required
+                    name = "password"
+                    #password="ngModel"
+                    [(ngModel)]="user.password">         
+
+                    <div *ngIf="password.touched">
+                        <p *ngIf="password.errors?.pattern">Password must be at least 5 characters.</p>
+                    </div>         
         </div>
      
          
-         
+        <div id="cc">
+            <p></p> 
+            <button  class="btn btn-primary"   type="submit">Register</button>   
+            <p><label>Have an account?<a style= "font-weight: bold;" routerLink = "/login" > Log in</a></label></p>
+        </div>
  
 
       
 </form>
 
-<div id="cc">
-    <p></p>
-    <button  class="btn btn-primary"  (click)="register()">Register</button>  
-    <p><label>Have an account?<a style= "font-weight: bold;" routerLink = "/login" > Log in</a></label></p>
-</div>
+
 </div>

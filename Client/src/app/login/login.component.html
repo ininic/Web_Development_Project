@@ -1,8 +1,8 @@
 <div class="form-group" style="text-align: center;" >
-        <form (ngSubmit)="logIn(stockForm)" #stockForm="ngForm">
+        <form (ngSubmit)="logIn(userForm)" #userForm="ngForm">
             <p></p>
             <div   id="cc" class="username">
-                    <label  style="text-align: center;" for="inputAddress" >username  </label>
+                    <label  style="text-align: center;" for="inputAddress" >Username:  </label>
                     <input class="form-control"  type="text"
                         placeholder="Username"
                         required
@@ -12,21 +12,33 @@
                         [(ngModel)] = "login.Username"  >
                       
             </div>
-            <div *ngIf="username.errors && username.errors.required">
-                Neki tekst
+            <div *ngIf="username.errors && username.errors.required">       
+                <i class="fas fa-exclamation-circle  fa-1x"  style="color: red;" ></i>
+            </div>
+            
+            <div *ngIf="!username.errors">
                 <i class="far fa-check-circle fa-1x" style="color: forestgreen;" ></i>
-
             </div>
         
-            <div id="cc"  > 
-                    <label for="inputPassword4"  >password  </label>
+            <div id="cc" class="password" > 
+                    <label for="inputPassword4"  >Password:  </label>
                     <input type="text"
                         type="password" 
+                        required
                         class="form-control" 
                         placeholder="Password"
-                        [value]="login.Password"
-                        (input)="login.Password=$event.target.value" 
+                        name = "password"
+                        #password="ngModel"
+                        [(ngModel)]="login.Password"                       
                        >
+            </div>
+
+            <div *ngIf="password.errors && password.errors.required">       
+                <i class="fas fa-exclamation-circle  fa-1x"  style="color: red;" ></i>
+            </div>
+            
+            <div *ngIf="!password.errors">
+                <i class="far fa-check-circle fa-1x" style="color: forestgreen;" ></i>
             </div>
          
              

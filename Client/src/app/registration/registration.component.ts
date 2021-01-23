@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { componentFactoryName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { User } from '../model/user';
 import { UserService } from '../services/user.service';
 
@@ -11,7 +12,7 @@ import { UserService } from '../services/user.service';
 })
 export class RegistrationComponent implements OnInit {
   public user: User;
-  constructor(private userService: UserService) { }
+  constructor(private toastr: ToastrService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.resetUser();
@@ -34,7 +35,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  register(): void {
+  register(registrationForm): void {
     console.log('podaci iz forme' + this.user.gender);
     this.userService.Register(this.user).subscribe(
       (res : any) => {
@@ -47,5 +48,17 @@ export class RegistrationComponent implements OnInit {
       });
   }
 
+  
+  showSuccess() {
+    this.toastr.success("You Have Successfully Logged in!");
+  }
+  showWarning(){
+    this.toastr.warning("Please fill in all the required fields!")
+  }
+  showError(){
+    this.toastr.error("Login failed: Invalid username or password.")
+  }
+
 
 }
+ 

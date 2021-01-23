@@ -8,6 +8,7 @@ import {MatFormField } from '@angular/material/form-field'
 import { RouterModule } from '@angular/Router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ToastrModule } from 'ngx-toastr';
 
 
  
@@ -71,6 +72,7 @@ export function tokengGetter(){
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MatTabsModule,
     FormsModule,
     MatFormFieldModule,
