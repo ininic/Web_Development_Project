@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Car } from '../model/car';
 import { CarRentalCompanyService } from '../services/car-rental-company.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-car',
@@ -14,7 +15,7 @@ export class EditCarComponent implements OnInit {
   public companyName: string;
   public id: string;
 
-  constructor(private route: ActivatedRoute, private carrentalservice: CarRentalCompanyService) {
+  constructor(private toastr: ToastrService, private route: ActivatedRoute, private carrentalservice: CarRentalCompanyService) {
   }
 
   ngOnInit(): void {
@@ -35,11 +36,29 @@ export class EditCarComponent implements OnInit {
       )
      
   }
-  editCar(){
-    this.carrentalservice.editCar(this.car.id.toString(), this.car).subscribe(
-      (response) => { console.log('Korisnik uspesno izmenjen!'); },
-      (error) => { console.error(error);}
-    )
+  editCar(editCarForm){
+    console.log(editCarForm);
+    if(editCarForm.valid){
+     this.carrentalservice.editCar(this.car.id.toString(), this.car).subscribe(
+        (response) => { console.log('Automobil uspesno izmenjen!');
+        this.showSuccess("You have successfully upadeted car information!") },
+        (error) => { console.error(error);
+        this.showError(); }
+      );
+   } else{
+    this.showWarning();
+   }
+       
   }
 
+
+  showSuccess(message: string) {
+    this.toastr.success(message);
+  }
+  showWarning(){
+    this.toastr.warning("Please fill in all the required fields!")
+  }
+  showError(){
+    this.toastr.error("Error!")
+  }
 }

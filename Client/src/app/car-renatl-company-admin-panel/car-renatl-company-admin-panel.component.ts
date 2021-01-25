@@ -4,6 +4,7 @@ import { Car } from '../model/car';
 import { CarRentalCompany } from '../model/car-rental-company';
 import { CarRentalCompanyService } from '../services/car-rental-company.service';
 import { CommunicationService } from '../services/comunication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-car-renatl-company-admin-panel',
@@ -18,7 +19,7 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
   //public car: Car;
   public companyName: string;
   public companyId: string;
-  constructor(private _communicationService: CommunicationService, private carservice: CarRentalCompanyService) {
+  constructor(private toastr: ToastrService, private _communicationService: CommunicationService, private carservice: CarRentalCompanyService) {
     this.companyName = localStorage.getItem('companyName');
     this.companyId = localStorage.getItem('companyId');
     _communicationService.changeEmitted$.subscribe(data => {
@@ -64,14 +65,24 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
     }
   }
 
-  onEditCompany(){
+  onEditCompany(editedForm){
+    if(editedForm.valid){
+
+    
     this.carservice.editCompany(this.company).subscribe(
       (response) => { 
         console.log('Kad menjam ovo je ime', this.company.name);
-        localStorage.setItem('companyName', this.company.name);},
+        localStorage.setItem('companyName', this.company.name);
+        this.showSuccess("You have successfully updated information about company!")
+      },
       (error) => { console.error(error);}
     );
+    } else {
+     this.showWarning();
+    }
   }
+
+  
   getCars(id: string)
   {
     this.carservice.getCompanyCars(id, "000").subscribe(
@@ -81,15 +92,29 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
   }
   onDeleteCar(id: string){
     this.carservice.deleteCar(id).subscribe(
-      (response) => { console.log('Automobil izbrisan');
-      this.getCars(this.company.id.toString());
+      (response) => { 
+        console.log('Automobil izbrisan');
+        this.getCars(this.company.id.toString());
+        this.showSuccess("You have successfully deleted car!")
     },
-      (error) => {console.error('Neuspelo'); }
+      (error) => {
+        console.error('Neuspelo'); 
+        this.showError();
+
+    }
     );
     //this.getCars(this.company.id.toString());
   
   }
   
-  
+  showSuccess(message: string) {
+    this.toastr.success(message);
+  }
+  showWarning(){
+    this.toastr.warning("Please fill in all the required fields!")
+  }
+  showError(){
+    this.toastr.error("Login failed: Invalid username or password.")
+  }
 
 }

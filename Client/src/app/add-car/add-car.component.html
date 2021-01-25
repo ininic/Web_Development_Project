@@ -1,31 +1,32 @@
 <div class="form-group" style="text-align: center;" >
-    <form (ngSubmit)="addCar()" #stockForm="ngForm">
+    <form (ngSubmit)="addCar(addCarForm)" #addCarForm="ngForm">
         <p></p>
-        <div   id="cc" >
+        <div   id="cc" class = "carmark">
                 <label  style="text-align: center;" for="inputAddress" >Mark  </label>
                 <input class="form-control"  type="text"
                     placeholder="Mark"
                     required
                     id="inputAddress"
-                    name = "mark"
-                    #username="ngModel"
+                    name = "carmark"
+                    #carmark="ngModel"
                     [(ngModel)] = "car.mark"  >
                   
         </div>
      
     
-        <div id="cc"  > 
+        <div id="cc"  class = "model" > 
                 <label for="inputPassword4"  >Model  </label>
                 <input type="text"
                     class="form-control" 
                     placeholder="Model"
+                    required
                     name = "model"
                     #model="ngModel"
                     [(ngModel)] = "car.model"  >
                    
         </div>
      
-        <div   id="cc" >
+        <div   id="cc"  class = "type">
             <label  style="text-align: center;" for="inputAddress" >Type  </label>
             <input class="form-control"  type="text"
                 placeholder="Type"
@@ -37,28 +38,37 @@
               
           </div>
 
-        <div   id="cc" >
+        <div   id="cc"  class = "year">
             <label  style="text-align: center;" for="inputAddress" >Year  </label>
             <input class="form-control"  type="text"
+                pattern="\d+"
                 placeholder="year"
                 required
                 id="inputAddress"
                 name = "year"
                 #year="ngModel"
                 [(ngModel)] = "car.year"  >
+                <div *ngIf="year.touched">
+                    <p *ngIf="year.errors?.pattern">Only numbers are allowed.</p>
+                </div>      
                 
         </div>
         
       
-        <div   id="cc" >
+        <div   id="cc"  class = "numberofseats" >
             <label  style="text-align: center;" for="inputAddress" >Number of seats  </label>
             <input class="form-control"  type="text"
+                pattern="\d+"
                 placeholder="number of seats"
                 required
                 id="inputAddress"
                 name = "numberofseats"
                 #numberofseats="ngModel"
                 [(ngModel)] = "car.numberOfSeats"  >
+                
+                <div *ngIf="numberofseats.touched">
+                    <p *ngIf="numberofseats.errors?.pattern">Only numbers are allowed.</p>
+                </div>      
               
           </div>
          

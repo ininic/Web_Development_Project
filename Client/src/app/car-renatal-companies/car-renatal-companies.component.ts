@@ -13,7 +13,7 @@ import { CommunicationService } from '../services/comunication.service';
 import { DlYearModelProvider } from 'angular-bootstrap-datetimepicker';
 import { getLocaleDateFormat } from '@angular/common';
 import { CookieService} from 'ngx-cookie-service';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-car-renatal-companies',
@@ -49,7 +49,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
 
    public cookieValue: string; 
 
-  constructor(private cookieService: CookieService, private communicationService: CommunicationService, private router: Router, private carservice: CarRentalCompanyService, private reservationService: ReservationService, private route: ActivatedRoute) { 
+  constructor(private toastr: ToastrService, private cookieService: CookieService, private communicationService: CommunicationService, private router: Router, private carservice: CarRentalCompanyService, private reservationService: ReservationService, private route: ActivatedRoute) { 
     this.nameOfCompany = "";
     this.companyName = "";
     this.mark = "";
@@ -61,15 +61,20 @@ export class CarRenatalCompaniesComponent implements OnInit {
    // this.selectedEndDate = null;
 
     var d = new Date();
+    console.log('d na pocetku', d)
+    d.setUTCHours(d.getHours());
+    console.log('d posle', d)
    
 
    this.selectedStartDate =  new Date(d.toISOString().slice(0, 16));
    
     this.startDate = d.toISOString().slice(0, 16);
+    console.log('string posle', this.startDate)
     d.setDate(d.getUTCDate() + 7)
     this.endDate = d.toISOString().slice(0, 16);
    this.selectedEndDate = new Date(d.toISOString().slice(0, 16));
 
+   //document.getElementById("dateInput").min = '2019-02-17T10:38';
     //console.log(this.endDate )
     //console.log(this.startDate);
     //this.selectedStartDate = this.selectedStartDate.getTime();
@@ -148,17 +153,59 @@ export class CarRenatalCompaniesComponent implements OnInit {
     
     if(this.startDate != null || this.endDate != null)
     {
-      console.log('aaaaaa',this.selectedStartDate);
-      console.log('bbbbb',this.selectedEndDate);
-      this.reservationService.getIdOfAvailableCar(this.startDate, this.endDate).subscribe(
-        (response) => {console.log('Available cars', response);
-      
-        this.searchedcars = response;
-      this.basicSearch();
-    },
-        (error) => {}
+      this.selectedStartDate = new Date(this.startDate);
+      var now = new Date();
+      //now.setUTCHours(now.getHours());
+      var nowstr = now.toISOString().slice(0, 16);    
+      //da li je pocetno vreme proslo 
+      if(this.selectedStartDate.valueOf() > now.valueOf())
+      {
+       //proveravamo da li razlika izmadju vremena pocetka rezervacije i trenutnog vremena veca od 1 sat
+       //ako jeste sve je u redu, ako nije, kazemo korisniku da mora sat vremena ranije da rezervise
+       if((this.selectedStartDate.valueOf() - now.valueOf())/1000 >= 3600)
+       {    
+      //pocetno vreme mora biti ranije od krajnjeg
+      if(this.startDate<this.endDate)
+      {
+        this.selectedEndDate = new Date(this.endDate);
+        this.selectedStartDate = new Date(this.startDate);
+        var diff = this.selectedEndDate.valueOf() - this.selectedStartDate.valueOf();
+
+        //razlika vremena izmedju pocetnog i krajnjeg mora biti min sat vremena
+        if((diff/1000) > 3600){
+
+        console.log('razlikaa', diff/1000);
+        console.log('bbbbb',this.selectedEndDate);
+        this.reservationService.getIdOfAvailableCar(this.startDate, this.endDate).subscribe(
+          (response) => {
+          console.log('Available cars', response);       
+          this.searchedcars = response;
+          this.basicSearch();
+         },
+          (error) => {}
         );
-      
+        } else{
+          this.showWarning("1 hour is minimum amount of time.");
+          this.searchedcars = [];
+        }
+        
+      }
+      else {
+        this.showWarning("Pick-up time must be earlier than drop-off time");
+        this.searchedcars = [];
+      }
+    } else{
+      this.showWarning("You need to make reservation at least 1h before pick-up time");
+      this.searchedcars = [];
+    }
+
+    }
+    else{
+      this.showWarning("Pick-up time is past!");
+      this.searchedcars = [];
+    }
+
+
     }
     else{
       this.searchedcars = [];
@@ -272,4 +319,25 @@ export class CarRenatalCompaniesComponent implements OnInit {
   });
   }
 
+
+  showSuccess(message: string) {
+    this.toastr.success(message);
+  }
+  showWarning(message: string){
+    this.toastr.warning(message)
+  }
+  showError(){
+    this.toastr.error("Error!")
+  }
 }
+
+
+
+/* else { 
+        if((this.selectedStartDate.valueOf() - now.valueOf())/1000 <= 3600)
+      {
+       
+        console.log(this.selectedStartDate, now);
+        this.showWarning("morate zakazati sat ranije")
+        console.log((this.selectedStartDate.valueOf() - now.valueOf())/1000)
+      }*/

@@ -13,3 +13,19 @@
     width: 35%;
     height: 40%;
 }
+
+.carmark .ng-valid.ng-touched,
+.model .ng-valid.ng-touched,
+.type .ng-valid.ng-touched,
+.year .ng-valid.ng-touched,
+.numberofseats .ng-valid.ng-touched {
+    border-color: rgb(36, 148, 36);
+}
+.carmark .ng-invalid.ng-touched,
+.model .ng-invalid.ng-touched,
+.type .ng-invalid.ng-touched,
+.year .ng-invalid.ng-touched,
+.numberofseats .ng-invalid.ng-touched {
+    border-color:red;
+}
+
