@@ -26,8 +26,8 @@
               <td>{{cars[i].model}} </td>
               <td>{{cars[i].numberOfSeats}} </td>
               <td>{{cars[i].year}} </td>
-              <td><button  style="width: 70%; height: 20%;" class="btn btn-primary" (click)="Redirect(cars[i], reservations[i])">Cancel this reservation</button>  </td>
-             
+              <td *ngIf = " this.flags[i] == true " ><button  style="width: 70%; height: 20%;" class="btn btn-primary" (click)="Redirect(cars[i], reservations[i])">Cancel this reservation</button>  </td>
+              <td *ngIf = " this.flags[i] == false " > It is not possible to cancel this reservation.</td>
       </tr> 
     
     </tbody>

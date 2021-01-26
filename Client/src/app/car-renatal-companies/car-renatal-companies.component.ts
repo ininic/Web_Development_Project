@@ -48,6 +48,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public companyName: string;
 
    public cookieValue: string; 
+   public role: string;
 
   constructor(private toastr: ToastrService, private cookieService: CookieService, private communicationService: CommunicationService, private router: Router, private carservice: CarRentalCompanyService, private reservationService: ReservationService, private route: ActivatedRoute) { 
     this.nameOfCompany = "";
@@ -57,6 +58,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
     this.numberOfSeats = 0;
     this.state = "company";
     this.cookieValue = this.cookieService.get('cookie-name');
+    this.role = localStorage.getItem('role');
    // this.selectedStartDate = null;
    // this.selectedEndDate = null;
 

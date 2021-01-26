@@ -8,6 +8,7 @@ import { Reservation } from '../model/reservation';
 import { ParsedEvent } from '@angular/compiler';
 import { Parser } from '@angular/compiler/src/ml_parser/parser';
 import { ReservationService } from '../services/reservation.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reservation-details',
@@ -26,7 +27,7 @@ export class ReservationDetailsComponent implements OnInit {
   public currentReservation: Reservation;
   public userId: string;
   public action: string;
-  constructor(private reservationService: ReservationService, private _location: Location, private route: ActivatedRoute, private communicationService: CommunicationService) { }
+  constructor(private toastr: ToastrService, private reservationService: ReservationService, private _location: Location, private route: ActivatedRoute, private communicationService: CommunicationService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {this.startDate = params.get('start'); this.endDate = params.get('end');  this.action = params.get('action'); console.log(params.get('id')) });
@@ -50,16 +51,16 @@ export class ReservationDetailsComponent implements OnInit {
   makeReservation()
   {
      this.reservationService.makeReservation(this.reservation).subscribe(
-     (response) => {console.log('uspeh');},
-     (error) => {console.log('neuspeh');}
+     (response) => {console.log('uspeh'); this.showSuccess("Your reservation has been successfully made"); this._location.back();},
+     (error) => {console.log('neuspeh'); this.showError("It is not possible to confirm this reservation."); this._location.back();}
      )
   }
 
   cancelReservation()
   {
      this.reservationService.cancelReservation(this.currentReservation.id.toString()).subscribe(
-     (response) => {console.log('uspeh'); this._location.back();},
-     (error) => {console.error('neuspeh');}
+     (response) => {console.log('uspeh');  this.showSuccess("Your reservation has been successfully cancelled."); this._location.back(); },
+     (error) => {console.error('neuspeh');  this.showError("You can't cancel this reservation."); this._location.back();}
      )
   }
 
@@ -67,4 +68,16 @@ export class ReservationDetailsComponent implements OnInit {
   {
     this._location.back();
   }
+
+  showSuccess(message: string) {
+    this.toastr.success(message);
+  }
+  showWarning(){
+    this.toastr.warning("Please fill in all the required fields!")
+  }
+  showError(message: string){
+    this.toastr.error(message);
+  }
+
+
 }

@@ -108,7 +108,7 @@ namespace WebServer.DatabaseLogic
                         DateTime dt = new DateTime(res.Start.Year, res.Start.Month, res.Start.Day, res.Start.Hour, res.Start.Minute, res.Start.Second);
                       
                         diff = dt - dtl;
-                        if(diff.TotalMinutes < 30)
+                        if(diff.TotalMinutes < 60)
                             {
                                 return 0;
                             }   
