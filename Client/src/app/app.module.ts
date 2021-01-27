@@ -40,6 +40,7 @@ import { SystemAdminPanelComponent } from './system-admin-panel/system-admin-pan
 import { AuthGuardSystemAdminService } from './services/auth-guard-system-admin.service';
 import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { AuthGuardUserService } from './services/auth-guard-user.service';
 
 
 
@@ -92,8 +93,8 @@ export function tokengGetter(){
       {path: 'editcar/:id', component: EditCarComponent, canActivate: [AuthGuardCarRentalAdminService]},
       {path: 'airlineadmin', component: AirlineAdminPanelComponent, canActivate: [AuthGuardAirlineAdminService]},
       {path: 'systemadmin', component: SystemAdminPanelComponent, canActivate: [AuthGuardSystemAdminService]},
-      {path: 'reservationdetails/:start/:end/:action', component: ReservationDetailsComponent, canActivate: [AuthGuardService]},
-      {path: 'reservations', component: ReservationsComponent, canActivate: [AuthGuardService]}
+      {path: 'reservationdetails/:start/:end/:action', component: ReservationDetailsComponent, canActivate: [AuthGuardUserService]},
+      {path: 'reservations', component: ReservationsComponent, canActivate: [AuthGuardUserService]}
       
     ]),
     JwtModule.forRoot({

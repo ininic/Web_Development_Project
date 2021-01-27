@@ -312,5 +312,25 @@ namespace WebServer.DatabaseLogic
                 return null;
             }
         }
+
+        public List<User> GetUsersByRole(string role)
+        {
+            List<User> listOfUsers= new List<User>();
+
+            using (var access = new DatabaseAccess())
+            { 
+                var users = access.Users;
+                foreach (var user in users)
+                {
+                    if (user.Role == role)
+                    {
+                        listOfUsers.Add(user);
+                    }
+                }
+            }
+
+            return listOfUsers;
+        }
+    
     }
 }

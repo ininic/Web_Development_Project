@@ -51,7 +51,7 @@ export class ReservationDetailsComponent implements OnInit {
   makeReservation()
   {
      this.reservationService.makeReservation(this.reservation).subscribe(
-     (response) => {console.log('uspeh'); this.showSuccess("Your reservation has been successfully made"); this._location.back();},
+     (response) => {console.log('uspeh'); this.showSuccess("Your reservation has been successfully made."); this._location.back();},
      (error) => {console.log('neuspeh'); this.showError("It is not possible to confirm this reservation."); this._location.back();}
      )
   }

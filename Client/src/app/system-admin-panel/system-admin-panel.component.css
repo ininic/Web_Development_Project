@@ -13,3 +13,28 @@
     width: 35%;
     height: 40%;
 }
+
+.companyname .ng-valid.ng-touched,
+.address .ng-valid.ng-touched,
+.about .ng-valid.ng-touched,
+.username .ng-valid.ng-touched,
+.firstname .ng-valid.ng-touched,
+.lastname .ng-valid.ng-touched,
+.password .ng-valid.ng-touched,
+.gender .ng-valid.ng-touched,
+.nameofcompany .ng-valid.ng-touched,
+.email .ng-valid.ng-touched{
+    border-color: rgb(36, 148, 36);
+}
+.companyname .ng-invalid.ng-touched,
+.address .ng-invalid.ng-touched,
+.about .ng-invalid.ng-touched,
+.username .ng-invalid.ng-touched,
+.firstname .ng-invalid.ng-touched,
+.lastname .ng-invalid.ng-touched,
+.password .ng-invalid.ng-touched,
+.gender .ng-invalid.ng-touched,
+.nameofcompany .ng-invalid.ng-touched,
+.email .ng-invalid.ng-touched {
+    border-color:red;
+}
