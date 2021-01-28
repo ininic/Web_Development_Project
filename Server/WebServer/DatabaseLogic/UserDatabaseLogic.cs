@@ -330,7 +330,34 @@ namespace WebServer.DatabaseLogic
             }
 
             return listOfUsers;
+        } 
+
+        public bool DeleteUser(int id)
+        {
+            int valid = 0;
+
+            using (var access = new DatabaseAccess())
+            {
+                var users = access.Users;
+                foreach (var user in users)
+                {
+                    if (user.Id == id)
+                    {
+                        users.Remove(user);
+                    }
+                }
+                valid = access.SaveChanges();
+            }
+
+            if (valid > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-    
+
     }
 }

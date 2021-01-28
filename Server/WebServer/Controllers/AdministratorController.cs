@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.DatabaseLogic;
@@ -23,6 +24,7 @@ namespace WebServer.Controllers
 
         // GET: api/Admin/5
         [HttpGet("{role}")]
+        [Authorize(Roles = "sysadmin")]
         public List<User> Get(string role)
         {
             return Udbl.GetUsersByRole(role);           
@@ -42,8 +44,17 @@ namespace WebServer.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Authorize(Roles = "sysadmin")]
+        public IActionResult Delete(int id)
         {
+            if (Udbl.DeleteUser(id))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

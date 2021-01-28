@@ -105,10 +105,19 @@ namespace WebServer.Controllers
            
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/ApiWithActions/
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Authorize(Roles = "sysadmin")]
+        public IActionResult Delete(int id)
         {
+            if (Crdbl.DeleteCarRentalCompany(id))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

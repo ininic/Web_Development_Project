@@ -172,5 +172,32 @@ namespace WebServer.DatabaseLogic
             }
             return true;
         }
+
+        public bool DeleteCarRentalCompany(int id)
+        {
+            int valid = 0;
+
+            using (var access = new DatabaseAccess())
+            {
+                var companies = access.CarRentalCompaies;
+                foreach (var company in companies)
+                {
+                    if (company.Id == id)
+                    {
+                        companies.Remove(company);
+                    }
+                }
+                valid = access.SaveChanges();
+            }
+
+            if (valid > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

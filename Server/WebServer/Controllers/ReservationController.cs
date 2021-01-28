@@ -54,6 +54,7 @@ namespace WebServer.Controllers
                             //s tim sto moramo proveriti da li ga nismo ranije vec izbacili
                             //oni automobili koji nisu u rezervacijama, svakako ne treba da budu izbaceni
                             availableCars.Remove(car);
+                            break;
                         }
                     }
                 }

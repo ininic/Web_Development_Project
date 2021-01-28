@@ -52,7 +52,35 @@
           
 </form>
 
+<p>
 
+</p>
+
+<table class="table">
+    <thead>
+            <tr>
+              <th >Name  </th>
+              <th scope="col">About  </th>
+              <th scope="col">Address</th>
+              <th scope="col">Action  <i  scope="col"  class="fas fa-sort"></i></th>
+            </tr>
+    </thead>
+       
+    <tbody>
+            <tr *ngFor="let clickd of companies; index as i;">
+  
+                    <td > <a [routerLink] = "['/carrentals', companies[i].id]">{{companies[i].name}}</a> </td>
+                    <td>{{companies[i].about}} </td>
+                    <td>{{companies[i].address}} </td>
+                    <td><i (click) = "onDeleteCompany(companies[i].id)" class="fas fa-trash-alt" style="color:rgb(0, 123, 255);   padding-left:5%;"></i></td>
+            </tr> 
+
+    </tbody>
+    
+</table>
+
+
+    
 </div>
 
 
@@ -159,6 +187,34 @@
 
       
 </form>
+
+
+<p>
+    
+</p>
+
+<table class="table">
+    <thead>
+            <tr>
+              <th >First name </th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Username </th>
+              <th scope="col">Action  <i  scope="col"  class="fas fa-sort"></i></th>
+            </tr>
+    </thead>
+       
+    <tbody>
+            <tr *ngFor="let clickd of admins; index as i;">
+  
+                    <td >{{admins[i].firstName}} </td>
+                    <td>{{admins[i].lastname}} </td>
+                    <td>{{admins[i].username}} </td>
+                    <td><i (click) = "onDeleteAdmin(admins[i].id)" class="fas fa-trash-alt" style="color:rgb(0, 123, 255);   padding-left:5%;"></i></td>
+            </tr> 
+
+    </tbody>
+    
+</table>
 
 
 </div>

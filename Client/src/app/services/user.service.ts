@@ -44,4 +44,8 @@ export class UserService {
   getUsersByRole(role: string): Observable<User[]>{
     return this.http.get<User[]>('https://localhost:44325/api/administrator/' + role);
   }
+
+  deleteUser(id: string): Observable<any>{
+    return this.http.delete('https://localhost:44325/api/administrator/'+ id);
+  }
 }

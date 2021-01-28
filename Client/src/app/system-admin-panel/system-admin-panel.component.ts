@@ -21,6 +21,7 @@ export class SystemAdminPanelComponent implements OnInit {
   constructor(private toastr: ToastrService, private userService: UserService, private carRentalService: CarRentalCompanyService) { }
 
   ngOnInit(): void {
+    this.state = 'carrentalcompany';
     this.carrentalcompany = {
       name: '',
       address: '',
@@ -57,7 +58,7 @@ export class SystemAdminPanelComponent implements OnInit {
     if(addCompanyForm.valid){
       console.log('dodajem kompaniju')
       this.carRentalService.addCarRentalCompany(this.carrentalcompany).subscribe(
-        (response) => { console.log('uspeh'); this.showSuccess("Car rental company has been succsesfuly added.")},
+        (response) => { console.log('uspeh'); this.showSuccess("Car rental company has been succsesfuly added.");  this.getAdminsAndCompanies();},
         (error) => {   this.showError("This company name already exists in system");     }
       );
     }
@@ -71,7 +72,7 @@ export class SystemAdminPanelComponent implements OnInit {
     console.log('dodajem admina')
     this.user.role = 'carrentaladmin';
     this.userService.addAdmin(this.user).subscribe(
-      (response) => { console.log('uspeh'); this.showSuccess("Car rental company admin has been succsesfuly added");},
+      (response) => { console.log('uspeh'); this.showSuccess("Car rental company admin has been succsesfuly added"); this.getAdminsAndCompanies();},
       (error) => { this.showError("This username already exists in system"); }
     );         
     }
@@ -91,6 +92,19 @@ export class SystemAdminPanelComponent implements OnInit {
     )
   }
 
+  onDeleteCompany(id: string){
+    this.carRentalService.deleteCompany(id).subscribe(
+      (response) => {console.log('uspeh'); this.getAdminsAndCompanies(); this.showSuccess("Car rental company has been succsesfuly deleted.")},
+      (error) => {console.log('neuspeh'); this.getAdminsAndCompanies(); this.showError("This company has been already deleted.")}
+    )
+  }
+
+  onDeleteAdmin(id: string){
+    this.userService.deleteUser(id).subscribe(
+      (response) => {console.log('uspeh'); this.getAdminsAndCompanies(); this.showSuccess("Car rental company has been succsesfuly deleted.")},
+      (error) => {console.log('neuspeh'); this.getAdminsAndCompanies(); this.showError("This user has been already deleted.") }
+    )
+  }
 
   showSuccess(message: string) {
     this.toastr.success(message);

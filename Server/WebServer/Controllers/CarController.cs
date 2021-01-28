@@ -93,7 +93,7 @@ namespace WebServer.Controllers
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "carrentaladmin")]
-        public async Task<IActionResult>  Delete(int id)
+        public IActionResult Delete(int id)
         {
             if (Cdbl.DeleteCar(id) != 0)
             {
