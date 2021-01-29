@@ -1,0 +1,23 @@
+#cc {
+    margin: auto;
+    position:relative;
+    top:5%;
+    width: 35%;
+    height: 60%;
+    font-size: x-large;
+    color:rgb(78, 78, 78);
+}
+
+#dd{
+    color:rgb(78, 78, 78);
+    font-size: large 
+}
+
+#fixedheight td {
+    overflow: hidden;
+    width: 25%;
+}
+
+#fixedheight {
+    table-layout: fixed;
+}

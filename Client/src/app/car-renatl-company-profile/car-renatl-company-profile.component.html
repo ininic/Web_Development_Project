@@ -1,13 +1,86 @@
-<p>car-renatl-company-profile works!</p>
-<div>
-    <li>ID: {{this.id}}</li>
-    <li>Name: {{this.name}}</li>
-    <li>Adress: {{this.address}}</li>
-    <li>About: {{this.about}}</li>
-    <li>List of cars: </li>
-    <span *ngFor="let clickd of cars; index as i;">
-        <li>{{cars[i].nameOfCompany}}  {{cars[i].mark}}  {{cars[i].model}}  {{cars[i].year}} </li>
-</span>
+<div id="cc">
+    <table id="fixedheight">   
+        <tr >
+            <td style="text-align: center;" colspan="3" ><label style=" text-align: center;  color:  black; font-size: x-large;">{{name}}:</label></td>
+        </tr>
+        <tr >
+           <td><p></p></td>
+        </tr>
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Compnay name: </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label id="dd" style="text-align: center;" for="inputAddress" >{{name}}  </label>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Address:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label  id="dd" style="text-align: center;" for="inputAddress" >{{address}}  </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >About:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label  id="dd" style="text-align: center;" for="inputAddress" >{{about}}  </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Price list:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label  id="dd" style="text-align: center;" for="inputAddress" >{{priceList}}  </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label  style="text-align: center;" for="inputAddress" >Branches:  </label>
+        </td>
+        <td  style="padding-left:10px;">
+            <label  id="dd" style="text-align: center;" for="inputAddress" >{{branches}}  </label>
+        </td>
+    </tr>
+
+    
+    
+
+   
+    <tr>
+        <td>
+            <p></p>
+        </td>
+    </tr>
+   
+    
+
+    
+</table>
 
 </div>
+
+
+<div>
+    <span *ngFor="let clickd of cars; index as i;">
+        <li>{{cars[i].mark}} {{cars[i].model}} {{cars[i].year}} {{cars[i].numberOfSeats}} </li>
+    </span>
+</div>
+    
+
+
+
+
+
+
+
+
+
 

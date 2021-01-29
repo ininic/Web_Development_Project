@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
   invalidLogin : boolean;
   ngOnInit(): void {
     this.login = {
-      Username : 'mmarkovic',
-      Password : 'm123'
+      Username : 'jjovanovic',
+      Password : 'j1234'
     }
   }
   logIn(userForm) {

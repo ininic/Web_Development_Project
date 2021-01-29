@@ -30,4 +30,5 @@ export class CommunicationService {
     nextReservation(reservation: Reservation) {
         this.message2.next(reservation)
       }
+      
 }

@@ -108,16 +108,17 @@
 
 <div  *ngIf = "this.issearched == 1">
   
-<h1>Rezultati pretrage: </h1>
+<h1>Search results: </h1>
 
 
 <table class="table" >
 <thead>
   <tr>
-    <th >Mark <i  scope="col"  class="fas fa-sort"></i> </th>
-    <th >Model <i  scope="col"  class="fas fa-sort"></i> </th>
-    <th scope="col">Number of seats  <i  scope="col"  class="fas fa-sort"></i></th>
-    <th scope="col">Company  <i  scope="col"  class="fas fa-sort"></i></th>
+    <th>Car profile</th>
+    <th >Mark <i  (click) = "sortCarsByMark('true')" scope="col"  class="fas fa-sort"></i> </th>
+    <th >Model <i  (click) = "sortCarsByModel('true')"scope="col"  class="fas fa-sort"></i> </th>
+    <th scope="col">Number of seats  <i  (click) = "sortCarsBySeats('true')" scope="col"  class="fas fa-sort"></i></th>
+    <th scope="col">Company  <i (click) = "sortCarsByCompany('true')"  scope="col"  class="fas fa-sort"></i></th>
     <th *ngIf="this.cookieValue == 'our cookie value' && this.role == 'user'" scope="col">Action  <i  scope="col" ></i></th>
   </tr>
 </thead>
@@ -125,11 +126,12 @@
 <tbody>
   <tr *ngFor="let clickd of searchedcars; index as i; let last = last">
 
-          <td > <a [routerLink] = "['/carrentals', searchedcars[i].id]">{{searchedcars[i].mark}}</a> </td>
+          <td>  <a [routerLink] = "['/cardetails', searchedcars[i].id]" ><i class="fas fa-car-side" style="color:rgb(0, 123, 255);"></i></a> </td>
+          <td >{{searchedcars[i].mark}} </td>
           <td>{{searchedcars[i].model}} </td>
           <td>{{searchedcars[i].numberOfSeats}} </td>
           <td>{{searchedcars[i].nameOfCompany}} </td>
-          <td *ngIf="this.cookieValue == 'our cookie value' && this.role == 'user' "><button  style="width: 30%; height: 20%;" class="btn btn-primary" (click)="Redirect(searchedcars[i])">Choose this car</button>  </td>
+          <td *ngIf="this.cookieValue == 'our cookie value' && this.role == 'user' "><button  style="width: 40%; height: 20%;" class="btn btn-primary" (click)="Redirect(searchedcars[i])">Choose this car</button>  </td>
           <span *ngIf="i == 4">{{scrollOn()}}</span>
   </tr> 
 
@@ -138,6 +140,40 @@
 
 </table>
 </div>
+
+
+<div  *ngIf = "this.issearched == 0">
+  
+  <h1>All cars: </h1>
+  
+  
+  <table class="table" >
+  <thead>
+    <tr>
+      <th>Car profile</th>
+      <th >Mark <i  (click) = "sortCarsByMark('false')" scope="col"  class="fas fa-sort"></i> </th>
+      <th >Model <i (click) = "sortCarsByModel('false')" scope="col"  class="fas fa-sort"></i> </th>
+      <th scope="col">Number of seats  <i (click) = "sortCarsBySeats('false')" scope="col"  class="fas fa-sort"></i></th>
+      <th scope="col">Company  <i (click) = "sortCarsByCompany('false')" scope="col"  class="fas fa-sort"></i></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr *ngFor="let clickd of cars; index as i; let last = last">
+  
+            <td>  <a [routerLink] = "['/cardetails', cars[i].id]" ><i class="fas fa-car-side" style="color:rgb(0, 123, 255);"></i></a> </td>
+            <td >{{cars[i].mark}} </td>
+            <td>{{cars[i].model}} </td>
+            <td>{{cars[i].numberOfSeats}} </td>
+            <td>{{cars[i].nameOfCompany}} </td>           
+            <span *ngIf="i == 4">{{scrollOn()}}</span>
+    </tr> 
+  
+  </tbody>
+          
+  
+  </table>
+  </div>
 
 </div>
 

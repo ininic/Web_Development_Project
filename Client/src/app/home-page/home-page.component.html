@@ -7,14 +7,14 @@
  
 
 <nav mat-tab-nav-bar  animationDuration="2ms" >
-  <a mat-tab-link label="First" routerLink = "airlines" >Airlines</a> 
-  <a mat-tab-link label="Second"  routerLink = "carrentals" >Car Rentals</a>
-  <a mat-tab-link label="Second"  routerLink = "hotels" >Hotels</a>
+  <a mat-tab-link label="First" (click) = "onSomething()" routerLink = "airlines" >Airlines</a> 
+  <a mat-tab-link label="Second" (click) = "onSomething()"  routerLink = "carrentals" >Car Rentals</a>
+  <a mat-tab-link label="Second" (click) = "onSomething()" routerLink = "hotels" >Hotels</a>
   <a mat-tab-link *ngIf="this.cookieValue != 'our cookie value'"  label="Third" routerLink="login">Login</a>
   <a mat-tab-link *ngIf="this.cookieValue == 'our cookie value'"  (click) = "onSomething()" label="Forth" routerLink="profile">Profile</a>
-  <a mat-tab-link *ngIf="this.role == 'carrentaladmin'"  label="Forth" routerLink="carrentaladmin">Admin Panel</a>
-  <a mat-tab-link *ngIf="this.role == 'airlineadmin'"  label="Forth" routerLink="airlineadmin">Admin Panel</a>
-  <a mat-tab-link *ngIf="this.role == 'sysadmin'"  label="Forth" routerLink="systemadmin">Admin Panel</a>
-  <a mat-tab-link *ngIf="this.role == 'user'"  label="Forth" routerLink="reservations">Your Reservations</a>
+  <a mat-tab-link *ngIf="this.role == 'carrentaladmin'" (click) = "onSomething()"  label="Forth" routerLink="carrentaladmin">Admin Panel</a>
+  <a mat-tab-link *ngIf="this.role == 'airlineadmin'" (click) = "onSomething()"  label="Forth" routerLink="airlineadmin">Admin Panel</a>
+  <a mat-tab-link *ngIf="this.role == 'sysadmin'"  (click) = "onSomething()" label="Forth" routerLink="systemadmin">Admin Panel</a>
+  <a mat-tab-link *ngIf="this.role == 'user'"  (click) = "onSomething()" label="Forth" routerLink="reservations">Your Reservations</a>
 </nav>
 

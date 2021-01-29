@@ -33,6 +33,12 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public sortedByName: number;
   public sortedByAbout: number;
   public sortedByAddress: number;
+
+  public carSortedByMark: number;
+  public carSortedByModel: number;
+  public carSortedByNumberOfSeats: number;
+  public carSortedByCompanyName: number;
+
   public cars: Car[];
   public searchedcarspom: Car[] = [];
   public car: Car; 
@@ -56,7 +62,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
     this.mark = "";
     this.model = "";
     this.numberOfSeats = 0;
-    this.state = "company";
+    this.state = "car";
     this.cookieValue = this.cookieService.get('cookie-name');
     this.role = localStorage.getItem('role');
    // this.selectedStartDate = null;
@@ -331,15 +337,117 @@ export class CarRenatalCompaniesComponent implements OnInit {
   showError(){
     this.toastr.error("Error!")
   }
-}
 
+  //sortiranje automobila na osnovu marke
+  sortCarsByMark(searched: string): void{
 
-
-/* else { 
-        if((this.selectedStartDate.valueOf() - now.valueOf())/1000 <= 3600)
+    if(searched == 'true'){
+      if(this.carSortedByMark == -1)
       {
-       
-        console.log(this.selectedStartDate, now);
-        this.showWarning("morate zakazati sat ranije")
-        console.log((this.selectedStartDate.valueOf() - now.valueOf())/1000)
-      }*/
+        this.searchedcars.sort((a, b) => a.mark.localeCompare(b.mark));
+        this.carSortedByMark = 1;
+      }
+      else{
+        this.searchedcars.sort((a, b) => b.mark.localeCompare(a.mark));
+        this.carSortedByMark = - 1;
+      }
+    }
+    else{
+    console.log('Available aaaaaa');       
+      if(this.carSortedByMark == -1)
+      {
+        this.cars.sort((a, b) => a.mark.localeCompare(b.mark));
+        this.carSortedByMark = 1;
+      }
+      else{
+        this.cars.sort((a, b) => b.mark.localeCompare(a.mark));
+        this.carSortedByMark = - 1;
+      }
+    }
+  }
+  
+  //sortiranje automobila na osnovu modela
+  sortCarsByModel(searched: string): void{
+
+    if(searched == 'true'){
+      if(this.carSortedByModel == -1)
+      {
+        this.searchedcars.sort((a, b) => a.model.localeCompare(b.model));
+        this.carSortedByModel = 1;
+      }
+      else{
+        this.searchedcars.sort((a, b) => b.model.localeCompare(a.model));
+        this.carSortedByModel = - 1;
+      }
+    }
+    else{
+    console.log('Available aaaaaa');       
+      if(this.carSortedByModel == -1)
+      {
+        this.cars.sort((a, b) => a.model.localeCompare(b.model));
+        this.carSortedByModel = 1;
+      }
+      else{
+        this.cars.sort((a, b) => b.model.localeCompare(a.model));
+        this.carSortedByModel = - 1;
+      }
+    }
+  }
+
+  //sortiranje automobila na osnovu broja sedista
+  sortCarsBySeats(searched: string): void{
+
+    if(searched == 'true'){
+      if(this.carSortedByNumberOfSeats == -1)
+      {
+        this.searchedcars.sort((a, b) => a.numberOfSeats > b.numberOfSeats ? 1 : -1);
+        this.carSortedByNumberOfSeats = 1;
+      }
+      else{
+        this.searchedcars.sort((a, b) => a.numberOfSeats < b.numberOfSeats ? 1 : -1);
+        this.carSortedByNumberOfSeats = - 1;
+      }
+    }
+    else{
+    console.log('Available aaaaaa');       
+      if(this.carSortedByNumberOfSeats == -1)
+      {
+        this.cars.sort((a, b) => a.numberOfSeats > b.numberOfSeats ? 1 : -1);
+        this.carSortedByNumberOfSeats = 1;
+      }
+      else{
+        this.cars.sort((a, b) => a.numberOfSeats < b.numberOfSeats ? 1 : -1);
+        this.carSortedByNumberOfSeats = - 1;
+      }
+    }
+  }
+
+  //sortiranje automobila na osnovu modela
+  sortCarsByCompany(searched: string): void{
+
+    if(searched == 'true'){
+      if(this.carSortedByCompanyName == -1)
+      {
+        this.searchedcars.sort((a, b) => a.nameOfCompany.localeCompare(b.nameOfCompany));
+        this.carSortedByCompanyName = 1;
+      }
+      else{
+        this.searchedcars.sort((a, b) => b.nameOfCompany.localeCompare(a.nameOfCompany));
+        this.carSortedByCompanyName = - 1;
+      }
+    }
+    else{
+    console.log('Available aaaaaa');       
+      if(this.carSortedByCompanyName == -1)
+      {
+        this.cars.sort((a, b) => a.nameOfCompany.localeCompare(b.nameOfCompany));
+        this.carSortedByCompanyName = 1;
+      }
+      else{
+        this.cars.sort((a, b) => b.nameOfCompany.localeCompare(a.nameOfCompany));
+        this.carSortedByCompanyName = - 1;
+      }
+    }
+  }
+
+}
