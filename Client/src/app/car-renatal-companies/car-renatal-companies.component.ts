@@ -14,6 +14,7 @@ import { DlYearModelProvider } from 'angular-bootstrap-datetimepicker';
 import { getLocaleDateFormat } from '@angular/common';
 import { CookieService} from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
+import { forEachChild } from 'typescript';
 
 @Component({
   selector: 'app-car-renatal-companies',
@@ -33,11 +34,13 @@ export class CarRenatalCompaniesComponent implements OnInit {
   public sortedByName: number;
   public sortedByAbout: number;
   public sortedByAddress: number;
+  public sortedByRating: number;
 
   public carSortedByMark: number;
   public carSortedByModel: number;
   public carSortedByNumberOfSeats: number;
   public carSortedByCompanyName: number;
+  public carSortedByRating: number;
 
   public cars: Car[];
   public searchedcarspom: Car[] = [];
@@ -151,8 +154,29 @@ export class CarRenatalCompaniesComponent implements OnInit {
   
   }
 
+  sortByRating(): void{
+    if(this.sortedByRating == -1)
+    {
+    this.companies.sort((a, b) => a.rating > b.rating ? 1 : -1);
+    this.sortedByRating = 1;
+    }
+    else{
+      this.companies.sort((a, b) =>  a.rating < b.rating ? 1 : -1);
+      this.sortedByRating = - 1;
+    }
+  
+  }
+
   getCars(): void{
-    this.carservice.getCars().subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);})
+    this.carservice.getCars().subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);
+  
+    for(var i = 0; i<this.cars.length; i++)
+    {
+      this.cars[i].rating = Number(this.cars[i].rating.toFixed(2));
+    }
+  });
+
+   
   }
 
 
@@ -188,6 +212,10 @@ export class CarRenatalCompaniesComponent implements OnInit {
           (response) => {
           console.log('Available cars', response);       
           this.searchedcars = response;
+          for(var i = 0; i<this.searchedcars.length; i++)
+            {
+              this.searchedcars[i].rating = Number(this.searchedcars[i].rating.toFixed(2));
+            }
           this.basicSearch();
          },
           (error) => {}
@@ -418,6 +446,35 @@ export class CarRenatalCompaniesComponent implements OnInit {
       else{
         this.cars.sort((a, b) => a.numberOfSeats < b.numberOfSeats ? 1 : -1);
         this.carSortedByNumberOfSeats = - 1;
+      }
+    }
+  }
+
+
+  //sortiranje automobila na osnovu broja sedista
+  sortCarsByRating(searched: string): void{
+
+    if(searched == 'true'){
+      if(this.carSortedByRating == -1)
+      {
+        this.searchedcars.sort((a, b) => a.rating > b.rating ? 1 : -1);
+        this.carSortedByRating = 1;
+      }
+      else{
+        this.searchedcars.sort((a, b) => a.rating < b.rating ? 1 : -1);
+        this.carSortedByRating = - 1;
+      }
+    }
+    else{
+    console.log('Available aaaaaa');       
+      if(this.carSortedByRating == -1)
+      {
+        this.cars.sort((a, b) => a.rating > b.rating ? 1 : -1);
+        this.carSortedByRating = 1;
+      }
+      else{
+        this.cars.sort((a, b) => a.rating < b.rating ? 1 : -1);
+        this.carSortedByRating = - 1;
       }
     }
   }

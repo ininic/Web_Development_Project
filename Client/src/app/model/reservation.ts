@@ -4,4 +4,6 @@ export class Reservation {
     userId: number;
     start: string;
     end: string;
+    isCarRated: boolean;
+    isCompanyRated: boolean;
 }

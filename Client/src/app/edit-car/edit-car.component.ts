@@ -27,7 +27,9 @@ export class EditCarComponent implements OnInit {
       id: 0,
       year: 0,
       carRenalId: 0,
-      type: ''
+      type: '',
+      rating: 0,
+      ratingCounter: 0
       };
   
       this.route.paramMap.subscribe(params => {this.id = params.get('id'); console.log(params.get('id')) });

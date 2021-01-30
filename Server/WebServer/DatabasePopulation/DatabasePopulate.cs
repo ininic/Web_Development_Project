@@ -33,12 +33,12 @@ namespace WebServer.DatabasePopulation
             PopulateAirlines("Francuska kompanija koja se bavi avio prevozom", "Air France", 4.35);
             PopulateAirlines("Svajcarska kompanija koja se bavi avio prevozom", "Helvetic Airways", 4.35);
 
-            PopulateCarRentalCompanies("Novosadska komanija", "Svetozara Miletica 12", "Rentacar021", "u izradi", "trenutno nedostupno");
-            PopulateCarRentalCompanies("Valjevska komanija", "Ilije Bircanina 71", "Rentacar014", "u izradi", "trenutno nedostupno");
-            PopulateCarRentalCompanies("Beogradska komanija", "Krunska 42", "Rentacar011", "u izradi", "trenutno nedostupno");
-            PopulateCarRentalCompanies("Zrenjaninska komanija", "Žarka Zrenjanina 16", "Rentacar023", "u izradi", "trenutno nedostupno");
-            PopulateCarRentalCompanies("Niška komanija", "Sinđelićeva 22", "Rentacar018", "u izradi", "trenutno nedostupno");
-            PopulateCarRentalCompanies("Pančevačka komanija", "Miloša Crnjanskog 33", "Rentacar013", "u izradi", "trenutno nedostupno");
+            PopulateCarRentalCompanies("Novosadska komanija", "Svetozara Miletica 12", "Rentacar021", "u izradi", "trenutno nedostupno", 0, 0);
+            PopulateCarRentalCompanies("Valjevska komanija", "Ilije Bircanina 71", "Rentacar014", "u izradi", "trenutno nedostupno", 0, 0);
+            PopulateCarRentalCompanies("Beogradska komanija", "Krunska 42", "Rentacar011", "u izradi", "trenutno nedostupno", 0, 0);
+            PopulateCarRentalCompanies("Zrenjaninska komanija", "Žarka Zrenjanina 16", "Rentacar023", "u izradi", "trenutno nedostupno", 0, 0);
+            PopulateCarRentalCompanies("Niška komanija", "Sinđelićeva 22", "Rentacar018", "u izradi", "trenutno nedostupno", 0, 0);
+            PopulateCarRentalCompanies("Pančevačka komanija", "Miloša Crnjanskog 33", "Rentacar013", "u izradi", "trenutno nedostupno", 0, 0);
 
             DateTime dt = new DateTime(2021, 11, 05, 14, 5, 11);
             Reservation r = new Reservation();
@@ -46,6 +46,8 @@ namespace WebServer.DatabasePopulation
             r.End = dt;
             r.CarId = 510;
             r.UserId = 17;
+            r.IsCarRated = false;
+            r.IsCompanyRated = false;
             Rdbl.AddReservation(r);
        
 
@@ -80,31 +82,33 @@ namespace WebServer.DatabasePopulation
             Adbl.AddAirline(airline);
         }
 
-        public void PopulateCarRentalCompanies(string about, string address, string name, string priceList, string branches)
+        public void PopulateCarRentalCompanies(string about, string address, string name, string priceList, string branches, double rating, int ratingCounter)
         {
             CarRentalCompany carRentalCompany = new CarRentalCompany();
             carRentalCompany.About = about;
             carRentalCompany.Address = address;
             carRentalCompany.Branches = branches;
             carRentalCompany.Name = name;
+            carRentalCompany.Rating = rating;
+            carRentalCompany.RatingCounter = ratingCounter;
             carRentalCompany.PriceList = priceList;
             Crdbl.AddCarRentalCompany(carRentalCompany);
-            PopulateCars("mercedes", "m2000", "caravan", 2010, 5, carRentalCompany.Id, carRentalCompany.Name);
-            PopulateCars("toyota", "t2000", "caravan", 2007, 5, carRentalCompany.Id, carRentalCompany.Name);
-            PopulateCars("ford", "f2000", "caravan", 1990, 5, carRentalCompany.Id, carRentalCompany.Name);
-            PopulateCars("audi", "a2000", "caravan", 2000, 4, carRentalCompany.Id, carRentalCompany.Name);
-            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name);
-            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name);
-            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name);
-            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name);
-            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name);
-            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name);
-            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name);
+            PopulateCars("mercedes", "m2000", "caravan", 2010, 5, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
+            PopulateCars("toyota", "t2000", "caravan", 2007, 5, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
+            PopulateCars("ford", "f2000", "caravan", 1990, 5, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
+            PopulateCars("audi", "a2000", "caravan", 2000, 4, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
+            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
+            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
+            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
+            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
+            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
+            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
+            PopulateCars("fiat", "f2000", "caravan", 2011, 4, carRentalCompany.Id, carRentalCompany.Name, 0, 0);
 
         }
 
 
-        public void PopulateCars(string mark, string model, string type, int year, int numberOfSeats, int carRentalId, string nameOfCompany)
+        public void PopulateCars(string mark, string model, string type, int year, int numberOfSeats, int carRentalId, string nameOfCompany, double rating, int ratingCounter)
         {
             Car car = new Car();
             car.Mark = mark;
@@ -114,6 +118,8 @@ namespace WebServer.DatabasePopulation
             car.NumberOfSeats = numberOfSeats;
             car.CarRenalId = carRentalId;
             car.NameOfCompany = nameOfCompany;
+            car.Rating = rating;
+            car.RatingCounter = ratingCounter;
             Cdbl.AddCar(car);
 
 

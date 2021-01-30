@@ -137,6 +137,8 @@ namespace WebServer.DatabaseLogic
                             company.Branches = newCompany.Branches;
                             company.PriceList = newCompany.PriceList;
                             company.About = newCompany.About;
+                            company.Rating = newCompany.Rating;
+                            company.RatingCounter = newCompany.RatingCounter;
                         }
                     }
                     int valid = acess.SaveChanges();

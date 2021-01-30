@@ -79,12 +79,14 @@ namespace WebServer.Controllers
             company.Branches = editedCompany.Branches;
             company.PriceList = editedCompany.PriceList;
             company.About = editedCompany.About;
+            company.Rating = companyTemp.Rating;
+            company.RatingCounter = companyTemp.RatingCounter;
 
             //proveravamo da li je novoizabrano ime kompanije dozvoljeno
             //ne mogu postojati dve kompanije sa istim imenom
             //ali prvo moramo da provrimo da li se ime uopste menja
             //jer ako se ne menja ne moramo da proveravamo da li je ime odgovarajuce
-            if(editedCompany.Name != companyTemp.Name)
+            if (editedCompany.Name != companyTemp.Name)
             {
           
                 if(Crdbl.CheckCompanyName(company.Name))

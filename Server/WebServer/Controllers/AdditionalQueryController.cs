@@ -16,6 +16,7 @@ namespace WebServer.Controllers
     {
         readonly ReservationDatabaseLogic Rdbl = new ReservationDatabaseLogic();
         readonly CarDatabaseLogic Cdbl = new CarDatabaseLogic();
+        readonly CarRentalCompanyDatabaseLogic Crdbl = new CarRentalCompanyDatabaseLogic();
         // GET: api/AdditionalQuery
         [HttpGet]
         public IEnumerable<string> Get()
@@ -44,9 +45,34 @@ namespace WebServer.Controllers
         }
 
         // PUT: api/AdditionalQuery/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT: api/Reservation/5
+        [HttpPut("{carId}/{reservationId}")]
+        public IActionResult Put(int carId, int reservationId, [FromBody] int newCopmanyRating)
         {
+            CarRentalCompany Company = new CarRentalCompany();
+            Car car = new Car();
+            car = Cdbl.GetCarObjectById(carId);
+            
+            if (Rdbl.IsCompanyRated(reservationId))
+            {
+                return BadRequest();
+            }
+            else
+            {
+                Rdbl.SetCompanyRate(reservationId);
+                Company = Crdbl.FindCompanyByName(car.NameOfCompany);
+                Company.Rating = (Company.Rating * Company.RatingCounter + newCopmanyRating) / (Company.RatingCounter + 1);
+                Company.RatingCounter++;
+                if (Crdbl.EditCarRentalCompany(Company))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+
         }
 
         // DELETE: api/ApiWithActions/5

@@ -6,4 +6,6 @@ export class CarRentalCompany {
     about: string;
     priceList: string;
     branches: string;
+    rating: number;
+    ratingCounter: number;
 }

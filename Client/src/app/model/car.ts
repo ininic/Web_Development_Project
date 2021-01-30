@@ -7,4 +7,6 @@ export class Car {
     numberOfSeats: number; 
     type: string;
     carRenalId: number;
+    rating: number;
+    ratingCounter: number;
 }

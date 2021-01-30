@@ -95,9 +95,30 @@ namespace WebServer.Controllers
         }
 
         // PUT: api/Reservation/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{carId}/{reservationId}")]
+        public IActionResult Put(int carId, int reservationId, [FromBody] int newCarRating)
         {
+            Car car = new Car();
+            if(Rdbl.IsCarRated(reservationId))
+            {
+                return BadRequest();
+            }
+            else
+            {
+                Rdbl.SetCarRate(reservationId);
+                car = Cdbl.GetCarObjectById(carId);
+                car.Rating = (car.Rating * car.RatingCounter + newCarRating) / (car.RatingCounter + 1);
+                car.RatingCounter++;
+                if (Cdbl.EditCar(car))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            
         }
 
         // DELETE: api/ApiWithActions/5

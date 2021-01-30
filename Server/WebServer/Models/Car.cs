@@ -15,6 +15,8 @@ namespace WebServer.Models
         public int NumberOfSeats { get; set; }
         public string Type { get; set; }  
         public int CarRenalId { get; set; }
+        public double Rating { get; set; }
+        public int RatingCounter { get; set; }
 
     }
 }

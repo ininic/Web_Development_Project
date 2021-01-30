@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/Router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ToastrModule } from 'ngx-toastr';
+import { RatingModule } from 'ng-starrating';
 
 
  
@@ -42,6 +43,7 @@ import { ReservationDetailsComponent } from './reservation-details/reservation-d
 import { ReservationsComponent } from './reservations/reservations.component';
 import { AuthGuardUserService } from './services/auth-guard-user.service';
 import { CarDetailsComponent } from './car-details/car-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -78,6 +80,7 @@ export function tokengGetter(){
     ToastrModule.forRoot(),
     MatTabsModule,
     FormsModule,
+    RatingModule,
     MatFormFieldModule,
     RouterModule.forRoot([
       {path: '', redirectTo: '/airlines', pathMatch: 'full'},
@@ -106,7 +109,8 @@ export function tokengGetter(){
         allowedDomains: ["localhost:44325"],
         disallowedRoutes:[]
       }
-    })
+    }),
+    NgbModule
   ],
   providers: [
     UserService,

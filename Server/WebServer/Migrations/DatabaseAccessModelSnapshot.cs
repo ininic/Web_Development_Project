@@ -52,6 +52,10 @@ namespace WebServer.Migrations
 
                     b.Property<int>("NumberOfSeats");
 
+                    b.Property<double>("Rating");
+
+                    b.Property<int>("RatingCounter");
+
                     b.Property<string>("Type");
 
                     b.Property<int>("Year");
@@ -77,6 +81,10 @@ namespace WebServer.Migrations
 
                     b.Property<string>("PriceList");
 
+                    b.Property<double>("Rating");
+
+                    b.Property<int>("RatingCounter");
+
                     b.HasKey("Id");
 
                     b.ToTable("CarRentalCompaies");
@@ -91,6 +99,10 @@ namespace WebServer.Migrations
                     b.Property<int>("CarId");
 
                     b.Property<DateTime>("End");
+
+                    b.Property<bool>("IsCarRated");
+
+                    b.Property<bool>("IsCompanyRated");
 
                     b.Property<DateTime>("Start");
 

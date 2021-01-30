@@ -13,6 +13,10 @@ namespace WebServer.Models
         public string About { get; set; }
         public string PriceList { get; set; }
         public string Branches { get; set; }
-         
-}
+        public double Rating { get; set; }
+        public int RatingCounter { get; set; }
+
+
+
+    }
 }

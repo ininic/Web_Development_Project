@@ -175,6 +175,8 @@ namespace WebServer.DatabaseLogic
                         car.Year = editedCar.Year;
                         car.NumberOfSeats = editedCar.NumberOfSeats;
                         car.CarRenalId = car.CarRenalId;
+                        car.Rating = editedCar.Rating;
+                        car.RatingCounter = editedCar.RatingCounter;
                         break;
                     }
                 }

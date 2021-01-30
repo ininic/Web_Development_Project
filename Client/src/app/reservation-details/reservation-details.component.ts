@@ -43,6 +43,8 @@ export class ReservationDetailsComponent implements OnInit {
       userId: parseInt(this.userId),
       start: this.startDate,
       end: this.endDate,
+      isCarRated: false,
+      isCompanyRated: false 
       };
      
 

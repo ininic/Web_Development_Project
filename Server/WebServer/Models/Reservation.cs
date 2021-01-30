@@ -12,6 +12,8 @@ namespace WebServer.Models
         public int UserId { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+        public bool IsCarRated { get; set; }
+        public bool IsCompanyRated { get; set; }
 
     }
 }

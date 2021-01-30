@@ -36,6 +36,8 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
       priceList: '',
       id: 1,
       branches: '', 
+      rating: 0,
+      ratingCounter: 0,
       };
 
      

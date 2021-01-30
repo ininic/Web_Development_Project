@@ -33,7 +33,9 @@ namespace WebServer.Migrations
                     Address = table.Column<string>(nullable: true),
                     About = table.Column<string>(nullable: true),
                     PriceList = table.Column<string>(nullable: true),
-                    Branches = table.Column<string>(nullable: true)
+                    Branches = table.Column<string>(nullable: true),
+                    Rating = table.Column<double>(nullable: false),
+                    RatingCounter = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,7 +54,9 @@ namespace WebServer.Migrations
                     Year = table.Column<int>(nullable: false),
                     NumberOfSeats = table.Column<int>(nullable: false),
                     Type = table.Column<string>(nullable: true),
-                    CarRenalId = table.Column<int>(nullable: false)
+                    CarRenalId = table.Column<int>(nullable: false),
+                    Rating = table.Column<double>(nullable: false),
+                    RatingCounter = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,7 +72,9 @@ namespace WebServer.Migrations
                     CarId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
                     Start = table.Column<DateTime>(nullable: false),
-                    End = table.Column<DateTime>(nullable: false)
+                    End = table.Column<DateTime>(nullable: false),
+                    IsCarRated = table.Column<bool>(nullable: false),
+                    IsCompanyRated = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -29,4 +29,13 @@ export class ReservationService {
   cancelReservation(id: string): Observable<any>{
     return this.http.delete('https://localhost:44325/api/reservation/'+ id);
   }
+  rateCar(carId: number, reservationId: number, newCarRating: number): Observable<any>{
+    return this.http.put('https://localhost:44325/api/reservation/'+ carId +'/' + reservationId + '/', newCarRating);
+   
+  }
+
+  rateCompany(carId: number, reservationId: number, newCarRating: number): Observable<any>{
+    return this.http.put('https://localhost:44325/api/AdditionalQuery/'+ carId +'/' + reservationId + '/', newCarRating);
+   
+  }
 }

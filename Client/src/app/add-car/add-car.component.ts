@@ -27,7 +27,9 @@ export class AddCarComponent implements OnInit {
       id: 0,
       year: 0,
       carRenalId: 0,
-      type: ''
+      type: '',
+      rating: 0,
+      ratingCounter: 0,
       };
   }
 

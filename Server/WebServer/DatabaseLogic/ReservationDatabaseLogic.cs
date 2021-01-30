@@ -130,5 +130,107 @@ namespace WebServer.DatabaseLogic
             }
         }
 
+        public bool IsCarRated(int id)
+        {
+            //Reservation reservation = new Reservation();
+
+            using (var access = new DatabaseAccess())
+            {
+                var reservations = access.Reservations;
+                foreach (var reservation in reservations)
+                {
+                    if (reservation.Id == id)
+                    {
+                        if (reservation.IsCarRated == false)
+                        {
+                            return false;
+                        }                                           
+                    }
+                }
+
+                return true;
+            }
+          
+        }
+
+        public bool IsCompanyRated(int id)
+        {
+            //Reservation reservation = new Reservation();
+
+            using (var access = new DatabaseAccess())
+            {
+                var reservations = access.Reservations;
+                foreach (var reservation in reservations)
+                {
+                    if (reservation.Id == id)
+                    {
+                        if (reservation.IsCompanyRated == false)
+                        {
+                            return false;
+                        }
+                    }
+                }
+
+                return true;
+            }
+
+        }
+
+        public bool SetCarRate(int reservationId)
+        {
+            int valid;
+
+            using (var access = new DatabaseAccess())
+            {
+                var reservations = access.Reservations;
+                foreach (var reservation in reservations)
+                {
+                    if (reservation.Id == reservationId)
+                    {
+                        reservation.IsCarRated = true;
+                    }
+                }
+
+                valid = access.SaveChanges();
+            }
+            if (valid > 0)
+            {
+                return true; 
+            }
+            else
+            {
+                return false;
+            }
+        
+        }
+
+        public bool SetCompanyRate(int reservationId)
+        {
+            int valid;
+
+            using (var access = new DatabaseAccess())
+            {
+                var reservations = access.Reservations;
+                foreach (var reservation in reservations)
+                {
+                    if (reservation.Id == reservationId)
+                    {
+                        reservation.IsCompanyRated = true;
+                    }
+                }
+
+                valid = access.SaveChanges();
+            }
+            if (valid > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
     }
 }

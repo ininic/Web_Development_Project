@@ -71,6 +71,8 @@ namespace WebServer.Controllers
         [Authorize(Roles = "carrentaladmin")]
         public IActionResult Put(int id, [FromBody] Car editedCar) 
         {
+            Car carTemp = new Car();
+            carTemp = Cdbl.GetCarObjectById(editedCar.Id);
             Car car = new Car();
             car.Id = editedCar.Id;
             car.Mark = editedCar.Mark;
@@ -80,6 +82,8 @@ namespace WebServer.Controllers
             car.Year = editedCar.Year;
             car.NumberOfSeats = editedCar.NumberOfSeats;
             car.CarRenalId = editedCar.CarRenalId;
+            car.Rating = carTemp.Rating;
+            car.RatingCounter = carTemp.RatingCounter;
             if(Cdbl.EditCar(car))
             {
                 return Ok();

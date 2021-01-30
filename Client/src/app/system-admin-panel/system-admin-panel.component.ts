@@ -29,6 +29,9 @@ export class SystemAdminPanelComponent implements OnInit {
       priceList: '',
       id: 1,
       branches: '', 
+      rating: 0,
+      ratingCounter: 0
+      
       };
 
       this.user = {
