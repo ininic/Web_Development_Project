@@ -20,13 +20,12 @@ export class AirlinesComponent implements OnInit {
   constructor(private airlineService: AirlineService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-   /* interval(3000).subscribe(x => { // will execute every 30 seconds
-      this.getData();
-    });*/
+    //preuzimanje aviokompanija
     this.airlineService.getAirlines().subscribe((response) => { this.airlines = response; console.log('OBSERVE "response" RESPONSE is ', this.airlines);
- });
+    });
   } 
 
+  //sortiranje avokompanija na osnovu imena
   sortByName(): void{
     if(this.sortetByName == -1)
     {
@@ -39,6 +38,7 @@ export class AirlinesComponent implements OnInit {
     }
   
   }
+  //sortiranje avokompanija na osnovu opisa
   sortByAbout(): void{
     if(this.sortetByAbout == -1)
     {
@@ -52,6 +52,7 @@ export class AirlinesComponent implements OnInit {
   
   }
 
+  //sortiranje avokompanija na osnovu ocena
   sortByRating(): void{
     if(this.sortetByRating == -1)
     {

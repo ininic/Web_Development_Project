@@ -14,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ReservationsComponent implements OnInit {
 
-  //currentRate = 0;
   reservations: Reservation[];
   flags: boolean[];
   carRatingFlags: boolean[];
@@ -31,10 +30,6 @@ export class ReservationsComponent implements OnInit {
     this.currentCompanyRates = [];
     this.carRatingFlags = [];
     this.companyRatingFlags = [];
-    /*
-    this.PickupDate = new Date(this.startDate);
-    var now = new Date(this.startDate);
-      var diff = this.PickupDate.valueOf() - this.selectedStartDate.valueOf();*/
    }
 
   ngOnInit(): void {
@@ -45,21 +40,27 @@ export class ReservationsComponent implements OnInit {
     this.reservationService.getResrvations(this.currentUserId).subscribe(
     (response) => {
       this.reservations = response.listOfReservations; this.cars = response.listOfCars; console.log(this.reservations);
-      //traba proci kroz rezervacije i postaviti jedinicu za svaku ciji je start time prosao
+      //prolazi se kroz sve rezervacije za one cije je pocetno vreme proslo, postavlja se true flag
+      //koji ce se kasnije koristiti da se za te rezervacije onemoguci otkazivanje
       for (var i = 0; i < this.reservations.length; i++)
       {
         this.currentCarRates[i] = 0;
         this.currentCompanyRates[i] = 0;
+
+        //sve rezervacije su inicijalno neocenjene
         this.carRatingFlags[i] = false;
         this.companyRatingFlags[i] = false;
+
         var now = new Date();
         this.pickupDate = new Date(this.reservations[i].start);
         if((this.pickupDate.valueOf() - now.valueOf())/1000 > 3600)
         {
+          //ako je startno vreme rezervacije minimum 1 čas udaljeno od sadašnjeg trenutka, rezervacija se može otkazati
           this.flags[i] = true;
           console.log('tacno');
         }
         else{
+          //ako je startno vreme rezervacije udaljeno manje od 60 minuta od sadašnjeg trenutka, rezervacija se više ne može otkazati
           this.flags[i] = false;
           console.log('netacno', this.flags[i]);
         }
@@ -67,21 +68,20 @@ export class ReservationsComponent implements OnInit {
       }
       console.log(this.flags);
     },
-    (error) => {console.error('Greska!');}
+    (error) => {console.error('Doslo je do greške pri preuzimanju rezervacija sa servera!');}
 
     )
   }
 
+  //funkcija kojom se prelazi na stranicu za potvrdu otkazivanja rezervacije
   Redirect(car: Car, reservation: Reservation)
   {
     this.communicationService.nextCar(car)
     this.communicationService.nextReservation(reservation);
-   // this.communicationService.nextMessage(reservation);
-    //localStorage.setItem('car', car.);
-    //this.comunicationService.sendData(car);
     this.router.navigate(['/reservationdetails', reservation.start, reservation.end, 'delete']);
   }
 
+  //funkcija za ocenjivanje automobila iz date rezervacije
   rateCar(rate: number, rb: number){
     this.carRatingFlags[rb] = true;
     console.log(rate,this.reservations[rb].carId, this.reservations[rb].id );
@@ -90,6 +90,8 @@ export class ReservationsComponent implements OnInit {
       (error) => {console.log('neuspeh'); this.showError('You have already rated this car.'); }
     )
   }
+
+  //funkcija za ocenjivanje rentacar kompanije iz date rezervacije
   rateCompany(rate: number, rb: number){
     this.companyRatingFlags[rb] = true;
     console.log(rate);
@@ -100,6 +102,7 @@ export class ReservationsComponent implements OnInit {
    
   }
 
+  //toastr poruke za korisnika
   showSuccess(message: string) {
     this.toastr.success(message);
   }

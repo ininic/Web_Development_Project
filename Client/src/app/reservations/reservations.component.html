@@ -31,35 +31,33 @@
               <td *ngIf = " this.flags[i] == false " >
                 
                 <div *ngIf = " reservations[i].isCarRated == false">
-                <div *ngIf = "this.carRatingFlags[i] == false" >Rate car:</div> 
-                <div *ngIf = "this.carRatingFlags[i] == true" >Your rating for a company</div> 
-                <ngb-rating *ngIf = "this.carRatingFlags[i] == false"  [max]="5" [(rate)]="currentCarRates[i]"   (rateChange)="rateCar(currentCarRates[i], i)" [readonly]="false"> </ngb-rating>
-                <ngb-rating *ngIf = "this.carRatingFlags[i] == true"  [max]="5" [(rate)]="currentCarRates[i]"   [readonly]="true"> </ngb-rating>
+                  <div *ngIf = "this.carRatingFlags[i] == false" >Rate car:</div> 
+                  <div *ngIf = "this.carRatingFlags[i] == true" >Your rating for a company</div> 
+                  <ngb-rating *ngIf = "this.carRatingFlags[i] == false"  [max]="5" [(rate)]="currentCarRates[i]"   (rateChange)="rateCar(currentCarRates[i], i)" [readonly]="false"> </ngb-rating>
+                  <ngb-rating *ngIf = "this.carRatingFlags[i] == true"  [max]="5" [(rate)]="currentCarRates[i]"   [readonly]="true"> </ngb-rating>
                 </div>    
+
                 <div *ngIf = " reservations[i].isCarRated == true">
                   You've already rated this car for this reservation.
                 </div>
 
                 <div *ngIf = " reservations[i].isCompanyRated == false">
-                <div  *ngIf = "this.companyRatingFlags[i] == false" >Rate company:</div>
-                <div  *ngIf = "this.companyRatingFlags[i] == true" >Your rating for a company</div>
-                <ngb-rating *ngIf = "this.companyRatingFlags[i] == false" [max]="5" [(rate)]="currentCompanyRates[i]"   (rateChange)="rateCompany(currentCompanyRates[i], i)"  [readonly]="false"></ngb-rating>
-                <ngb-rating *ngIf = "this.companyRatingFlags[i] == true" [max]="5" [(rate)]="currentCompanyRates[i]"   [readonly]="true"></ngb-rating>
-              </div>
+                  <div  *ngIf = "this.companyRatingFlags[i] == false" >Rate company:</div>
+                  <div  *ngIf = "this.companyRatingFlags[i] == true" >Your rating for a company</div>
+                  <ngb-rating *ngIf = "this.companyRatingFlags[i] == false" [max]="5" [(rate)]="currentCompanyRates[i]"   (rateChange)="rateCompany(currentCompanyRates[i], i)"  [readonly]="false"></ngb-rating>
+                  <ngb-rating *ngIf = "this.companyRatingFlags[i] == true" [max]="5" [(rate)]="currentCompanyRates[i]"   [readonly]="true"></ngb-rating>
+                </div>
 
-              <div *ngIf = " reservations[i].isCompanyRated == true">
-                You've already rated this company for this reservation.
-              </div>
-               
- 
+                <div *ngIf = " reservations[i].isCompanyRated == true">
+                  You've already rated this company for this reservation.
+                </div>
+                
               </td>
       </tr> 
     
     </tbody>
-
-
     
-    </table>
+</table>
 
     
     

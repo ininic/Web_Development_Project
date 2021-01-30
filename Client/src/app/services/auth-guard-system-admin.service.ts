@@ -14,7 +14,6 @@ export class AuthGuardSystemAdminService {
     const token =  localStorage.getItem('jwt');
     this.role = localStorage.getItem('role');
     if(token && this.role == "sysadmin" ){
-      console.log('tooookeeeeen');
       return true;
     }
     else if(token && !jwtHelper.isTokenExpired(token))

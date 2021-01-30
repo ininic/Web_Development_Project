@@ -11,22 +11,15 @@ import { tokengGetter } from '../app.module';
 })
 export class UserService {
   
-  constructor(private http: HttpClient) { 
-
-      
-  } 
+  constructor(private http: HttpClient) { } 
 
   logInaaa() : Observable<any>{
-    console.log('poziv');
     return this.http.get("https://localhost:44325/api/values");    
   }
 
   Register(user: User) : Observable<any>{
     const headers: HttpHeaders = new  HttpHeaders();
-    console.log('poziv');
-    headers.set('Content-Type', 'application/x-www-form-urlencoded');
-    
-
+    headers.set('Content-Type', 'application/x-www-form-urlencoded'); 
     return this.http.post('https://localhost:44325/api/registration/', user, { headers: headers , });
   }
 
@@ -41,6 +34,7 @@ export class UserService {
   addAdmin(user: User): Observable<any>{
     return this.http.post('https://localhost:44325/api/users/', user);
   }
+  
   getUsersByRole(role: string): Observable<User[]>{
     return this.http.get<User[]>('https://localhost:44325/api/administrator/' + role);
   }

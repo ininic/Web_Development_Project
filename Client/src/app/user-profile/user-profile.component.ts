@@ -16,6 +16,7 @@ export class UserProfileComponent implements OnInit {
   public userId: string;
   public user: User;
   constructor(private toastr: ToastrService, private _communicationService: CommunicationService, private cookieService: CookieService, private userService: UserService) { 
+    //preuzimanje username-a i id-ja iz localStorage-a
     this.username  = localStorage.getItem('currentUserUsername');
     this.userId = localStorage.getItem('currentUserId');
   }
@@ -35,36 +36,39 @@ export class UserProfileComponent implements OnInit {
       isDeleted: false,
       companyName: ''
     }
-    console.log('ovo je id:' + this.userId);
+    //preuzimanje podataka o rekucem korisniku
     this.userService.getUserData(this.userId, "000").subscribe(
-      (response) => { this.user = response; console.log('vraceni kor'+ this.user.lastname)},
+      (response) => { this.user = response; console.log('vraceni korisnik'+ this.user.lastname)},
       (error) => {console.error(error); }
     );
   }
 
-  
+  //metoda koja salje notifikaciju o promeni home-page komponenti
   onSomething() {
     this._communicationService.emitChange({proprty: 'value'});
-}
+  }
+  //metoda za odjavljivanje
   logOut(){
     console.log('Odjavljivanje');
     localStorage.setItem('role', '');
     localStorage.setItem('jwt','')
     this.cookieService.set('cookie-name','loggedOut');
   }
-
+  //metoda kojom se vrsi izmena podataka o tekucem korisniku
   editUser(userEditForm){
     if(userEditForm.valid){
       this.userService.editUserData(this.userId,this.user).subscribe(
         (response) => {console.log('pozivam'); this.showSuccess("You have succsessfuly updated your personal information.")},
         (error) => {console.error(error); this.showError(); }     
       );
-    } else{
+    } 
+    else{
       this.showWarning();
     }
     
   }
 
+  //toastr poruke za korisnika
   showSuccess(message: string) {
     this.toastr.success(message);
   }

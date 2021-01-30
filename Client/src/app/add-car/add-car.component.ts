@@ -13,6 +13,7 @@ export class AddCarComponent implements OnInit {
   public companyName: string;
   constructor(private toastr: ToastrService, private carrentalservice: CarRentalCompanyService)
   { 
+    //preuzimanje imena kompanije iz localStorage-a
     this.companyName = localStorage.getItem('companyName');
   }
 
@@ -33,21 +34,23 @@ export class AddCarComponent implements OnInit {
       };
   }
 
+  //metoda za dodavanje automobila
   addCar(addCarForm){
     if(addCarForm.valid){
-    this.car.nameOfCompany = this.companyName;
-    this.carrentalservice.addCar(this.car).subscribe( 
-      (response) => {console.log('Uspesno dodat automobil');
-      this.showSuccess("You have successfully added car!");
-    },
-      (error) => {console.error(error); 
-      this.showError();
-    });
+      this.car.nameOfCompany = this.companyName;
+      this.carrentalservice.addCar(this.car).subscribe( 
+        (response) => {console.log('Uspesno dodat automobil');
+        this.showSuccess("You have successfully added car!");
+      },
+        (error) => {console.error(error); 
+        this.showError();
+      });
     } else{
       this.showWarning();
     }       
   }
 
+  //toastr poruke za korisnika
   showSuccess(message: string) {
     this.toastr.success(message);
   }

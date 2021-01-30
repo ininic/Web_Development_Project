@@ -16,16 +16,11 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
   public company: CarRentalCompany; 
   public cars: Car[];
   public id: string;
-  //public car: Car;
   public companyName: string;
   public companyId: string;
   constructor(private toastr: ToastrService, private _communicationService: CommunicationService, private carservice: CarRentalCompanyService) {
     this.companyName = localStorage.getItem('companyName');
     this.companyId = localStorage.getItem('companyId');
-    _communicationService.changeEmitted$.subscribe(data => {
-      //this.ngOnInit();
-      //this.getCars(this.companyName);
-    });
    }
 
   ngOnInit(): void {
@@ -67,24 +62,24 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
     }
   }
 
+  //izmena podataka o kompaniji
   onEditCompany(editedForm){
-    if(editedForm.valid){
-
-    
-    this.carservice.editCompany(this.company).subscribe(
-      (response) => { 
-        console.log('Kad menjam ovo je ime', this.company.name);
-        localStorage.setItem('companyName', this.company.name);
-        this.showSuccess("You have successfully updated information about company!")
-      },
-      (error) => { console.error(error);}
-    );
-    } else {
+    if(editedForm.valid){   
+      this.carservice.editCompany(this.company).subscribe(
+        (response) => { 
+          console.log('Kad menjam ovo je ime', this.company.name);
+          localStorage.setItem('companyName', this.company.name);
+          this.showSuccess("You have successfully updated information about company!")
+        },
+        (error) => { console.error(error);}
+      );
+    } 
+    else {
      this.showWarning();
     }
   }
 
-  
+  //dobavljanje automobila za datu kompaniju
   getCars(id: string)
   {
     this.carservice.getCompanyCars(id, "000").subscribe(
@@ -92,23 +87,27 @@ export class CarRenatlCompanyAdminPanelComponent implements OnInit {
       (error) => { console.error(error); }
     )
   }
+
+  //brisanje automobila
+  //desice se problem, ako izbrisemo automobil koji jos uvek nije ocenjen u nekoj rezervaciji
+  //korisnik nece moci da oceni ni automobil ni kompaniju(jer se preko imena kompanije iz automobila, trazi kompanije(eventualno izmeniti model)) iz te rezervacije
+  //ideja za laksu ispravku: implementirati logicko, a ne fizicko brisanje automobila iz baze
   onDeleteCar(id: string){
     this.carservice.deleteCar(id).subscribe(
       (response) => { 
         console.log('Automobil izbrisan');
         this.getCars(this.company.id.toString());
         this.showSuccess("You have successfully deleted car!")
-    },
+      },
       (error) => {
         console.error('Neuspelo'); 
         this.showError();
 
-    }
-    );
-    //this.getCars(this.company.id.toString());
-  
+      }
+    ); 
   }
   
+  //toastr poruke za korisnika
   showSuccess(message: string) {
     this.toastr.success(message);
   }

@@ -50,6 +50,7 @@ export class ReservationDetailsComponent implements OnInit {
 
   }
 
+  //metoda kojom pravimo novu rezervaciju
   makeReservation()
   {
      this.reservationService.makeReservation(this.reservation).subscribe(
@@ -58,6 +59,7 @@ export class ReservationDetailsComponent implements OnInit {
      )
   }
 
+  //metoda kojom brisemo postojecu rezervaciju
   cancelReservation()
   {
      this.reservationService.cancelReservation(this.currentReservation.id.toString()).subscribe(
@@ -66,11 +68,13 @@ export class ReservationDetailsComponent implements OnInit {
      )
   }
 
+  //odustank od tekuce radnje i provratak na prethodnu stranicu
   abort()
   {
     this._location.back();
   }
 
+  //toastr poruke za korisnika
   showSuccess(message: string) {
     this.toastr.success(message);
   }

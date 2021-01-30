@@ -16,8 +16,6 @@ import {Location} from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 
 
-
-
 @Component({
   providers:[HomePageComponent],
   selector: 'app-login',
@@ -26,16 +24,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  //@Output() private toggleFavorite: EventEmitter<number>;
   public login: LoginParameters;
   public currentUser: User;
-  constructor(private toastr: ToastrService, private userService: UserService, private _location: Location, private authService: AuthService, private cookieService: CookieService, private route: Router,private _communicationService: CommunicationService)
-   {
-     
-    this.onSomething()
-    //const decodedToken = helper.decodeToken(myRawToken);
-    //const expirationDate = helper.getTokenExpirationDate(myRawToken);
-    //const isExpired = helper.isTokenExpired(myRawToken); 
+  constructor(private router: Router, private toastr: ToastrService, private userService: UserService, private _location: Location, private authService: AuthService, private cookieService: CookieService, private route: Router,private _communicationService: CommunicationService)
+   {    
+    this.onSomething();
     }
   invalidLogin : boolean;
   ngOnInit(): void {
@@ -47,8 +40,10 @@ export class LoginComponent implements OnInit {
   logIn(userForm) {
     if(userForm.valid)
     {
+        //logovanje korisnika
         this.authService.logIn(this.login)
         .subscribe((response: any) => { 
+                //cuvanje jwt-a, postavljanje lokalnog kukija
                 const token: any = response.token;
                 console.log(response);
                 this.invalidLogin = false;
@@ -58,9 +53,9 @@ export class LoginComponent implements OnInit {
                 const exp = helper.getTokenExpirationDate(token);
                 this.setCookie(exp); 
                 this.onSomething();
-                this._location.back();
+                this.router.navigate(['home']);
 
-
+                //prikupljanje podataka o ulogovanom korisniku i njihovo smestanje u localstorage, radi kasnije upotrebe
                 this.userService.getUserData( "000", this.login.Username).subscribe(
                   (response) => 
                   {
@@ -72,13 +67,14 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('companyId', "");
                   },
                   (error) => {console.error('nije uspelo prikupljanje podataka', error);}
-                  )
+                  );
 
 
 
                 this.showSuccess();
               },
                 (err : HttpErrorResponse) => { 
+                  //nesupesno logovanje, slanje poruke korisniku o neuspehu
                   this.invalidLogin = true;
                   this.showError();
                   this.login.Password = "";
@@ -87,27 +83,28 @@ export class LoginComponent implements OnInit {
               () => { console.log('hendling denflig');  } 
             );
 
-  
     }
     else{
       this.showWarning();
     }
     
-    }
-
-    setCookie(exp: any){
-      var date = new Date();
-      //date.setTime(date.getTime()+(5*1000)); 
-      console.log("datum",exp);
-      date = exp;
-       this.cookieService.set('cookie-name','our cookie value', date);
-   
-    }
-   
-    onSomething() {
-      this._communicationService.emitChange({proprty: 'value'});
   }
 
+  //postavljanje vrednosti lokalnog kukija, za njegov datum isticanja uzima se datum isticanja jwt-a
+  setCookie(exp: any){
+    var date = new Date();
+    console.log("datum",exp);
+    date = exp;
+    this.cookieService.set('cookie-name','our cookie value', date);
+   
+  }
+  
+  //metoda koja salje notifikaciju home-page komponenti da se korisnig ulogovao
+  onSomething() {
+    this._communicationService.emitChange({proprty: 'value'});
+  }
+
+  //toastr poruke za korisnika
   showSuccess() {
     this.toastr.success("You Have Successfully Logged in!");
   }

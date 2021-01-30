@@ -30,8 +30,7 @@ export class SystemAdminPanelComponent implements OnInit {
       id: 1,
       branches: '', 
       rating: 0,
-      ratingCounter: 0
-      
+      ratingCounter: 0 
       };
 
       this.user = {
@@ -48,15 +47,18 @@ export class SystemAdminPanelComponent implements OnInit {
         isDeleted: false,
         companyName: ''
       }
+      //preuzimane administratora i renacar servisa sa servera
       this.getAdminsAndCompanies();
   }
 
 
-
+  //izbor html segmenta
   setState(state: string){
     this.state = state;
     console.log(this.state);
   }
+
+  //dodavanje novog renacar servisa
   addCarRentalCompany(addCompanyForm){
     if(addCompanyForm.valid){
       console.log('dodajem kompaniju')
@@ -69,6 +71,8 @@ export class SystemAdminPanelComponent implements OnInit {
       this.showWarning();
     }
   }
+
+  //dodavanje novog administratora rentacar servisa 
   addAdmin(addcaradminForm){
     if(addcaradminForm.valid)
     {
@@ -84,6 +88,7 @@ export class SystemAdminPanelComponent implements OnInit {
     }
   }
 
+  //metoda koja dobavlja renacar servise i njihove administratore sa servera
   getAdminsAndCompanies(){
     this.carRentalService.getCompanies().subscribe(
       (response) => { this.companies = response; console.log('companies:', this.companies);},
@@ -95,6 +100,7 @@ export class SystemAdminPanelComponent implements OnInit {
     )
   }
 
+  //brisanje rentacar servisa
   onDeleteCompany(id: string){
     this.carRentalService.deleteCompany(id).subscribe(
       (response) => {console.log('uspeh'); this.getAdminsAndCompanies(); this.showSuccess("Car rental company has been succsesfuly deleted.")},
@@ -102,6 +108,7 @@ export class SystemAdminPanelComponent implements OnInit {
     )
   }
 
+  //brisanje administratora rentacar servisa
   onDeleteAdmin(id: string){
     this.userService.deleteUser(id).subscribe(
       (response) => {console.log('uspeh'); this.getAdminsAndCompanies(); this.showSuccess("Car rental company has been succsesfuly deleted.")},
@@ -109,6 +116,7 @@ export class SystemAdminPanelComponent implements OnInit {
     )
   }
 
+  //toastr poruke za korisnika
   showSuccess(message: string) {
     this.toastr.success(message);
   }

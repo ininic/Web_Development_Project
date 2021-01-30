@@ -10,13 +10,13 @@ export class AirlineService {
   constructor(private http: HttpClient) { }
 
   getAirlines() : Observable<Airline[]> {
-    console.log('aaaa222');
+    console.log('preuzimanje svih aviokompanija');
     return this.http.get<Airline[]>('https://localhost:44325/api/airline');
    
     }
 
     getAirline(id: string) : Observable<Airline> {
-      console.log('aaaa222');
+      console.log('preuzimanje zadate aviokompanije');
       return this.http.get<Airline>('https://localhost:44325/api/airline/'+ id);
      
       }

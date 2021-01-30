@@ -31,13 +31,17 @@ export class EditCarComponent implements OnInit {
       rating: 0,
       ratingCounter: 0
       };
-  
+      
+      //preuzimanje parametara iz rute
       this.route.paramMap.subscribe(params => {this.id = params.get('id'); console.log(params.get('id')) });
+      //preuzimanje automobila za datu kompaniju
       this.carrentalservice.getCompanyCars("1", this.id).subscribe(
         (response) => { this.car = response[0]},
       )
      
   }
+
+  //izmena automobila
   editCar(editCarForm){
     console.log(editCarForm);
     if(editCarForm.valid){
@@ -47,13 +51,14 @@ export class EditCarComponent implements OnInit {
         (error) => { console.error(error);
         this.showError(); }
       );
-   } else{
+   } 
+   else{
     this.showWarning();
    }
        
   }
 
-
+  //toastr porkue za korisnika
   showSuccess(message: string) {
     this.toastr.success(message);
   }

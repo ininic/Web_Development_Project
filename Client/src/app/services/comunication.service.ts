@@ -8,27 +8,28 @@ import { Reservation } from '../model/reservation';
 @Injectable()
 export class CommunicationService {
 
-    private message = new BehaviorSubject(new Car);
-    sharedMessage = this.message.asObservable();
 
-    private message2 = new BehaviorSubject(new Reservation);
-    sharedMessage2 = this.message2.asObservable();
-    constructor() { }
+  private message = new BehaviorSubject(new Car);
+  sharedMessage = this.message.asObservable();
+
+  private message2 = new BehaviorSubject(new Reservation);
+  sharedMessage2 = this.message2.asObservable();
+  constructor() { }
  
-    private emitChangeSource = new Subject<any>();
+  private emitChangeSource = new Subject<any>();
 
-    changeEmitted$ = this.emitChangeSource.asObservable();
+  changeEmitted$ = this.emitChangeSource.asObservable();
 
-    emitChange(data: {}) {
-        this.emitChangeSource.next(data);
-    }
+  emitChange(data: {}) {
+      this.emitChangeSource.next(data);
+  }
 
-    nextCar(car: Car) {
-        this.message.next(car)
-      }
+  nextCar(car: Car) {
+      this.message.next(car)
+  }
 
-    nextReservation(reservation: Reservation) {
-        this.message2.next(reservation)
-      }
+  nextReservation(reservation: Reservation) {
+      this.message2.next(reservation)
+  }
       
 }

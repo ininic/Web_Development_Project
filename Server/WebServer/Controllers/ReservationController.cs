@@ -26,6 +26,8 @@ namespace WebServer.Controllers
 
         // GET: api/Reservation/5
         [HttpGet("{start}/{end}")]
+        [Authorize]
+
         public List<Car> Get(DateTime start, DateTime end)
         {
             List<Car> carList = new List<Car>();
@@ -63,7 +65,7 @@ namespace WebServer.Controllers
         }
         // POST: api/Reservation
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "user")]
         public IActionResult Post([FromBody]  Reservation newReservation)
         {
             DateTime dtl = new DateTime();
@@ -96,6 +98,8 @@ namespace WebServer.Controllers
 
         // PUT: api/Reservation/5
         [HttpPut("{carId}/{reservationId}")]
+        [Authorize(Roles = "user")]
+
         public IActionResult Put(int carId, int reservationId, [FromBody] int newCarRating)
         {
             Car car = new Car();

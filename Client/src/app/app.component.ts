@@ -11,10 +11,6 @@ export class AppComponent implements OnInit{
   title = 'client-app';
   
   constructor(private cookieService: CookieService) {}
-  public ngOnInit(): void {
-    
-   
-  }
-
+  public ngOnInit(): void { }
 
 }

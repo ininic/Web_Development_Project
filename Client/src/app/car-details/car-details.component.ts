@@ -20,9 +20,10 @@ export class CarDetailsComponent implements OnInit {
 
   public carId: string;
   constructor(private route: ActivatedRoute, private carrentalservice: CarRentalCompanyService) {
-   
+    //preuzimanje parametara iz rute
     this.route.paramMap.subscribe(params => {
       this.carId = params.get('id'); 
+      //preuzimanje zadatog automobila sa servera
       this.carrentalservice.getCompanyCars("1", this.carId).subscribe(
        (response: Car[]) => { this.car = response[0];
       

@@ -22,6 +22,8 @@ export class CarRenatlCompanyProfileComponent implements OnInit {
   constructor(private carservice: CarRentalCompanyService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    //preuzimaju se parametri iz rute i sa servera se dobaljaju podaci o trezenoj kompaniji i njenim automobilima
     this.route.paramMap.subscribe(params => {this.id = params.get('id'); console.log(params.get('id')) });
     this.carservice.getCompany(this.id,'000').subscribe((response) => { this.company = response; console.log('OBSERVE "response" RESPONSE is ', this.company);
     this.carservice.getCompanyCars(this.id, "000").subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);});

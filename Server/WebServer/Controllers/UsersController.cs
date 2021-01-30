@@ -39,6 +39,7 @@ namespace WebServer.Controllers
 
         // GET: api/Users/5
         [HttpGet("{userId}/{username}")]
+        [Authorize]
         public User Get(int userId, string username)
         {
             if(username == "000")

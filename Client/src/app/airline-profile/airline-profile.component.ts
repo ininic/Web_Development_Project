@@ -21,13 +21,13 @@ export class AirlineProfileComponent implements OnInit {
     
   }
   ngOnInit(): void {
+    //preuzimanje parametara iz rute, a zatim dovlacenje zadate aviokompanije sa servera
     this.route.paramMap.subscribe(params => {this.id = params.get('id'); console.log(params.get('id')) });
     this.airlineService.getAirline(this.id).subscribe((response) => { this.airline = response; console.log('OBSERVE "response" RESPONSE is ', this.airline);
     this.name = this.airline.name;
-  this.about = this.airline.about;
-  this.rating = this.airline.rating;
-  });
-  
+    this.about = this.airline.about;
+    this.rating = this.airline.rating;
+    }); 
   }
 
 }

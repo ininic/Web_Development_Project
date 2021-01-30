@@ -11,15 +11,13 @@ export class CarRentalCompanyService {
   constructor(private http: HttpClient) { }
 
   getCompanies() : Observable<CarRentalCompany[]> {
-    console.log('aaaa222');
+    console.log('Preuzimanje svih rentacar servisa');
     return this.http.get<CarRentalCompany[]>('https://localhost:44325/api/carrentalcompany');   
-    }
-
-    
+  }
+  
   getCompany(id: string, name: string) : Observable<CarRentalCompany> {
-    console.log('OOOOOk' + name);
     return this.http.get<CarRentalCompany>('https://localhost:44325/api/carrentalcompany/'+ id + '/' + name);    
-    }
+  }
 
   getCompanyCars(id: string, carId: string) :  Observable<Car[]> {
     return this.http.get<Car[]>('https://localhost:44325/api/car/'+ id + '/' + carId); 
@@ -45,12 +43,15 @@ export class CarRentalCompanyService {
   editCar(id: string, car: Car): Observable<any>{
     return this.http.put('https://localhost:44325/api/car/'+ id + '/', car );
   }
+
   getCarById(id:string): Observable<Car>{
     return this.http.get<Car>('https://localhost:44325/api/car/byCarId' + id);
   }
+
   addCarRentalCompany(company: CarRentalCompany): Observable<any>{
     return this.http.post('https://localhost:44325/api/CarRentalCompany/', company)
   }
+
   deleteCompany(id: string): Observable<any>{
     return this.http.delete('https://localhost:44325/api/CarRentalCompany/'+ id);
   }

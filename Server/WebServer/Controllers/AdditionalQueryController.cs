@@ -47,6 +47,7 @@ namespace WebServer.Controllers
         // PUT: api/AdditionalQuery/5
         // PUT: api/Reservation/5
         [HttpPut("{carId}/{reservationId}")]
+        [Authorize(Roles = "user")]
         public IActionResult Put(int carId, int reservationId, [FromBody] int newCopmanyRating)
         {
             CarRentalCompany Company = new CarRentalCompany();

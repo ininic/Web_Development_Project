@@ -68,54 +68,41 @@ export class CarRenatalCompaniesComponent implements OnInit {
     this.state = "car";
     this.cookieValue = this.cookieService.get('cookie-name');
     this.role = localStorage.getItem('role');
-   // this.selectedStartDate = null;
-   // this.selectedEndDate = null;
 
+    //postavljanje pocetnih vremena na datetime picker-ima
     var d = new Date();
     console.log('d na pocetku', d)
     d.setUTCHours(d.getHours());
     console.log('d posle', d)
    
 
-   this.selectedStartDate =  new Date(d.toISOString().slice(0, 16));
+    this.selectedStartDate =  new Date(d.toISOString().slice(0, 16));
    
     this.startDate = d.toISOString().slice(0, 16);
     console.log('string posle', this.startDate)
     d.setDate(d.getUTCDate() + 7)
     this.endDate = d.toISOString().slice(0, 16);
-   this.selectedEndDate = new Date(d.toISOString().slice(0, 16));
-
-   //document.getElementById("dateInput").min = '2019-02-17T10:38';
-    //console.log(this.endDate )
-    //console.log(this.startDate);
-    //this.selectedStartDate = this.selectedStartDate.getTime();
-    //this.selectedEndDate = Date.;
-    //this.selectedEndDate = new Date;
-   
-  
+    this.selectedEndDate = new Date(d.toISOString().slice(0, 16));
   }
  
   ngOnInit(): void {
+    //inicijalno se preuzimaju sce kompanije i svi automobili
     this.getCars();
     this.issearched = 0;
     this.scroll = 0;
-     //interval(3000).subscribe(x => { // will execute every 30 seconds
-     // this.getCars();
-    //});
     this.carservice.getCompanies().subscribe((response) => { this.companies = response; console.log('OBSERVE "response" RESPONSE is ', this.companies);
- });
+    });
   }
 
 
- 
+  //prelazak na stranicu za rezervisanje uz slanje svih podataka o automobilu
   Redirect(car: Car)
   {
     this.communicationService.nextCar(car)
-    //localStorage.setItem('car', car.);
-    //this.comunicationService.sendData(car);
     this.router.navigate(['/reservationdetails', this.startDate, this.endDate, 'add']);
   }
 
+  //sortiranje kompanija na osnovu imena kompanije
   sortByName(): void{
     if(this.sortedByName == -1)
     {
@@ -128,6 +115,8 @@ export class CarRenatalCompaniesComponent implements OnInit {
     }
   
   }
+
+  //sortiranje kompanija na osnovu opisa
   sortByAbout(): void{
     if(this.sortedByAbout == -1)
     {
@@ -141,6 +130,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
   
   }
 
+  //sortiranje kompanija na osnovu adrese
   sortByAddress(): void{
     if(this.sortedByAddress == -1)
     {
@@ -153,7 +143,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
     }
   
   }
-
+  //sortiranje kompanija na osnovu ocene kompanije
   sortByRating(): void{
     if(this.sortedByRating == -1)
     {
@@ -168,17 +158,13 @@ export class CarRenatalCompaniesComponent implements OnInit {
   }
 
   getCars(): void{
-    this.carservice.getCars().subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars);
-  
-    for(var i = 0; i<this.cars.length; i++)
-    {
-      this.cars[i].rating = Number(this.cars[i].rating.toFixed(2));
-    }
-  });
-
-   
+    this.carservice.getCars().subscribe((response) => {this.cars = response; console.log('OBSERVE "response" RESPONSE is ', this.cars); 
+      for(var i = 0; i<this.cars.length; i++)
+      {
+        this.cars[i].rating = Number(this.cars[i].rating.toFixed(2));
+      }
+    }); 
   }
-
 
 
   Search() : void{
@@ -205,21 +191,22 @@ export class CarRenatalCompaniesComponent implements OnInit {
 
         //razlika vremena izmedju pocetnog i krajnjeg mora biti min sat vremena
         if((diff/1000) > 3600){
-
-        console.log('razlikaa', diff/1000);
-        console.log('bbbbb',this.selectedEndDate);
-        this.reservationService.getIdOfAvailableCar(this.startDate, this.endDate).subscribe(
-          (response) => {
-          console.log('Available cars', response);       
-          this.searchedcars = response;
-          for(var i = 0; i<this.searchedcars.length; i++)
-            {
-              this.searchedcars[i].rating = Number(this.searchedcars[i].rating.toFixed(2));
-            }
-          this.basicSearch();
-         },
-          (error) => {}
-        );
+          console.log('razlikaa', diff/1000);
+          console.log('bbbbb',this.selectedEndDate);
+          //na osnovu zadatog vremena, preuzimaju se dostupni automobili
+          this.reservationService.getIdOfAvailableCar(this.startDate, this.endDate).subscribe(
+            (response) => {
+            console.log('Available cars', response);       
+            this.searchedcars = response;
+            //ocene se zaokruzuju na 2 decimale
+            for(var i = 0; i<this.searchedcars.length; i++)
+              {
+                this.searchedcars[i].rating = Number(this.searchedcars[i].rating.toFixed(2));
+              }
+            this.basicSearch();
+            },
+            (error) => {}
+          );
         } else{
           this.showWarning("1 hour is minimum amount of time.");
           this.searchedcars = [];
@@ -244,6 +231,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
 
     }
     else{
+      //ako vremena nisu specificirana, preuzimaju se svi automobili
       this.searchedcars = [];
       for (let entry of this.cars) {     
         this.searchedcars.push(entry);   
@@ -253,14 +241,11 @@ export class CarRenatalCompaniesComponent implements OnInit {
     
   }
   
+  //pretraga na osnovu vise parametara, izuzimajuci zadata vremena
   basicSearch(){
 
-    //this.searchedcars = [];
     this.issearched = 1;  
-    //let i = 0;
-    
-     // console.log('svi automobili:',  this.cars);
-      console.log('svi automobili:',  this.searchedcars);
+    console.log('svi automobili:',  this.searchedcars);
 
     if(this.nameOfCompany != "")
     {
@@ -274,7 +259,6 @@ export class CarRenatalCompaniesComponent implements OnInit {
           }
          }
     }
-
     
     if(this.mark != "")
     {
@@ -310,18 +294,15 @@ export class CarRenatalCompaniesComponent implements OnInit {
         i--;
         }
       }
-    }
-
-    
+    }  
     this.scroll  = 1;
 
   }
   
 
  
-
+  //skrolovanje do rezultata pretrage
   scrollOn(): void {
-    // setTimeout(() => window.scroll(0,450),1000)
     if(this.scroll == 1){
       window.scroll(0,350);
       console.log("skrolujem");
@@ -329,6 +310,7 @@ export class CarRenatalCompaniesComponent implements OnInit {
     }
   }
 
+  //da li pretrazujemo automobile ili kompanije
   setState(state: string){
     this.state = state;
     console.log(this.state);
@@ -339,23 +321,21 @@ export class CarRenatalCompaniesComponent implements OnInit {
 
     console.log(this.companyName);
     this.carservice.getCompanies().subscribe((response) => { this.companies = response; console.log('OBSERVE "response" RESPONSE is ', this.companies);
-
-    if(this.companyName != "")
-    {
-        //i = 0;
-        for (var i = 0; i < this.companies.length; i++) {
-          console.log(this.companies[i].name);
-          if(this.companies[i].name.localeCompare(this.companyName) != 0 )
-          {         
-          this.companies.splice(i, 1)    
-          i--;
+      if(this.companyName != "")
+      {
+          for (var i = 0; i < this.companies.length; i++) {
+            console.log(this.companies[i].name);
+            if(this.companies[i].name.localeCompare(this.companyName) != 0 )
+            {         
+            this.companies.splice(i, 1)    
+            i--;
+            }
           }
-         }
-    }
-  });
+      }
+    });
   }
 
-
+  //toastr poruke za korisnika
   showSuccess(message: string) {
     this.toastr.success(message);
   }

@@ -33,39 +33,41 @@ export class HomePageComponent implements OnInit {
       //i ponovo ce se inicijalizovati home-page, sa novim vrednostima
       const helper = new JwtHelperService();
       this.cookieValue = this.cookieService.get('cookie-name');
+      //ako je cookie vazeci postavljaju se adekvatne vrednosti u potrebne promenljive
       if(this.cookieValue ==  'our cookie value')
       {
-      this.jwt = localStorage.getItem('jwt');
-      this.role = helper.decodeToken(this.jwt)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-      localStorage.setItem('role', this.role.toString());
+        this.jwt = localStorage.getItem('jwt');
+        this.role = helper.decodeToken(this.jwt)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        localStorage.setItem('role', this.role.toString());
       }
       else{
         this.role="";
-        localStorage.setItem('jwt','') 
+        localStorage.setItem('jwt',''); 
       }
     
+      //kada dodje do promene u nekoj od komponenti u hijerarhiji ispod, home-page u zavisnosti od promene koja se desila
+      //menja vrednosti svojih promenljivih
     _communicationService.changeEmitted$.subscribe(data => {
-      console.log('aaaa', data);
-      this.logged = 10;
-      this.cookieValue = this.cookieService.get('cookie-name');
-      if(this.cookieValue ==  'our cookie value')
-      {
-      this.jwt = localStorage.getItem('jwt');
-      const helper = new JwtHelperService();
-      this.role = helper.decodeToken(this.jwt)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-      localStorage.setItem('role', this.role.toString());
-      }
-      else{
-        this.role="";
-      }
-
-      })
+        console.log('aaaa', data);
+        this.logged = 10;
+        this.cookieValue = this.cookieService.get('cookie-name');
+        //proverava se da li je cookie istekao
+        if(this.cookieValue ==  'our cookie value')
+        {
+          this.jwt = localStorage.getItem('jwt');
+          const helper = new JwtHelperService();
+          this.role = helper.decodeToken(this.jwt)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+          localStorage.setItem('role', this.role.toString());
+        }
+        else{
+          this.role="";
+        }
+      });
 
    }
 
   ngOnInit(): void {
-    
-    
+      
     this.user = {
       username: 'ininic',
       password: '123',
@@ -77,16 +79,13 @@ export class HomePageComponent implements OnInit {
       listOfFriends: '',
       id: 1,
       loggedIn: false,
-      isDeleted: false,
-      companyName: '',
+      isDeleted: false, 
+      companyName: ''     
+      };   
 
-       
-      };
-     
-
+      //preuzimanje vrednosti cookie-a i jwt-a
       this.cookieValue = this.cookieService.get('cookie-name');
       this.jwt = localStorage.getItem('jwt');
-
      
   }
   

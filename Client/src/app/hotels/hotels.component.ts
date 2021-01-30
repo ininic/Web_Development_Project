@@ -12,9 +12,4 @@ export class HotelsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  onTestCall() {
-    this.userService.logInaaa().subscribe((response) => { console.log(response);});
-  }
-
 }
