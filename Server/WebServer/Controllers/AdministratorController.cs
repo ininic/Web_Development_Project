@@ -23,6 +23,7 @@ namespace WebServer.Controllers
         }
 
         // GET: api/Admin/5
+        // preuzimanje korisnika na osnovu njihove uloge u sistemu
         [HttpGet("{role}")]
         [Authorize(Roles = "sysadmin")]
         public List<User> Get(string role)
@@ -43,6 +44,7 @@ namespace WebServer.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
+        // brisanje korisnika
         [HttpDelete("{id}")]
         [Authorize(Roles = "sysadmin")]
         public IActionResult Delete(int id)

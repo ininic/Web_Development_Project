@@ -24,6 +24,7 @@ namespace WebServer.Controllers
         }
 
         // GET: api/Car/5
+        // preuzimanje svih automobila jedne kompanije ili jednog automobila na osnovu njegovo id broja
         [HttpGet("{companyId}/{carId}")]
         public List<Car> Get(int companyId, string carId)
         {
@@ -39,6 +40,7 @@ namespace WebServer.Controllers
         }
 
         // POST: api/Car
+        // dodavanje automobila
         [HttpPost]
         [Authorize(Roles = "carrentaladmin")]
         public IActionResult Post([FromBody]  Car newCar) 
@@ -67,6 +69,7 @@ namespace WebServer.Controllers
         }
 
         // PUT: api/Car/5
+        // izmena podataka o automobilu
         [HttpPut("{id}")]
         [Authorize(Roles = "carrentaladmin")]
         public IActionResult Put(int id, [FromBody] Car editedCar) 
@@ -95,6 +98,7 @@ namespace WebServer.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
+        // brisanje automobila na osnovu njegovog id broja
         [HttpDelete("{id}")]
         [Authorize(Roles = "carrentaladmin")]
         public IActionResult Delete(int id)

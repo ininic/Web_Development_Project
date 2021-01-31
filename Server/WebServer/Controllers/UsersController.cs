@@ -38,6 +38,7 @@ namespace WebServer.Controllers
         }
 
         // GET: api/Users/5
+        // preuzimanje podataka o korisniku na osnovu njegovog username-a ili id broja
         [HttpGet("{userId}/{username}")]
         [Authorize]
         public User Get(int userId, string username)
@@ -52,6 +53,7 @@ namespace WebServer.Controllers
         }
 
         // POST: api/Users
+        // dodavanje korisnika
         [HttpPost]
         [Authorize(Roles = "sysadmin")]
         public IActionResult Post([FromBody] User user)
@@ -82,10 +84,10 @@ namespace WebServer.Controllers
             
         }
 
-
-
         // PUT: api/Users/5
+        // izmena podataka o korisniku
         [HttpPut("{id}")]
+        [Authorize]
         public void Put(int id, [FromBody] User user)
         {
             Udbl.EditUser(user);

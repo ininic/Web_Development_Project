@@ -91,6 +91,10 @@ export class CarRenatalCompaniesComponent implements OnInit {
     this.issearched = 0;
     this.scroll = 0;
     this.carservice.getCompanies().subscribe((response) => { this.companies = response; console.log('OBSERVE "response" RESPONSE is ', this.companies);
+    for(var i = 0; i<this.companies.length; i++)
+      {
+        this.companies[i].rating = Number(this.companies[i].rating.toFixed(2));
+      }
     });
   }
 

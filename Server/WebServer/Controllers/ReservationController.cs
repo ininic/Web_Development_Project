@@ -25,9 +25,9 @@ namespace WebServer.Controllers
         }
 
         // GET: api/Reservation/5
+        // preuzimanje svih automobila koji su dostupni u specificiranom fremenu
         [HttpGet("{start}/{end}")]
         [Authorize]
-
         public List<Car> Get(DateTime start, DateTime end)
         {
             List<Car> carList = new List<Car>();
@@ -64,6 +64,7 @@ namespace WebServer.Controllers
             return availableCars;
         }
         // POST: api/Reservation
+        // pravljenje rezervacije
         [HttpPost]
         [Authorize(Roles = "user")]
         public IActionResult Post([FromBody]  Reservation newReservation)
@@ -97,9 +98,9 @@ namespace WebServer.Controllers
         }
 
         // PUT: api/Reservation/5
+        // ocenjivanje zadatog automobila 
         [HttpPut("{carId}/{reservationId}")]
         [Authorize(Roles = "user")]
-
         public IActionResult Put(int carId, int reservationId, [FromBody] int newCarRating)
         {
             Car car = new Car();
@@ -126,6 +127,7 @@ namespace WebServer.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
+        // brisanje rezervacije(otkazivanje)
         [HttpDelete("{id}")]
         [Authorize]
         public IActionResult Delete(int id)

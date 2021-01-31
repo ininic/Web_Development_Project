@@ -36,27 +36,8 @@ namespace WebServer.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Nesto nest)
-        {
-            //var user = await Udbl.FindUserById(2);
-             if (nest.ime == "nesto")
-            {
-               
-                return  NotFound();
-            }
-              User user4 = new User();
-            user4.FirstName = nest.ime;
-            user4.Lastname = nest.ime;
-            user4.LoggedIn = false;
-            user4.IsDeleted = false;
-            user4.Password = "12345678";
-            user4.Username = nest.ime;
-            user4.Username = nest.ime;
-            user4.Gender = "male";
-            user4.Role = "sysadmin";
-            user4.Email = "ininic95@gmail.com";
-            user4.ListOfFriends = "";
-               Udbl.AddUser(user4);
+        public IActionResult Post([FromBody] Nesto nest)
+        {        
             return  Ok("Inserted");
         }
 

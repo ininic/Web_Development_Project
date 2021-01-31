@@ -35,6 +35,7 @@ namespace WebServer.Controllers
         }
 
         // POST: api/Login
+        // prijavljivanje korisnika
         [HttpPost]
         public IActionResult Post([FromBody]  LoginParameters login)
         {

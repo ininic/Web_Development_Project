@@ -25,6 +25,7 @@ namespace WebServer.Controllers
         }
 
         // GET: api/AdditionalQuery/5
+        // preuzimanje rezervacija za zadatog korisnika
         [HttpGet("{userId}")]
         [Authorize]
         public object Get(int userId)
@@ -45,7 +46,7 @@ namespace WebServer.Controllers
         }
 
         // PUT: api/AdditionalQuery/5
-        // PUT: api/Reservation/5
+        // Ocenjivanje renacar servisa
         [HttpPut("{carId}/{reservationId}")]
         [Authorize(Roles = "user")]
         public IActionResult Put(int carId, int reservationId, [FromBody] int newCopmanyRating)

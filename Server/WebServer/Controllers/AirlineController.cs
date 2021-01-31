@@ -15,6 +15,7 @@ namespace WebServer.Controllers
     {
         readonly AirlineDatabaseLogic Adbl = new AirlineDatabaseLogic();
         // GET: api/Airline
+        // preuzimanje aviokompanija
         [HttpGet]
         public IEnumerable<Airline> Get()
         {

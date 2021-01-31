@@ -29,6 +29,7 @@ namespace WebServer.Controllers
         }
 
         // POST: api/Registration
+        // registracija korisnika
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {

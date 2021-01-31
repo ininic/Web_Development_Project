@@ -135,7 +135,7 @@
           <td>{{searchedcars[i].numberOfSeats}} </td>
           <td>{{searchedcars[i].nameOfCompany}} </td>
           <td>{{searchedcars[i].rating}} </td>
-          <td *ngIf="this.cookieValue == 'our cookie value' && this.role == 'user' "><button  style="width: 40%; height: 20%;" class="btn btn-primary" (click)="Redirect(searchedcars[i])">Choose this car</button>  </td>
+          <td *ngIf="this.cookieValue == 'our cookie value' && this.role == 'user' "><button  style="width: 50%; height: 20%;" class="btn btn-primary" (click)="Redirect(searchedcars[i])">Choose this car</button>  </td>
           <span *ngIf="i == 4">{{scrollOn()}}</span>
   </tr> 
 
