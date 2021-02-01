@@ -11,7 +11,7 @@
         <th scope="col">Model<i  scope="col" ></i></th>
         <th scope="col">Seats<i  scope="col" ></i></th>
         <th scope="col">Year<i  scope="col" ></i></th>
-        <th scope="col">Action<i  scope="col" ></i></th>
+        <th scope="col">Action<i  (click) = "sortByState()"scope="col"  class="fas fa-sort" scope="col" ></i></th>
       </tr>
     </thead>
     
@@ -27,9 +27,25 @@
               <td>{{cars[i].model}} </td>
               <td>{{cars[i].numberOfSeats}} </td>
               <td>{{cars[i].year}} </td>
-              <td *ngIf = " this.flags[i] == true " ><button  style="width: 70%; height: 20%;" class="btn btn-primary" (click)="Redirect(cars[i], reservations[i])">Cancel this reservation</button>  </td>
-              <td *ngIf = " this.flags[i] == false " >
+
+              <!-- Ukoliko je moguce otkazati rezervaciju, prikazujemo dugme za otkazivanje -->
+              <td *ngIf = " this.reservationsState[i] == 0 " ><button  style="width: 70%; height: 20%;" class="btn btn-primary" (click)="Redirect(cars[i], reservations[i])">Cancel this reservation</button>  </td>
+             
+              <!-- Ukoliko je do pocetka rezervacije ostalo manje od sat vremena, saopstavamo da je nemoguce otkazati rezervaciju -->
+              <td *ngIf = " this.reservationsState[i] ==  1" >
+                <div>Starting in less than 60 minitutes, it is not possible to cancel at this moment!</div>
+              </td>
+              
+              <!-- Ukoliko je rezervacija pocela, saopstavamo to korisniku -->
+              <td *ngIf = " this.reservationsState[i] == 2 " >
+                <div>In progress!</div>
+              </td>
+
+              <!-- Ukoliko je zavrsena -->
+              <td *ngIf = " this.reservationsState[i] == 3 " >
                 
+                <!-- proveravamo da li j automobil iz rezervacije ocenjen -->
+                <!-- ako jeste, omogucavamo ocenjivanje -->
                 <div *ngIf = " reservations[i].isCarRated == false">
                   <div *ngIf = "this.carRatingFlags[i] == false" >Rate car:</div> 
                   <div *ngIf = "this.carRatingFlags[i] == true" >Your rating for a company</div> 
@@ -37,22 +53,26 @@
                   <ngb-rating *ngIf = "this.carRatingFlags[i] == true"  [max]="5" [(rate)]="currentCarRates[i]"   [readonly]="true"> </ngb-rating>
                 </div>    
 
+                <!-- ako nije, saopstavamo to korisniku -->
                 <div *ngIf = " reservations[i].isCarRated == true">
                   You've already rated this car for this reservation.
                 </div>
-
+                
+                <!-- proveravamo da li je kompanija iz rezervacije ocenjena -->
+                <!-- ako jeste, omogucavamo ocenjivanje -->
                 <div *ngIf = " reservations[i].isCompanyRated == false">
                   <div  *ngIf = "this.companyRatingFlags[i] == false" >Rate company:</div>
                   <div  *ngIf = "this.companyRatingFlags[i] == true" >Your rating for a company</div>
                   <ngb-rating *ngIf = "this.companyRatingFlags[i] == false" [max]="5" [(rate)]="currentCompanyRates[i]"   (rateChange)="rateCompany(currentCompanyRates[i], i)"  [readonly]="false"></ngb-rating>
                   <ngb-rating *ngIf = "this.companyRatingFlags[i] == true" [max]="5" [(rate)]="currentCompanyRates[i]"   [readonly]="true"></ngb-rating>
                 </div>
-
+                
+                <!-- ako nije, saopstavamo to korisniku -->
                 <div *ngIf = " reservations[i].isCompanyRated == true">
                   You've already rated this company for this reservation.
                 </div>
                 
-              </td>
+              </td>                        
       </tr> 
     
     </tbody>
