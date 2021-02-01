@@ -1,58 +1,121 @@
-<div   style="text-align: center;" >
-    <form (ngSubmit)="onEditCompany(editForm)" #editForm="ngForm" >
+<table class="table">
+  <thead>
+    <tr>
+      <th style="text-align: center;" >Info <i  scope="col" ></i> </th>
+      <th style="text-align: center;">Report  <i  scope="col" ></i></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr style="text-align: center;">
+      <td>
         <p></p>
-        <div   id="cc" class="companyname">
-                <label  style="text-align: center;" for="inputAddress" >Company Name  </label>
-                <input class="form-control"  type="text"
-                    placeholder="Company Name"
-                    id="inputAddress"      
-                    required     
-                    pattern=".{2,}"
-                    name = "companyname"
-                    #companyname="ngModel"
-                    [(ngModel)] = "company.name"
-                    >
-                    <div *ngIf="companyname.touched">
-                      <p *ngIf="companyname.errors?.pattern">Company name must be at least 2 characters.</p>
-                  </div>  
+      <div   style="text-align: center;" >
+        <h1>Information:</h1>
+          <form (ngSubmit)="onEditCompany(editForm)" #editForm="ngForm"  style="margin-top: 7%;">
+              <p></p>
+              <div   id="cc" class="companyname">
+                      <label  style="text-align: center;" for="inputAddress" >Company Name  </label>
+                      <input class="form-control"  type="text"
+                          placeholder="Company Name"
+                          id="inputAddress"      
+                          required     
+                          pattern=".{2,}"
+                          name = "companyname"
+                          #companyname="ngModel"
+                          [(ngModel)] = "company.name"
+                          >
+                          <div *ngIf="companyname.touched">
+                            <p *ngIf="companyname.errors?.pattern">Company name must be at least 2 characters.</p>
+                        </div>  
+                        
+              </div>
                   
-        </div>
-            
-        <div   id="cc" class="address">
-            <label  style="text-align: center;" for="inputAddress" >Address  </label>
-            <input class="form-control"  type="text"
-                placeholder="Address"
-                id="inputAddress"
-                required          
-                name = "address"
-                #address="ngModel"
-                [(ngModel)] = "company.address"           
-                >
-              
-        </div>
+              <div   id="cc" class="address">
+                  <label  style="text-align: center;" for="inputAddress" >Address  </label>
+                  <input class="form-control"  type="text"
+                      placeholder="Address"
+                      id="inputAddress"
+                      required          
+                      name = "address"
+                      #address="ngModel"
+                      [(ngModel)] = "company.address"           
+                      >
+                    
+              </div>
 
-        <div   id="cc" class="about">
-            <label  style="text-align: center;" for="inputAddress" >About  </label>
-            <input class="form-control"  type="text"
-                placeholder="About"
-                id="inputAddress"
-                required     
-                name = "about"
-                #about="ngModel"
-                [(ngModel)] = "company.about" 
-                >
-              
+              <div   id="cc" class="about">
+                  <label  style="text-align: center;" for="inputAddress" >About  </label>
+                  <input class="form-control"  type="text"
+                      placeholder="About"
+                      id="inputAddress"
+                      required     
+                      name = "about"
+                      #about="ngModel"
+                      [(ngModel)] = "company.about" 
+                      >
+                    
+              </div>
+              <div id="cc">
+                <p></p>
+                <button  class="btn btn-primary" type="submit" >Edit</button>  
+            </div>                  
+          </form>
         </div>
-        <div id="cc">
+       </td>
+       <td>
+       <h1>Report:</h1>
+        <div  style="font-weight: bolder;">All cars: </div>
           <p></p>
-          <button  class="btn btn-primary" type="submit" >Edit</button>  
-      </div>
-             
-</form>
+        <div>{{this.allcars}}</div>
+          <p></p>
+        <div style="font-weight: bolder;">Booked cars at the moment: </div>
+          <p></p>
+        <div>{{this.bookedCars}}</div>
+          <p></p>
+        <div style="font-weight: bolder;">Available cars at the moment: </div>
+          <p></p>
+        <div>{{this.availableCars}}</div>
+          <p></p>
+        <div style="font-weight: bolder;">Reservations: </div>
 
+       <div id="block_container" >
+        <div id="bloc1" >Last week: </div>  
+        <div id="bloc2" >{{this.lastWeekReservations}}</div>   
+       </div>
 
-</div>
+       <div id="block_container" >
+        <div id="bloc1" >Last month: </div>  
+        <div id="bloc2" >{{this.lastMonthReservations}}</div>   
+       </div>
 
+       <div id="block_container" >
+        <div id="bloc1" >Last year: </div>  
+        <div id="bloc2" >{{this.lastYearReservations}}</div>   
+       </div>
+        <p></p>
+
+       <div style="font-weight: bolder;">Total amount of time cars has been booked:</div>
+       
+       <div id="block_container" >
+        <div id="bloc1" >Last week: </div>  
+        <div id="bloc2" >{{this.lastWeekBookedTime}}</div>   
+       </div>
+
+       <div id="block_container" >
+        <div id="bloc1" >Last month: </div>  
+        <div id="bloc2" >{{this.lastMonthBookedTime}}</div>   
+       </div>
+       
+       <div id="block_container" >
+        <div id="bloc1" >Last year: </div>  
+        <div id="bloc2" >{{this.lastYearBookedTime}}</div>   
+       </div>
+
+      </td>
+  </tr> 
+  </tbody>
+</table>
 <p></p>
 
 <table class="table" >
@@ -68,7 +131,7 @@
     <tbody>
       <tr *ngFor="let clickd of cars; index as i; let last = last">
     
-              <td > <a [routerLink] = "['/carrentals', cars[i].id]" >{{cars[i].mark}}</a> </td>
+              <td>{{cars[i].mark}} </td>
               <td>{{cars[i].model}} </td>
               <td>{{cars[i].nameOfCompany}} </td>
               <td> <a [routerLink] = "['/editcar', cars[i].id]">  <i  class="fas fa-edit" style="color:rgb(0, 123, 255);"></i> </a> <i (click) = "onDeleteCar(cars[i].id)" class="fas fa-trash-alt" style="color:rgb(0, 123, 255);   padding-left:5%;"></i> </td>

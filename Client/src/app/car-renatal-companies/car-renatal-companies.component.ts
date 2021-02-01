@@ -172,77 +172,74 @@ export class CarRenatalCompaniesComponent implements OnInit {
 
 
   Search() : void{
-    
-    if(this.startDate != null || this.endDate != null)
-    {
-      this.selectedStartDate = new Date(this.startDate);
-      var now = new Date();
-      //now.setUTCHours(now.getHours());
-      var nowstr = now.toISOString().slice(0, 16);    
-      //da li je pocetno vreme proslo 
-      if(this.selectedStartDate.valueOf() > now.valueOf())
+    if(this.cookieValue == 'our cookie value')
+    {    
+      if(this.startDate != null || this.endDate != null)
       {
-       //proveravamo da li razlika izmadju vremena pocetka rezervacije i trenutnog vremena veca od 1 sat
-       //ako jeste sve je u redu, ako nije, kazemo korisniku da mora sat vremena ranije da rezervise
-       if((this.selectedStartDate.valueOf() - now.valueOf())/1000 >= 3600)
-       {    
-      //pocetno vreme mora biti ranije od krajnjeg
-      if(this.startDate<this.endDate)
-      {
-        this.selectedEndDate = new Date(this.endDate);
-        this.selectedStartDate = new Date(this.startDate);
-        var diff = this.selectedEndDate.valueOf() - this.selectedStartDate.valueOf();
-
-        //razlika vremena izmedju pocetnog i krajnjeg mora biti min sat vremena
-        if((diff/1000) > 3600){
-          console.log('razlikaa', diff/1000);
-          console.log('bbbbb',this.selectedEndDate);
-          //na osnovu zadatog vremena, preuzimaju se dostupni automobili
-          this.reservationService.getIdOfAvailableCar(this.startDate, this.endDate).subscribe(
-            (response) => {
-            console.log('Available cars', response);       
-            this.searchedcars = response;
-            //ocene se zaokruzuju na 2 decimale
-            for(var i = 0; i<this.searchedcars.length; i++)
+          this.selectedStartDate = new Date(this.startDate);
+          var now = new Date();
+          //now.setUTCHours(now.getHours());
+          var nowstr = now.toISOString().slice(0, 16);    
+          //da li je pocetno vreme proslo 
+          if(this.selectedStartDate.valueOf() > now.valueOf())
+          {
+          //proveravamo da li razlika izmadju vremena pocetka rezervacije i trenutnog vremena veca od 1 sat
+          //ako jeste sve je u redu, ako nije, kazemo korisniku da mora sat vremena ranije da rezervise
+            if((this.selectedStartDate.valueOf() - now.valueOf())/1000 >= 3600)
+            {    
+            //pocetno vreme mora biti ranije od krajnjeg
+              if(this.startDate<this.endDate)
               {
-                this.searchedcars[i].rating = Number(this.searchedcars[i].rating.toFixed(2));
+                this.selectedEndDate = new Date(this.endDate);
+                this.selectedStartDate = new Date(this.startDate);
+                var diff = this.selectedEndDate.valueOf() - this.selectedStartDate.valueOf();
+                //razlika vremena izmedju pocetnog i krajnjeg mora biti min sat vremena
+                if((diff/1000) > 3600){
+                  console.log('razlikaa', diff/1000);
+                  console.log('bbbbb',this.selectedEndDate);
+                  //na osnovu zadatog vremena, preuzimaju se dostupni automobili
+                  this.reservationService.getIdOfAvailableCar(this.startDate, this.endDate).subscribe(
+                    (response) => {
+                    console.log('Available cars', response);       
+                    this.searchedcars = response;
+                    //ocene se zaokruzuju na 2 decimale
+                    for(var i = 0; i<this.searchedcars.length; i++)
+                      {
+                        this.searchedcars[i].rating = Number(this.searchedcars[i].rating.toFixed(2));
+                      }
+                    this.basicSearch();
+                    },
+                    (error) => {}
+                  );
+                } else{
+                  this.showWarning("1 hour is minimum amount of time.");
+                  this.searchedcars = [];
+                }          
               }
-            this.basicSearch();
-            },
-            (error) => {}
-          );
-        } else{
-          this.showWarning("1 hour is minimum amount of time.");
-          this.searchedcars = [];
-        }
-        
-      }
-      else {
-        this.showWarning("Pick-up time must be earlier than drop-off time");
+              else {
+                this.showWarning("Pick-up time must be earlier than drop-off time");
+                this.searchedcars = [];
+              }
+            } else{
+              this.showWarning("You need to make reservation at least 1h before pick-up time");
+              this.searchedcars = [];
+            }
+          } else{
+              this.showWarning("Pick-up time is past!");
+              this.searchedcars = [];
+            }
+      } else{
+        //ako vremena nisu specificirana, preuzimaju se svi automobili
         this.searchedcars = [];
+        for (let entry of this.cars) {     
+          this.searchedcars.push(entry);   
+        }
+        this.basicSearch();
       }
     } else{
-      this.showWarning("You need to make reservation at least 1h before pick-up time");
-      this.searchedcars = [];
-    }
-
-    }
-    else{
-      this.showWarning("Pick-up time is past!");
-      this.searchedcars = [];
-    }
-
-
-    }
-    else{
-      //ako vremena nisu specificirana, preuzimaju se svi automobili
-      this.searchedcars = [];
-      for (let entry of this.cars) {     
-        this.searchedcars.push(entry);   
-       }
-       this.basicSearch();
-    }
-    
+      // korisnik koji nije ulogovan ne može koristiti ovu funkcionalnost
+      this.showWarning("Please login to use this functionality.");    
+    }   
   }
   
   //pretraga na osnovu vise parametara, izuzimajuci zadata vremena

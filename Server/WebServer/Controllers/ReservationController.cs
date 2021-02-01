@@ -25,7 +25,7 @@ namespace WebServer.Controllers
         }
 
         // GET: api/Reservation/5
-        // preuzimanje svih automobila koji su dostupni u specificiranom fremenu
+        // preuzimanje svih automobila koji su dostupni u specificiranom vremenu
         [HttpGet("{start}/{end}")]
         [Authorize]
         public List<Car> Get(DateTime start, DateTime end)
@@ -35,7 +35,7 @@ namespace WebServer.Controllers
             carList = Cdbl.GetCars();
             availableCars.AddRange(carList);
             List<Reservation> reservationList = new List<Reservation>();
-            reservationList = Rdbl.GetReservation();
+            reservationList = Rdbl.GetReservations();
 
 
             //uzimamo sve automobile

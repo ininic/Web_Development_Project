@@ -49,7 +49,7 @@ namespace WebServer.DatabaseLogic
             }
         }
 
-        public List<Reservation> GetReservation()
+        public List<Reservation> GetReservations()
         {
             lock (Obj)
             {
