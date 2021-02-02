@@ -59,7 +59,8 @@ namespace WebServer.Controllers
             }
             lastMonth = lastMonth.AddMonths(-1);
             lastYear = lastYear.AddYears(-1);
-
+            
+            // proverva se da li je u zahtevu stigao id ili ime kompanije
             if (companyName == "000")
             {
                 foreach (var car in listOfCars)

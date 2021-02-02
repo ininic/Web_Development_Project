@@ -9,6 +9,8 @@ import { ParsedEvent } from '@angular/compiler';
 import { Parser } from '@angular/compiler/src/ml_parser/parser';
 import { ReservationService } from '../services/reservation.service';
 import { ToastrService } from 'ngx-toastr';
+import { CarRentalCompanyService } from '../services/car-rental-company.service';
+import { CarRentalCompany } from '../model/car-rental-company';
 
 @Component({
   selector: 'app-reservation-details',
@@ -19,6 +21,7 @@ export class ReservationDetailsComponent implements OnInit {
 
   //message:string;
   public car: Car;
+  public company: CarRentalCompany;
   public startDate: string;
   public endDate: string;
   public startPrintDate: string;
@@ -27,7 +30,7 @@ export class ReservationDetailsComponent implements OnInit {
   public currentReservation: Reservation;
   public userId: string;
   public action: string;
-  constructor(private toastr: ToastrService, private reservationService: ReservationService, private _location: Location, private route: ActivatedRoute, private communicationService: CommunicationService) { }
+  constructor(private carRentalCompanyService: CarRentalCompanyService, private toastr: ToastrService, private reservationService: ReservationService, private _location: Location, private route: ActivatedRoute, private communicationService: CommunicationService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {this.startDate = params.get('start'); this.endDate = params.get('end');  this.action = params.get('action'); console.log(params.get('id')) });
@@ -46,7 +49,20 @@ export class ReservationDetailsComponent implements OnInit {
       isCarRated: false,
       isCompanyRated: false 
       };
-     
+      this.company = {
+        id: 0,
+        name:'',
+        address:'',
+        branches:'',
+        priceList:'',
+        about:'',
+        rating: 0,
+        ratingCounter: 0
+      }
+    this.carRentalCompanyService.getCompany(this.car.carRenalId.toString(),'000').subscribe(
+      (response) => { this.company = response;},
+      (error) => { console.error(error);}
+    ); 
 
   }
 
